@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #bouton1, #bouton2 {
+            background:rgba(255, 0, 0, 0.657);
+            position: absolute;
+            /* height: 50px;
+            width: 50px; */
+            border-radius: 50%;
+            border: 4px solid rgba(255, 0, 0, 0.322);
+        }
+        #carre{
+            background-color: blue;
+        }
+    </style>
+
+</head>
+<body>
+    <div id ="bouton1"></div>
+    <div id ="bouton2"></div>
+    <div id="carre"></div>
+
+    <script>
+        'use strict';
+        window.onload = function(){
+            var bouton1 = document.getElementById('bouton1');
+            var bouton2 = document.getElementById('bouton2');
+            var carre = document.getElementById('carre');
+
+           var boutons = {
+            bouton1: {
+                height: 50,
+                width: 50,
+                increment: 1
+            },
+            bouton2:{
+                height: 100,
+                width: 100,
+                increment: -1
+            },
+            carre:{
+                height:75,
+                width: 75,
+                increment: 1
+            }
+           };
+
+           var sqLeft = boutons.carre.left;
+           var left1 = boutons.bouton1.left;
+           var left2 = boutons.bouton2.left;
+           var top1 = boutons.bouton1.top;
+           var top2 = boutons.bouton2.top;
+           var width1 = boutons.bouton1.width;
+           var width2 = boutons.bouton2.width;
+           var height1 = boutons.bouton1.height;
+           var height2 = boutons.bouton2.height;
+           var increment1 = boutons.bouton1.increment;
+           var increment2 = boutons.bouton2.increment;
+
+           window.setInterval(function(){
+            if (width1 > 100) {
+                increment1 = -1
+            }
+            if (width1 < 50) {
+                increment1 = 1
+            }
+            if (width2 > 100) {
+                increment2 = -1
+            }
+            if (width2 < 50) {
+                increment2 = 1
+            }
+            width1 = width1 + increment1;
+            width2 = width2 + increment2;
+            height1 = width1;
+            height2 = width2;
+            left1 = 100 - (width1 / 2);
+            top1 = 100 - (width1 / 2);
+            left2 = 200 - (width2 / 2);
+            top2 = 200 - (width2 / 2);
+
+
+
+            bouton1.style.left = left1 + 'px';
+            bouton1.style.top = top1 + 'px';
+            bouton1.style.height = height1 + 'px';
+            bouton1.style.width = width1 + 'px';
+
+            bouton2.style.left = left2 + 'px';
+            bouton2.style.top = top2 + 'px';
+            bouton2.style.height = height2 + 'px';
+            bouton2.style.width = width2 + 'px';
+
+
+           },15);
+
+           window.setInterval(function(){
+            if (width1 > 100) {
+                increment1 = -1
+            }
+            if (width1 < 50) {
+                increment1 = 1
+            }
+         
+            
+            
+            width1 = width1 + increment1;     
+            height1 = width1;
+            left1 = 100 - (width1 / 2);
+            top1 = 100 - (width1 / 2);
+          
+
+            carre.style.left = left1 + 'px';
+            carre.style.top = top1 + 'px';
+            carre.style.height = height1 + 'px';
+            carre.style.width = width1 + 'px';
+
+           },315);
+
+           
+
+
+
+        };
+
+    </script>
+</body>
+</html>

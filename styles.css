@@ -2,7 +2,7 @@
 ********************  DEFINITION DES VARIABLES ********************
 ******************************************************************/
 :root {
-  --hauteur-du-sol: 30px;
+  --hauteur-du-sol: 50px;
   --facteuragrandissement: 1;
 }
 
@@ -20,7 +20,8 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  overflow-x: hidden;
+  overflow-x: hidden; 
+  overflow-y: hidden;
 }
 main {
   height: 100%;
@@ -96,10 +97,28 @@ a :visited {
   position: relative;
   bottom: 0;
 }
+/**************************************************************
+***************** DESIGN DES BOUTONS D'ACTION *****************
+***************************************************************/
 
+.boutondaction {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  left: 50px;
+  /* bottom: calc(var(--hauteur-du-sol) + 50px); */
+  bottom:  150px;
+  
+  border-radius: 50%;
+  background-color: red;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
 /***************************************************************
 *********************** DESIGN DE STICKY ***********************
-***************************************************************/
+****************************************************************/
 
 #container {
   position: absolute;
@@ -134,20 +153,20 @@ a :visited {
 }
 /*******************************************************************
 ********************  DESIGN DU PANNEAU PIETON  ********************
-*******************************************************************/
+********************************************************************/
 
-.panneauPieton {
+.panneaupieton {
   position: absolute;
   left: 10px;
   width: 150px;
   bottom: var(--hauteur-du-sol);
 }
-.panneauPieton img {
+.panneau_pieton_initial {
   position: absolute;
   width: 120px;
-  bottom: calc(var(--hauteur-du-sol) + 101px);
+  bottom: 132px;
 }
-.panneauPieton .poteau {
+.poteaupieton {
   position: relative;
   left: 53px;
   height: 136px;
@@ -315,7 +334,8 @@ background-color: rgb(23, 58, 31);
 .ballon {
   position: absolute;
   left: 48px;
-  bottom: calc(var(--hauteur-du-sol) + 70px);
+  /* bottom: calc(var(--hauteur-du-sol) + 70px); */
+  bottom: 100px;
   height: 70px;
   /* display: none; */
 }
