@@ -210,7 +210,93 @@ $(function () {
     // }
   ];
 
+  ////////////////////////////////////////////////////////////////////////
+  //////////////////////// GESTION DES EVENEMENTS ////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  var $tag = $(".tag");
+  var $tagOpacity = $tag.css("opacity");
+  $tag.click(function () {
+    $tag.css("opacity", $tagOpacity);
+    $tagOpacity = parseFloat($tagOpacity) + 0.05;
+    console.log($tagOpacity);
+  });
 
+  $tag.mousemove(function () {});
+
+var $boutonDActionFeu = $("#boutonfeutricolore")
+let $leftInitialFeuTri = parseFloat($boutonDActionFeu.css('left'));
+setInterval(function(){
+
+  $boutonDActionFeu.animate({
+    height: '25px',
+    width: '25px',
+    left: $leftInitialFeuTri - 7 + 'px',
+    bottom: '65px',
+    duration: 10
+  });
+  $boutonDActionFeu.animate({
+    height: '10px',
+    width: '10px',
+    left: $leftInitialFeuTri + 'px',
+    bottom: '75px',
+    duration: 10
+  });
+
+},10);
+
+var $boutonDActionFille = $("#boutonfille")
+let $leftInitialFille = parseFloat($boutonDActionFille.css('left'));
+setInterval(function(){
+
+  $boutonDActionFille.animate({
+    height: '25px',
+    width: '25px',
+    left: $leftInitialFille - 7 + 'px',
+    bottom: '65px',
+    duration: 10
+  });
+  $boutonDActionFille.animate({
+    height: '10px',
+    width: '10px',
+    left: $leftInitialFille + 'px',
+    bottom: '75px',
+    duration: 10
+  });
+},10);
+
+var $boutonDActionTracteur = $("#boutontracteur")
+let $leftInitialTracteur = parseFloat($boutonDActionTracteur.css('left'));
+setInterval(function(){
+
+  $boutonDActionTracteur.animate({
+    height: '25px',
+    width: '25px',
+    left: $leftInitialTracteur - 7 + 'px',
+    bottom: '65px',
+    duration: 10
+  });
+  $boutonDActionTracteur.animate({
+    height: '10px',
+    width: '10px',
+    left: $leftInitialTracteur + 'px',
+    bottom: '75px',
+    duration: 10
+  });
+},10);
+
+
+
+
+
+
+
+  ////////////////////////////////////////////////////////////////////////
+  /////////////////////// GESTION DES COORDONNEES ////////////////////////
+  ////////////////////////////////////////////////////////////////////////
+  // var coordoSprite = {
+  //   left: interpos[0].sprite.left,
+  //   bottom: interpos[0].sprite.bottom,
+  // };
 
   var coordoContainer = {
     left: 100,
@@ -219,29 +305,6 @@ $(function () {
     height: interpos[0].masque.height,
     point_central: 20,
   };
-
-
-  
-  var $tag = $('.tag');
-  var $tagOpacity = $tag.css('opacity');
-  $tag.click(function(){
-    $tag.css('opacity',$tagOpacity);
-    $tagOpacity = parseFloat($tagOpacity) + 0.05;
-    console.log($tagOpacity);
-  });
-
-  $tag.mousemove(function(){
-alert();
-
-  });
-
-
-  
-  // var coordoSprite = {
-  //   left: interpos[0].sprite.left,
-  //   bottom: interpos[0].sprite.bottom,
-  // };
-
   $container.css({
     left: coordoContainer.left,
     bottom: coordoContainer.bottom,
@@ -287,9 +350,6 @@ alert();
         }
       }
     },
-
-
-
 
     mouvementHorizontal: function (position, increment) {
       var positionActuelleContainer = parseFloat($container.css(position));
