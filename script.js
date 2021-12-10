@@ -114,6 +114,30 @@ $(function () {
     },
     {
       masque: {
+        width: 136,
+        height: 141,
+        retrait: 50,
+      },
+      sprite: {
+        nom: "mouvCoup",
+        left: -563,
+        bottom: -104,
+      }
+    },
+    {
+      masque: {
+        width: 80,
+        height: 150,
+        retrait: 15,
+      },
+      sprite: {
+        nom: "mouvAction",
+        left: -599,
+        bottom: -282,
+      }
+    },
+    {
+      masque: {
         width: 36,
         height: 74,
         retrait: 21,
@@ -171,23 +195,11 @@ $(function () {
         left: -256,
         top: -231,
       },
-    },
-    {
-      masque: {
-        width: 100,
-        height: 100,
-        retrait: 50,
-      },
-      sprite: {
-        nom: "mouvSpecial",
-        left: -565,
-        top: -230,
-      },
-    },
+    }
   ];
 
   // var serieRun = [etatInitial, run1, run2, run3, run4, run5, run6, run2, 'run9', run10, run11];
-  var timing = 90;
+  var timing = 70;
   var $container = $("#container");
   var $sprite = $("#contenu");
 
@@ -231,6 +243,7 @@ $(function () {
   //////////////////////// GESTION DES ANIMATIONS ////////////////////////
   ////////////////////////////////////////////////////////////////////////
 
+  /////////////////////////// BOUTONS D'ACTION ///////////////////////////
   var $boutonDActionFeu = $("#boutonfeutricolore");
   let $leftInitialFeuTri = parseFloat($boutonDActionFeu.css("left"));
   setInterval(function () {
@@ -288,17 +301,19 @@ $(function () {
     });
   }, 10);
 
+  ///////////////////////////// FEU DE VOITURE /////////////////////////////
+
   var $feu = $(".feu");
   var $widthFeu = parseFloat($feu.css("width"));
   var $leftFeu = parseFloat($feu.css("left"));
   var $heightFeu = parseFloat($feu.css("height"));
-    setInterval(function () {
+  setInterval(function () {
     let facteur = parseInt(100 * Math.random()) / 100;
     $feu.css({
-      left: 210 +($leftFeu - $widthFeu / 2) - (($widthFeu * facteur) / 2) + 'px',
-      width: ($widthFeu * facteur) + 'px',
-      height: ($heightFeu * facteur) + 'px'
-    })
+      left: 210 + ($leftFeu - $widthFeu / 2) - ($widthFeu * facteur) / 2 + "px",
+      width: $widthFeu * facteur + "px",
+      height: $heightFeu * facteur + "px",
+    });
   }, 100);
 
   ////////////////////////////////////////////////////////////////////////
@@ -348,6 +363,8 @@ $(function () {
       bas: false,
       gauche: false,
       etatInitial: true,
+      coup: false,
+      action: false
     },
     rechercheObstacle: function () {
       for (var i = 0; i < listeDesObstacles.length; i++) {
@@ -386,6 +403,8 @@ $(function () {
         }
       }
 
+      if(position == "action"){ indexImage=9;}
+      if(position == "coup"){ indexImage=8;}
       // alert(indexImage);
       // Cas du saut vertical:
       if (increment == "sautEnHauteur") {
@@ -490,6 +509,19 @@ $(function () {
       if (this.directions.etatInitial) {
         this.mouvementHorizontal("bottom", 0);
       }
+      if(this.directions.action) {
+        this.mouvementHorizontal("action", 1);
+
+
+      }
+      if(this.directions.coup) {
+        this.mouvementHorizontal("coup", 1);
+
+
+      }
+
+
+
     }, // fin du moteur animations
 
     start: function () {
@@ -521,6 +553,12 @@ $(function () {
           case 40:
             ici.directions.bas = true;
             break;
+            case 13:
+            ici.directions.action = true;
+            break;
+            case 32:
+              ici.directions.coup = true;
+              break;
         }
       });
 
@@ -538,6 +576,12 @@ $(function () {
             ici.directions.droite = false;
           case 40:
             ici.directions.bas = false;
+             case 13:
+            ici.directions.action = false;
+            break;
+             case 32:
+            ici.directions.coup = false;
+            break;
         }
       });
 
