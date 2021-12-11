@@ -273,13 +273,11 @@ $(function () {
   var sautPanneau;
   var listeImagesPanneauPieton = [];
 
-// Création de la liste d'images de panneau piéton:
-for (let i =0; i<8; i++){
-  var imagePanneau = document.getElementsByClassName(
-    "panneau_pieton_" + i
-  );
-  listeImagesPanneauPieton[i] = imagePanneau;
-}
+  // Création de la liste d'images de panneau piéton:
+  for (let i = 0; i < 8; i++) {
+    var imagePanneau = document.getElementsByClassName("panneau_pieton_" + i);
+    listeImagesPanneauPieton[i] = imagePanneau;
+  }
 
   ////////////////////////////////////////////////////////////////////////
   //////////////// DECLARATION DES COORDONNEES DE STICKY /////////////////
@@ -520,7 +518,6 @@ for (let i =0; i<8; i++){
               // Check des clous à colorer en fonction du temps d'appui
               for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
                 if (chronoIntro > ici.parametres.tempoClous[i]) {
-                
                   listeImagesPanneauPieton[i][0].style.zIndex = i + 1;
 
                   console.log(ici.parametres.listeImagesPanneauPieton);
@@ -558,26 +555,26 @@ for (let i =0; i<8; i++){
             ici.directions.haut = false;
           case 39:
             if (introDuJeu == true) {
-              if (chronoIntro < delaiFinIntro) { // Si le joueur lève la che la touche avant la fin de l'intro
+              if (chronoIntro < delaiFinIntro) {
+                // Si le joueur lève la che la touche avant la fin de l'intro
                 ici.parametres.debutTimerIntro = NaN; // Réinitialisation des tempos
                 ici.parametres.currentTimerIntro = NaN;
                 //Réinitialisation de l'affichage du panneau
-                for (let i = 0; i < listeImagesPanneauPieton.length; i++){
+                for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
                   listeImagesPanneauPieton[i][0].style.zIndex = 1;
                 }
-               listeImagesPanneauPieton[0][0].style.zIndex = 2;
-                
+                listeImagesPanneauPieton[0][0].style.zIndex = 2;
               }
             }
             //fin lorsqu'on a passé + de 3sec sur la flèche de droite
             if (chronoIntro > delaiFinIntro) {
-                   //Réinitialisation de l'affichage du panneau
+              //Réinitialisation de l'affichage du panneau
 
-                   for (let i = 0; i < listeImagesPanneauPieton.length; i++){
-                     console.log('i=',i);
-                    listeImagesPanneauPieton[i][0].style.zIndex = 1;
-                  }
-                 listeImagesPanneauPieton[0][0].style.zIndex = 2;
+              for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
+                console.log("i=", i);
+                listeImagesPanneauPieton[i][0].style.zIndex = 1;
+              }
+              listeImagesPanneauPieton[0][0].style.zIndex = 2;
 
               // var panneauInit =
               //   document.getElementsByClassName("panneau_pieton_0");
@@ -621,33 +618,27 @@ for (let i =0; i<8; i++){
               var gravite = 15;
               var x = 0;
               var z;
-              
 
-              
-              var calculTrajectoire = function () {
-                z =
-                  207 +
-                  (-0.5 *
-                    ((gravite / (vitesseInitiale * vitesseInitiale)) *
-                      (x * x)) *
-                    (1 + Math.tan(angle) * Math.tan(angle)) +
-                    x * Math.tan(angle));
+              // var calculTrajectoire = ;
 
+              var sautPanneau = setInterval(function () {
+                z =  207 + (-0.5 * ((gravite / (vitesseInitiale * vitesseInitiale)) * (x * x)) * (1 + Math.tan(angle) * Math.tan(angle)) + x * Math.tan(angle));
                 $container.css({
                   bottom: z + "px",
                   left: 50 + x + "px",
                 });
-                x = x + 5;
-              };
-
-
-               var sautPanneau = setInterval(calculTrajectoire, 20);
-              (function stopSautPanneau() {
-                // if (pareseFloat(z) < parseFloat($hauteurSol)) {
+                x++;
+                if (z<parseFloat($hauteurSol) + 0){
                   clearInterval(sautPanneau);
-                // }
-              });
-              console.log(z);
+                }
+              }, 4);
+
+              // function stopSautPanneau() {
+              //   // if (pareseFloat(z) < parseFloat($hauteurSol)) {
+              //   clearInterval(sautPanneau);
+              //   // }
+              // }
+              // console.log(z);
               // $container.css({
               //   left: interpos[7].masque.left,
               //   bottom: interpos[7].masque.bottom,
