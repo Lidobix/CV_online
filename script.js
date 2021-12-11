@@ -10,6 +10,7 @@ $(function () {
         nom: "etatInitial",
         left: -600,
         bottom: -452,
+        height: 630,
       },
     },
     {
@@ -21,6 +22,8 @@ $(function () {
         nom: "run5",
         left: -50,
         bottom: -264,
+
+        height: 630,
       },
     },
     {
@@ -32,6 +35,8 @@ $(function () {
         nom: "run9",
         left: -57,
         bottom: -78,
+
+        height: 630,
       },
     },
     {
@@ -43,6 +48,7 @@ $(function () {
         nom: "run6",
         left: -176,
         bottom: -264,
+        height: 630,
       },
     },
     {
@@ -54,6 +60,7 @@ $(function () {
         nom: "run11",
         left: -310,
         bottom: -78,
+        height: 630,
       },
     },
     {
@@ -65,6 +72,7 @@ $(function () {
         nom: "run3",
         left: -318,
         bottom: -457,
+        height: 630,
       },
     },
     {
@@ -76,6 +84,7 @@ $(function () {
         nom: "run10",
         left: -180,
         bottom: -79,
+        height: 630,
       },
     },
     {
@@ -87,6 +96,7 @@ $(function () {
         nom: "run8",
         left: -439,
         bottom: -265,
+        height: 630,
       },
     },
     {
@@ -98,6 +108,7 @@ $(function () {
         nom: "mouvCoup",
         left: -563,
         bottom: -104,
+        height: 630,
       },
     },
     {
@@ -109,6 +120,7 @@ $(function () {
         nom: "mouvAction",
         left: -599,
         bottom: -282,
+        height: 630,
       },
     },
     {
@@ -230,10 +242,10 @@ $(function () {
   ////////////////////////////////////////////////////////////////////////
 
   // var serieRun = [etatInitial, run1, run2, run3, run4, run5, run6, run2, 'run9', run10, run11];
-  var timing = 50;
+  var timing = 70;
   var $decorMobile = $(".decormobile");
-  var sortiePanneauAutorisee = false;
-  var delaiFinIntro = 3500;
+
+  var delaiFinIntro = 500;
   var $hauteurSol = $(".sol").css("height");
 
   var listeDesObstacles = [
@@ -272,6 +284,7 @@ $(function () {
   var indexImageMaxi = 18;
   var sautPanneau;
   var listeImagesPanneauPieton = [];
+  var gauche_cont = "";
 
   // Création de la liste d'images de panneau piéton:
   for (let i = 0; i < 8; i++) {
@@ -290,11 +303,6 @@ $(function () {
       width: interpos[index].masque.width,
       height: interpos[index].masque.height,
     });
-
-    console.dir(interpos[index].masque.left);
-    console.dir(interpos[index].masque.bottom);
-    console.dir(interpos[index].masque.width);
-    console.dir(interpos[index].masque.height);
 
     $sprite.css({
       left: interpos[index].sprite.left,
@@ -336,6 +344,20 @@ $(function () {
         }
       }
     },
+    initialiseSticky: function (index) {
+      $container.css({
+        left: interpos[index].masque.left,
+        bottom: interpos[index].masque.bottom,
+        width: interpos[index].masque.width,
+        height: interpos[index].masque.height,
+      });
+
+      $sprite.css({
+        left: interpos[index].sprite.left,
+        bottom: interpos[index].sprite.bottom,
+        height: interpos[index].sprite.height,
+      });
+    },
 
     mouvementHorizontal: function (position, increment) {
       var positionActuelleContainer = parseFloat($container.css(position));
@@ -370,6 +392,7 @@ $(function () {
           break;
         case "etatInitial":
           indexImage = 0;
+
           break;
         case "etatInitialMini":
           indexImage = 10;
@@ -426,8 +449,11 @@ $(function () {
         $sprite.css({
           left: interpos[indexImage].sprite.left + "px",
           bottom: interpos[indexImage].sprite.bottom + "px",
+          // height: interpos[indexImage].sprite.height + "px",
         });
       }
+
+      console.log(indexImage);
       indexImage++;
 
       if (indexImage == indexImageMaxi) {
@@ -489,9 +515,12 @@ $(function () {
       }
     }, // fin du moteur animations
 
+
     start: function () {
       var ici = this;
       window.addEventListener("keydown", function (event) {
+        console.log(introDuJeu);
+
         ici.directions.etatInitial = false;
         var codeTouche = event.keyCode;
         var appuiLong = event.repeat;
@@ -520,10 +549,13 @@ $(function () {
                 if (chronoIntro > ici.parametres.tempoClous[i]) {
                   listeImagesPanneauPieton[i][0].style.zIndex = i + 1;
 
-                  console.log(ici.parametres.listeImagesPanneauPieton);
+                  // console.log(ici.parametres.listeImagesPanneauPieton);
                 }
               }
             }
+            // indexImage = 0;
+            // indexImageMini = 1;
+            // indexImageMaxi = 7;
             ici.directions.droite = true;
             break;
           case 40:
@@ -555,111 +587,219 @@ $(function () {
             ici.directions.haut = false;
           case 39:
             if (introDuJeu == true) {
-              if (chronoIntro < delaiFinIntro) {
-                // Si le joueur lève la che la touche avant la fin de l'intro
-                ici.parametres.debutTimerIntro = NaN; // Réinitialisation des tempos
-                ici.parametres.currentTimerIntro = NaN;
-                //Réinitialisation de l'affichage du panneau
-                for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
-                  listeImagesPanneauPieton[i][0].style.zIndex = 1;
+              // function () {
+                if (chronoIntro < delaiFinIntro) {
+                  // Si le joueur lève la che la touche avant la fin de l'intro
+                  ici.parametres.debutTimerIntro = NaN; // Réinitialisation des tempos
+                  ici.parametres.currentTimerIntro = NaN;
+                  //Réinitialisation de l'affichage du panneau
+                  for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
+                    listeImagesPanneauPieton[i][0].style.zIndex = 1;
+                  }
+                  listeImagesPanneauPieton[0][0].style.zIndex = 2;
                 }
-                listeImagesPanneauPieton[0][0].style.zIndex = 2;
-              }
-            }
-            //fin lorsqu'on a passé + de 3sec sur la flèche de droite
-            if (chronoIntro > delaiFinIntro) {
-              //Réinitialisation de l'affichage du panneau
+          
+                //fin lorsqu'on a passé + de 3sec sur la flèche de droite
+                if (chronoIntro > delaiFinIntro) {
+                  //Réinitialisation de l'affichage du panneau
+                  for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
+                    // console.log("i=", i);
+                    listeImagesPanneauPieton[i][0].style.zIndex = 1;
+                  }
+                  listeImagesPanneauPieton[0][0].style.zIndex = 2;
+          
+                  // Passage sur le sprite image run8mini:
+          
+                  // Lancement de l'animation de sortie de panneau:
+                  var angle = (75 * Math.PI) / 180;
+                  var vitesseInitiale = 60;
+                  var gravite = 15;
+                  var x = 0;
+                  var z;
+                  $container.css({
+                    left: interpos[17].masque.left,
+                    bottom: interpos[17].masque.bottom,
+                    width: interpos[17].masque.width,
+                    height: interpos[17].masque.height,
+                  });
+      
+                  $sprite.css({
+                    left: interpos[17].sprite.left,
+                    bottom: interpos[17].sprite.bottom,
+                    hieght: interpos[17].sprite.height,
+                  });
 
-              for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
-                console.log("i=", i);
-                listeImagesPanneauPieton[i][0].style.zIndex = 1;
-              }
-              listeImagesPanneauPieton[0][0].style.zIndex = 2;
 
-              // var panneauInit =
-              //   document.getElementsByClassName("panneau_pieton_0");
-              //   for (let i = 0; i < ici.parametres.listeImagesPanneauPieton.length; i++){
-              //     ici.parametres.listeImagesPanneauPieton[i][0].style.zIndex = 1;
-              //   }
-              // panneauInit[0].style.zIndex = 2;
+                  sautPanneau();
+                  
+                  function sautPanneau (){
 
-              // sortiePanneauAutorisee = true;
+                    var timer = setTimeout(function () {
+                        z =
+                          207 +
+                          (-0.5 *
+                            ((gravite / Math.pow(vitesseInitiale, 2)) * Math.pow(x, 2)) *
+                            (1 + Math.pow(Math.tan(angle), 2)) +
+                            x * Math.tan(angle));
+            
+                        $container.css({
+                          bottom: z + "px",
+                          left: 50 + x + "px",
+                        });
 
-              $container.css({
-                left: interpos[17].masque.left,
-                bottom: interpos[17].masque.bottom,
-                width: interpos[17].masque.width,
-                height: interpos[17].masque.height,
-              });
+                        $container.css({
+                          // left: interpos[17].masque.left,
+                          // bottom: interpos[17].masque.bottom,
+                          width: interpos[17].masque.width,
+                          height: interpos[17].masque.height,
+                        });
+            
+                        $sprite.css({
+                          left: interpos[17].sprite.left,
+                          bottom: interpos[17].sprite.bottom,
+                          hieght: interpos[17].sprite.height,
+                        });
 
-              $sprite.css({
-                left: interpos[17].sprite.left,
-                bottom: interpos[17].sprite.bottom,
-              });
-              // console.log($hauteurSol);
 
-              // $container.animate(
-              //   {
-              //     bottom: parseFloat($hauteurSol) + 200 + "px",
-              //     left: 100,
-              //   },
-              //   80
-              // );
-              // $container.animate(
-              //   {
-              //     bottom: parseFloat($hauteurSol) + 220 + "px",
-              //     left: 120,
-              //   },
-              // 120
-              // );
 
-              var angle = (75 * Math.PI) / 180;
-              var vitesseInitiale = 60;
-              var gravite = 15;
-              var x = 0;
-              var z;
 
-              // var calculTrajectoire = ;
 
-              var sautPanneau = setInterval(function () {
-                z =  207 + (-0.5 * ((gravite / (vitesseInitiale * vitesseInitiale)) * (x * x)) * (1 + Math.tan(angle) * Math.tan(angle)) + x * Math.tan(angle));
-                $container.css({
-                  bottom: z + "px",
-                  left: 50 + x + "px",
-                });
-                x++;
-                if (z<parseFloat($hauteurSol) + 0){
-                  clearInterval(sautPanneau);
-                }
-              }, 4);
 
-              // function stopSautPanneau() {
-              //   // if (pareseFloat(z) < parseFloat($hauteurSol)) {
-              //   clearInterval(sautPanneau);
-              //   // }
-              // }
-              // console.log(z);
-              // $container.css({
-              //   left: interpos[7].masque.left,
-              //   bottom: interpos[7].masque.bottom,
-              //   width: interpos[7].masque.width,
-              //   height: interpos[7].masque.height,
-              // });
 
-              // $sprite.css({
-              //   left: interpos[7].sprite.left,
-              //   bottom: interpos[7].sprite.bottom,
-              //   height: '630px',
-              // });
-              ici.parametres.debutTimerIntro = NaN;
-              ici.parametres.currentTimerIntro = NaN;
 
-              // indexImage = 0;
-              // indexImageMini = 1;
-              // indexImageMaxi = 7;
-              // initialiseSticky(indexImage);
-              // introDuJeu = false;
-            }
+                        x++;
+                        
+                        console.log(z);
+                        if (z < parseFloat($hauteurSol)) {
+                          clearTimeout(timer)
+                          // clearInterval(sautPanneau);
+                          // Passage sur le sprite image etatinitial mini:
+                      
+                          
+                        } else {sautPanneau();}
+
+
+                      }, 1);
+                    
+                      
+
+
+
+
+
+
+                    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+                  
+                 
+                  
+                  $container.css({
+                    left: 50 + x + "px",
+                    bottom: parseFloat($hauteurSol) + "px",
+                    width: interpos[10].masque.width,
+                    height: interpos[10].masque.height,
+                  });
+                  $sprite.css({
+                    left: interpos[10].sprite.left,
+                    bottom: interpos[10].sprite.bottom,
+                    height: interpos[10].sprite.height,
+                  });
+                  // var sautPanneau = setInterval();
+          
+                  // var sautPanneau = setInterval(function () {
+                  //   $container.css({
+                  //     left: interpos[17].masque.left,
+                  //     bottom: interpos[17].masque.bottom,
+                  //     width: interpos[17].masque.width,
+                  //     height: interpos[17].masque.height,
+                  //   });
+          
+                  //   $sprite.css({
+                  //     left: interpos[17].sprite.left,
+                  //     bottom: interpos[17].sprite.bottom,
+                  //   });
+          
+                  //   z =
+                  //     207 +
+                  //     (-0.5 *
+                  //       ((gravite / Math.pow(vitesseInitiale, 2)) * Math.pow(x, 2)) *
+                  //       (1 + Math.pow(Math.tan(angle), 2)) +
+                  //       x * Math.tan(angle));
+          
+                  //   $container.css({
+                  //     bottom: z + "px",
+                  //     left: 50 + x + "px",
+                  //   });
+                  //   x++;
+                  //   if (z < parseFloat($hauteurSol)) {
+                  //     clearInterval(sautPanneau);
+                  //     // Passage sur le sprite image etatinitial mini:
+                  //     $container.css({
+                  //       left: 50 + x + "px",
+                  //       bottom: parseFloat($hauteurSol) + "px",
+                  //       width: interpos[10].masque.width,
+                  //       height: interpos[10].masque.height,
+                  //     });
+                  //     $sprite.css({
+                  //       left: interpos[10].sprite.left,
+                  //       bottom: interpos[10].sprite.bottom,
+                  //     });
+                  //     // alert($container.css('left'));
+                  //     // gauche_cont = $container.css('left');
+                  //   }
+                  //   return $container.css("left");
+                  // }, 4);
+          
+                  // console.log(z);
+                  // $container.css({
+                  //   left: interpos[7].masque.left,
+                  //   bottom: interpos[7].masque.bottom,
+                  //   width: interpos[7].masque.width,
+                  //   height: interpos[7].masque.height,
+                  // });
+          
+                  // $sprite.css({
+                  //   left: interpos[7].sprite.left,
+                  //   bottom: interpos[7].sprite.bottom,
+                  //   height: '630px',
+                  // });
+                  ici.parametres.debutTimerIntro = NaN;
+                  ici.parametres.currentTimerIntro = NaN;
+          
+                  // console.log(sautPanneau);
+          
+                  // console.log($container.css("left"));
+                  // console.log(gauche_cont);
+                  // $container.css('left', '500px');
+          
+                  indexImage = 0;
+                  indexImageMini = 1;
+                  indexImageMaxi = 7;
+          
+                  initialiseSticky(indexImage);
+                  introDuJeu = false;
+                // }
+            }}
 
             ici.directions.droite = false;
           case 40:
@@ -771,6 +911,6 @@ $(function () {
   $tag.mousemove(function () {
     $tag.css("opacity", $tagOpacity);
     $tagOpacity = parseFloat($tagOpacity) + 0.003;
-    console.log($tagOpacity);
+    // console.log($tagOpacity);
   });
 });
