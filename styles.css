@@ -10,7 +10,7 @@
 ********************  IMPORT DES POLICES ********************
 ************************************************************/
 
-@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap"); */
 
 /************************************************************
 **************** DESIGN DE LA PAGE D'ACCUEIL ****************
@@ -65,7 +65,7 @@ h1 {
   padding: 5px;
   border-radius: 7px;
   -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
+  /* -moz-border-radius: 7px; */
   -ms-border-radius: 7px;
   -o-border-radius: 7px;
   border: 3px solid black;
@@ -101,7 +101,7 @@ a :visited {
 ***************** DESIGN DES BOUTONS D'ACTION *****************
 ***************************************************************/
 
-.boutondaction {
+/* .boutondaction {
   position: absolute;
   border: 3px solid rgba(0, 0, 0, 0.5);
   border-radius: 50%;
@@ -110,15 +110,33 @@ a :visited {
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+} */
+button {
+  /* box-shadow: unset; */
+  position: absolute;
+  bottom: calc(var(--hauteur-du-sol) + 73px);
+  border:2px solid rgb(196, 162, 13);
+  width: 25px;
+  height: 25px;
+  background-color: rgb(7, 253, 171);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  /* -moz-border-radius: 50%; */
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  z-index: 3;
 }
-
 #boutonfeutricolore{
-  height: 10px;
-  width: 10px;
-  left: 16px;
-  bottom: 75px;
+    left: 610px;
+}
+#boutontracteur{
+  left: 3850px;
 }
 #boutonfille{
+  left: 3100px;
+}
+
+/* #boutonfille{
   height: 10px;
   width: 10px;
   left: 75px;
@@ -130,7 +148,10 @@ a :visited {
   left: 130px;
   bottom: 75px;
   z-index: 3;
-}
+} */
+
+
+
 
 
 /***************************************************************
@@ -183,42 +204,43 @@ a :visited {
 
 
 
-.panneaupieton {
+#panneaupieton {
   position: absolute;
   left: 10px;
   width: 150px;
   bottom: var(--hauteur-du-sol);
 }
-.panneaupieton img {
+#panneaupieton img {
   position: absolute;
   width: 120px;
   bottom: 132px;  
 }
 
-.panneaupieton img:nth-child(1){
+/* 
+#panneaupieton img:nth-child(1){
   z-index: 8;
 }
-.panneaupieton img:nth-child(2){
+#panneaupieton img:nth-child(2){
   z-index: 7;
 }
-.panneaupieton img:nth-child(3){
+#panneaupieton img:nth-child(3){
     z-index: 6;
 }
-.panneaupieton img:nth-child(4){
+#panneaupieton img:nth-child(4){
     z-index: 5;
 }
-.panneaupieton img:nth-child(5){
+#panneaupieton img:nth-child(5){
     z-index: 4;
 }
-.panneaupieton img:nth-child(6){
+#panneaupieton img:nth-child(6){
     z-index: 3;
 }
-.panneaupieton img:nth-child(7){
+#panneaupieton img:nth-child(7){
     z-index: 2;
 }
-.panneaupieton img:nth-child(8){
+#panneaupieton img:nth-child(8){
     z-index: 1;
-}
+} */
 
 
 .poteaupieton {
@@ -234,7 +256,7 @@ a :visited {
 ********************  DESIGN DU FEU TRICOLORE  ********************
 ******************************************************************/
 
-.feuTricolore {
+#feuTricolore {
   position: absolute;
   left: 600px;
   width: 46px;
@@ -254,7 +276,7 @@ a :visited {
   top: 5px;
   width: 30px;
   height: 30px;
-  background-color: rgb(255, 0, 0);
+  background-color: rgb(121, 38, 38);
   border-radius: 50%;
   
 }
@@ -292,10 +314,10 @@ background-color: rgb(23, 58, 31);
 /*******************************************************
 *************  DESIGN DE LA VOITURE EN FEU *************
 ********************************************************/
-.voitureEnFeu {
+#voitureEnFeu {
   position: absolute;
   bottom: calc(var(--hauteur-du-sol) - 15px);
-  left: 1300px;
+  left: 1700px;
   height: 500px;
   width: 200px;
 }
@@ -316,18 +338,18 @@ background-color: rgb(23, 58, 31);
 /*******************************************************
 ********************  DESIGN DU BUS ********************
 ********************************************************/
-.bus {
+#bus {
   position: absolute;
   height: calc(270px * var(--facteuragrandissement));
   bottom: calc(var(--hauteur-du-sol) - 0px);
   left: 2000px;
   /* display: none; */
 }
-.bus img {
+#bus img:first-of-type {
   height: calc(270px * var(--facteuragrandissement));
 }
 
-#logo_ifocop {
+.logo_ifocop {
   position: absolute;
   height: calc(50px * var(--facteuragrandissement));
 
@@ -353,7 +375,7 @@ background-color: rgb(23, 58, 31);
 /******************************************************
 ************  DESIGN DE LA FILLE AU BALLON ************
 ******************************************************/
-.filleauballon {
+#filleauballon {
   position: absolute;
   bottom: calc(var(--hauteur-du-sol) - 4px);
   left: 3000px;
@@ -398,7 +420,7 @@ background-color: rgb(23, 58, 31);
 /******************************************************
 *****************  DESIGN DU TRACTEUR *****************
 ******************************************************/
-.tracteur {
+#tracteur {
   position: absolute;
   transform: scaleX(-1);
   left: 4000px;
@@ -427,14 +449,14 @@ background-color: rgb(23, 58, 31);
 *****************  DESIGN DE LA FERME *****************
 ******************************************************/
 
-.ferme {
+#ferme {
   position: absolute;
   height: calc(520px * var(--facteuragrandissement));
   bottom: calc(var(--hauteur-du-sol) - 2px);
   left: 4500px;
 }
 
-.mouton {
+#mouton {
   position: absolute;
   height: calc(50px * var(--facteuragrandissement));
   bottom: calc(var(--hauteur-du-sol) - 5px);

@@ -28,76 +28,89 @@
         <div id="container">
           <img src="images/sticky_run_action.png" id="contenu" class="sprite" />
         </div>
-
-        <div class="decormobile">
-          <div class="panneaupieton">
+        <button id="boutonfeutricolore" class="decor_mobile"></button>
+        <button id="boutontracteur"class="decor_mobile"></button>
+        <button id="boutonfille" class="decor_mobile"></button>
+        <!-- <div class="decormobile"> -->
+          <div id="panneaupieton" class="decor_mobile">
             <img
               src="images/00_passage_pieton_clous_color_Etat_initial.svg"
               alt=""
-              class="panneau_pieton_0"
+              id="panneau_pieton_0"
+              class = "calque_panneau_pieton"
             />
 
             <img
               src="images/01_passage_pieton_clous_color_1sur7.svg"
               alt=""
-              class="panneau_pieton_1"
+              id="panneau_pieton_1"
+              class = "calque_panneau_pieton"
             />
 
             <img
               src="images/02_passage_pieton_clous_color_2sur7.svg"
               alt=""
-              class="panneau_pieton_2"
+              id="panneau_pieton_2"
+              class = "calque_panneau_pieton"
             />
             <img
               src="images/03_passage_pieton_clous_color_3sur7.svg"
               alt=""
-              class="panneau_pieton_3"
+              id="panneau_pieton_3"
+              class = "calque_panneau_pieton"
             />
             <img
               src="images/04_passage_pieton_clous_color_4sur7.svg"
               alt=""
-              class="panneau_pieton_4"
+              id="panneau_pieton_4"
+              class = "calque_panneau_pieton"
             />
             <img
               src="images/05_passage_pieton_clous_color_5sur7.svg"
               alt=""
-              class="panneau_pieton_5"
+              id="panneau_pieton_5"
+              class = "calque_panneau_pieton"
             />
             <img
               src="images/06_passage_pieton_clous_color_6sur7.svg"
               alt=""
-              class="panneau_pieton_6"
+              id="panneau_pieton_6"
+              class = "calque_panneau_pieton"
             />
             <img
               src="images/07_passage_pieton_clous_color_7sur7.svg"
               alt=""
-              class="panneau_pieton_7"
+              id="panneau_pieton_7"
+              class = "calque_panneau_pieton"
             />
             <div class="poteaupieton"></div>
           </div>
+          
+          <div id="feuTricolore" class="decor_mobile">
 
-          <div class="feuTricolore">
+            
             <div class="coque">
               <div class="feuRouge"></div>
               <div class="feuOrange"></div>
               <div class="feuVert"></div>
             </div>
             <div class="poteau"></div>
-            <div class="boutondaction" id="boutonfeutricolore"></div>
+            <!-- <div class="boutondaction" id="boutonfeutricolore"></div> -->
+            
           </div>
-
-          <div class="voitureEnFeu">
+          
+          <div id="voitureEnFeu" class="decor_mobile" class="obstacle" >
             <img src="images/voiture.svg" alt="" class="voiture" />
             <img src="images/feu.svg" alt="" class="feu" />
           </div>
 
-          <div class="bus">
+          <div id="bus" class="decor_mobile">
             <img src="images/bus_scolaire_pneus.svg" alt="" />
             <img src="images/tag.svg" alt="" class="tag" />
-            <img src="images/ifocop.png" alt="" id="logo_ifocop" />
+            <img src="images/ifocop.png" alt="" class="logo_ifocop" />
           </div>
 
-          <div class="filleauballon">
+          <div id="filleauballon" class="decor_mobile"  class="obstacle">
             <img
               src="images/Fille_avec_ballon.svg"
               alt=""
@@ -113,11 +126,12 @@
             <!-- <img src="images/basket_bis.svg" alt="" class="chaussure2" /> -->
             <img src="images/Ballon.svg" alt="" class="ballon" />
 
-            <div class="boutondaction" id="boutonfille"></div>
+            
           </div>
 
-          <div class="tracteur">
-            <div class="boutondaction" id="boutontracteur"></div>
+          <div class="decor_mobile"  id="tracteur">
+            <!-- <div class="boutondaction" id="boutontracteur"></div> -->
+            
             <!-- </div> -->
 
             <img
@@ -127,10 +141,12 @@
             />
             <img src="images/Tracteur_vide.svg" alt="" class="tracteurvide" />
           </div>
-          <img src="images/ferme.svg" alt="" class="ferme" />
+          
+          
+          <img src="images/ferme.svg" alt=""  class="decor_mobile"  id="ferme" />
 
-          <img src="images/mouton.svg" alt="" class="mouton" />
-        </div>
+          <img src="images/mouton.svg" alt=""  class="decor_mobile"   id="mouton" />
+        <!-- </div> -->
         <div class="sol"></div>
       </section>
       <noscript>
