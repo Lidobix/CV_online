@@ -243,7 +243,7 @@ $(function () {
   var timing = 80;
 
   // var bouton;
-  var delaiFinIntro = 200;
+  var delaiFinIntro = 1500;
   var $hauteurSol = $(".sol").css("height");
 
   var listeDesObstacles = [
@@ -382,7 +382,7 @@ $(function () {
     parametres: {
       debutTimerIntro: NaN,
       currentTimerIntro: NaN,
-      tempoClous: [0, 250, 750, 1250, 1750, 2250, 2750, 3250],
+      tempoClous: [0, 200, 400, 600, 800, 1000, 1200, 1500],
       dernièreDirection: "",
     },
     detectionAction: function () {

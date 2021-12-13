@@ -168,6 +168,9 @@ button {
 #boutonfeutricolore {
   left: 610px;
 }
+#boutonbus {
+  left: 1550px;
+}
 #boutontracteur {
   left: 3850px;
 }
@@ -347,7 +350,7 @@ button {
 #voitureEnFeu {
   position: absolute;
   bottom: calc(var(--hauteur-du-sol) - 15px);
-  left: 1700px;
+  left: 2400px;
   height: 500px;
   width: 200px;
 }
@@ -372,7 +375,7 @@ button {
   position: absolute;
   height: calc(270px * var(--facteuragrandissement));
   bottom: calc(var(--hauteur-du-sol) - 0px);
-  left: 2000px;
+  left: 1500px;
   /* display: none; */
 }
 #bus img:first-of-type {
