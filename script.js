@@ -395,9 +395,9 @@ $(function () {
         var styleBouton = window.getComputedStyle(bouton);
 
         if (
-          extremiteContainer > parseFloat(styleBouton.left) &&
+          extremiteContainer > (parseFloat(styleBouton.left) -3) &&
           extremiteContainer <
-            parseFloat(styleBouton.left) + parseFloat(styleBouton.width)
+           ( parseFloat(styleBouton.left) + parseFloat(styleBouton.width)+3)
         ) {
           console.log("bouton d'action appuyé :", bouton.id);
           this.lancementAction(bouton.id);
@@ -452,11 +452,11 @@ $(function () {
         console.log("obstacle.style.left : ", obstacle.style.left);
         // console.log('obstacle.left : ', parseFloat(obstacle.left));
 
-        if (extremiteContainer >= parseFloat(obstacle.style.left)-19) {
+        if (extremiteContainer >= parseFloat(obstacle.style.left)-20) {
           // increment=0;
           console.log("obstacle touché ");
           this.directions.obstacle = true;
-        }
+        } else {  this.directions.obstacle = false;}
 
         // this.lancementAction(bouton.id);
       }
@@ -604,7 +604,7 @@ $(function () {
         if (introDuJeu == false) {
           $container.addClass("containerinverse");
           this.detectionObstacle();
-          this.mouvementHorizontal("left", -10);
+          this.mouvementHorizontal("left", -13);
           this.avancementDecor(17);
         }
       }
@@ -618,7 +618,7 @@ $(function () {
           // this.detectionObstacle();
           this.detectionObstacle();
           if (this.directions.obstacle == false) {
-            this.mouvementHorizontal("left", 10);
+            this.mouvementHorizontal("left", 13);
             this.avancementDecor(-17);
           } else {
             this.mouvementHorizontal("left", 0);
