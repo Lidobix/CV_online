@@ -240,29 +240,13 @@ $(function () {
   ////////////////////////////////////////////////////////////////////////
 
   // var serieRun = [etatInitial, run1, run2, run3, run4, run5, run6, run2, 'run9', run10, run11];
-  var timing = 80;
+  var timing = 50;
 
   // var bouton;
-  var delaiFinIntro = 1500;
-  var $hauteurSol = $(".sol").css("height");
+  var delaiFinIntro = 100;
+  var $hauteurSol = $("#sol").css("height");
+  console.log("hauteur du sol :", $hauteurSol);
 
-  var listeDesObstacles = [
-    {
-      nom: "sol",
-      left: 0,
-      width: 500,
-      height: $hauteurSol,
-      transparence: true,
-    },
-
-    {
-      nom: "panneauPieton",
-      left: 10,
-      width: 150,
-      height: 50,
-      transparence: true,
-    },
-  ];
   var dernièreDirection;
   var animationADroiteEnCours = false;
   var animationAGaucheEnCours = false;
@@ -395,9 +379,9 @@ $(function () {
         var styleBouton = window.getComputedStyle(bouton);
 
         if (
-          extremiteContainer > (parseFloat(styleBouton.left) -3) &&
+          extremiteContainer > parseFloat(styleBouton.left) - 3 &&
           extremiteContainer <
-           ( parseFloat(styleBouton.left) + parseFloat(styleBouton.width)+3)
+            parseFloat(styleBouton.left) + parseFloat(styleBouton.width) + 3
         ) {
           console.log("bouton d'action appuyé :", bouton.id);
           this.lancementAction(bouton.id);
@@ -417,18 +401,18 @@ $(function () {
           switch (actionFeuTricolore[0]) {
             case 1:
               $feuRouge.css("background-color", "rgb(255, 0, 0)");
-              var photo1 = document.getElementById('identite_1');
-              photo1.style.display = 'block';
+              var photo1 = document.getElementById("identite_1");
+              photo1.style.display = "block";
               break;
             case 2:
-              $feuOrange.css("background-color", "rgb(255, 187, 0)");
-              var photo2 = document.getElementById('identite_3');
-              photo2.style.display = 'block';
+              $feuVert.css("background-color", "rgb(9, 251, 70)");
+              var photo3 = document.getElementById("identite_2");
+              photo3.style.display = "block";
               break;
             case 3:
-              $feuVert.css("background-color", "rgb(9, 251, 70)");
-              var photo3 = document.getElementById('identite_2');
-              photo3.style.display = 'block';
+              $feuOrange.css("background-color", "rgb(255, 187, 0)");
+              var photo2 = document.getElementById("identite_3");
+              photo2.style.display = "block";
               break;
             case 4:
               actionFeuTricolore[0] = 0;
@@ -458,18 +442,24 @@ $(function () {
         console.log("obstacle.style.left : ", obstacle.style.left);
         // console.log('obstacle.left : ', parseFloat(obstacle.left));
 
-        if (extremiteContainer >= parseFloat(obstacle.style.left)-20) {
+        if (extremiteContainer >= parseFloat(obstacle.style.left) - 20) {
           // increment=0;
           console.log("obstacle touché ");
           this.directions.obstacle = true;
-        } else {  this.directions.obstacle = false;}
+        } else {
+          this.directions.obstacle = false;
+          console.log(
+            "aucun obstacle détecté, bottom actuel :",
+            $container.css("bottom")
+          );
+        }
 
         // this.lancementAction(bouton.id);
       }
     },
 
     mouvementHorizontal: function (position, increment) {
-      console.log("increment =", increment);
+      // console.log("increment =", increment);
       var positionActuelleContainer = parseFloat($container.css(position));
 
       //Test de la position left du container pour ne pas le faire sortir de l'écran à gauche ou à droite
@@ -484,10 +474,10 @@ $(function () {
       } else {
         if (
           position == "left" &&
-          positionActuelleContainer + increment > 1300
+          positionActuelleContainer + increment >  (parseFloat(screen.width)-30) 
         ) {
           // test marge à droite, on bloque le left au left maxi
-          $container.css("left", 1300);
+          $container.css("left", parseFloat(screen.width)-30);
           // console.log(
           //   "on va à droite, et on arrive au bord de écran, le left est calibré à 1010px :",
           //   $container.css("left")
@@ -529,47 +519,63 @@ $(function () {
       ////////////////////////////////////////////////////////////////////////////////////
       ///////////////////////////// REGLAGE DU SAUT VERTICAL /////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
-      if (position == "sautEnHauteur") {
+      if (position == "sautEnHauteur" && sautEnCours == false) {
+        console.log(
+          'demande de saut détectée, sautEnCours actuel  ="',
+          sautEnCours
+        );
         sautEnCours = true;
+        console.log("demande de saut détectée, incrément actuel  =", increment);
+
+        console.log("saut en cours =", sautEnCours);
         $container.css({
           width: interpos[7].masque.width + "px",
           height: interpos[7].masque.height + "px",
         });
 
-        // Switch de l'image du sprite:
+        console.log("bottom du container :", $container.css("bottom"));
+        // On affiche le sprite du saut:
         $sprite.css({
           left: interpos[7].sprite.left + "px",
           bottom: interpos[7].sprite.bottom + "px",
         });
 
-        if (positionActuelleContainer + 150 <= coordoContainer.bottom + 150) {
-          var saut = function () {
-            $container
-              .animate(
-                { bottom: coordoContainer.bottom + 100 },
-                { duration: 75 }
-              )
-              .animate(
-                { bottom: coordoContainer.bottom + 150 },
-                { duration: 125 }
-              )
-              .animate(
-                { bottom: coordoContainer.bottom + 100 },
-                { duration: 125 }
-              )
-              .animate({ bottom: coordoContainer.bottom }, { duration: 50 });
-          };
-          saut();
+        if (this.directions.obstacle == false) {
+          var bottomDeRef = $hauteurSol;
         }
+
+        var saut = function () {
+          console.log("entrée dans la fonction de saut");
+          console.log("bottom de ref :", bottomDeRef);
+
+          $container
+            .animate(
+              { bottom: parseFloat(bottomDeRef) + 100 + "px" },
+              { duration: 75 }
+            )
+            .animate(
+              { bottom: parseFloat(bottomDeRef) + 150 + "px" },
+              { duration: 125 }
+            )
+            .animate(
+              { bottom: parseFloat(bottomDeRef) + 100 + "px" },
+              { duration: 125 }
+            )
+            .animate(
+              { bottom: parseFloat(bottomDeRef) + "px" },
+              { duration: 50 }
+            );
+        };
+        saut();
       }
 
       ////////////////////////////////////////////////////////////////////////////////////
       /////////////////// REGLAGE DU CONTAINER ET DU SPRITE EN COURANT ///////////////////
       ////////////////////////////////////////////////////////////////////////////////////
-      if (increment != NaN) {
-      
-        console.log('on va affecter une nouvelle valeur de left :', $container.css("left"), 'indexImage = ', indexImage);
-        console.log("increment =", increment);
+      if (increment != NaN && position != "sautEnHauteur") {
+        // console.log("on va changer le sprite");
+        // console.log('on va affecter une nouvelle valeur de left :', $container.css("left"), 'indexImage = ', indexImage);
+        // console.log("increment =", increment);
         $container.css({
           left: interpos[indexImage].masque.left + increment + "px",
           width: interpos[indexImage].masque.width + "px",
@@ -591,22 +597,24 @@ $(function () {
         indexImage = indexImageMini;
       }
 
-     
-
       // this.avancementDecor(increment);
     },
 
     avancementDecor: function (increment) {
       // console.log("on avance le décor");
-      for (let element of decor_mobile) {
+     
+             for (let element of decor_mobile) {
         nouveauLeft = parseFloat(element.style.left) + increment;
         element.style.left = nouveauLeft + "px";
-      }
+             }
+    
+  
+  
       //  this.detectionObstacle(increment);
     },
 
-    leMoteurPourLesAnimations: function (tempsEcoule) {
-      if (this.directions.gauche) {
+    leMoteurPourLesAnimations: function () {
+      if (this.directions.gauche && !this.directions.haut) {
         if (introDuJeu == false) {
           $container.addClass("containerinverse");
           this.detectionObstacle();
@@ -614,27 +622,21 @@ $(function () {
           this.avancementDecor(17);
         }
       }
-      if (this.directions.droite) {
+      if (this.directions.droite && !this.directions.haut) {
         if (introDuJeu == false) {
           console.log(
             // "appui touche droite, intro finie, on calcule le déplacement du container. son left actuel est : ",
             $container.css("left")
           );
           $container.removeClass("containerinverse");
-          // this.detectionObstacle();
           this.detectionObstacle();
           if (this.directions.obstacle == false) {
-            this.mouvementHorizontal("left", 13);
-            this.avancementDecor(-17);
+            this.mouvementHorizontal("left", 10);
+            this.avancementDecor(-20);
           } else {
             this.mouvementHorizontal("left", 0);
-            this.avancementDecor(0);
+            this.avancementDecor(-12);
           }
-          console.log("pas = ", pas);
-          // this.mouvementHorizontal("left", pas);
-          // this.avancementDecor(-17);
-
-          // this.detectionAction();
         } else {
           // console.log(
           // "appui touche droite, intro en cours, le déplacement du container est nul (toujours dans le panneau), son left actuel est : ",
@@ -643,8 +645,101 @@ $(function () {
           this.mouvementHorizontal("left", 0);
         }
       }
-      if (this.directions.haut) {
+      if (this.directions.gauche && this.directions.haut && !introDuJeu) {
+        console.log("demande de saut à gauche");
+        // for (let x = parseFloat($container.css('left')) ; i<parseFloat($container.css('left')) + 50; i++){
+
+        //   $container.css('left',x);
+        // }
+      }
+
+      if (this.directions.droite && this.directions.haut && !introDuJeu && !sautEnCours) {
+
+        
+        
+        
+        sautEnCours = true;
+        console.log("demande de saut à droite");
+        var leftActuel = parseFloat($container.css("left"));
+        console.log("left actuel du container: ", leftActuel);
+        $sprite.css({
+          left: interpos[7].sprite.left + "px",
+          bottom: interpos[7].sprite.bottom + "px",
+        });
+        $container.css({
+          width: interpos[7].masque.width + "px",
+          height: interpos[7].masque.height + "px",
+        });
+        var x = 0;
+        var sautenLongueur = function () {
+          console.log("entrée dans la fonction de calcul de trajectoire");
+          
+          // $container.css("left", x + "px");
+          var angle = (75 * Math.PI) / 180;
+          var vitesseInitiale = 85;
+          var gravite = 15;
+          
+          console.log("hauteur du sol: ", $hauteurSol);
+
+          // Equation de trajectoire:
+          var z =
+            parseFloat($hauteurSol) +
+            (-0.5 *
+              ((gravite / Math.pow(vitesseInitiale, 2)) * Math.pow(x, 2)) *
+              (1 + Math.pow(Math.tan(angle), 2)) +
+              x * Math.tan(angle));
+
+        
+
+          // console.log("position z :", z);
+
+          if (z >= parseFloat($hauteurSol)) {
+            $container.css({
+              bottom: z + "px",
+              left: x + leftActuel + "px",
+              
+            });
+            x += 10;
+            console.log("exécution du saut");
+            console.log("left actuel du container :", $container.css('left'));
+            console.log("valeur du noouveau z calculé :", z);
+
+            for (let element of decor_mobile) {
+              nouveauLeft = parseFloat(element.style.left) -5;
+              element.style.left = nouveauLeft + "px";
+            }
+
+
+
+
+            requestAnimationFrame(sautenLongueur);
+          }
+        };
+        requestAnimationFrame(sautenLongueur);
+        console.log("valeur du noouveau z calculé à la fin du saut:", z);
+        
+        
+//         y = 0
+        
+//         // this.avancementDecor(-10);
+// for (let y = 0; y<25; y++){
+
+//         // if (y<250){
+// console.log('y= ', y);
+//           this.avancementDecor(-10);
+//           }
+        // }
+
+      }
+
+      if (
+        this.directions.haut &&
+        !this.directions.gauche &&
+        !this.directions.droite
+      ) {
+        console.log("demande de saut vertical uniquement");
         if (introDuJeu == false) {
+          this.detectionObstacle();
           this.mouvementHorizontal("sautEnHauteur", NaN);
         }
       }
@@ -735,9 +830,8 @@ $(function () {
         //   "relache touche, left container : ",
         //   $container.css("left")
         // );
-        // if (chronoIntro > delaiFinIntro){
+
         ici.directions.etatInitial = true;
-        // }
 
         if (introDuJeu == true && chronoIntro > delaiFinIntro) {
           // console.log(
@@ -756,7 +850,9 @@ $(function () {
             ici.directions.derniere = "gauche";
             break;
           case 38:
+            sautEnCours = false;
             ici.directions.haut = false;
+
             break;
           case 39:
             ici.directions.derniere = "droite";
@@ -929,9 +1025,17 @@ $(function () {
         }
       });
 
+
+// requestAnimationFrame(
+//  ici.leMoteurPourLesAnimations()
+// )
+
       window.setInterval(function () {
         ici.leMoteurPourLesAnimations(0);
       }, timing);
+
+
+
     },
   };
   monJeu.start();

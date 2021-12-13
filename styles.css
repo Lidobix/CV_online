@@ -86,6 +86,15 @@ a :visited {
 .lienCV:hover a {
   color: black;
 }
+.icone{
+  position: absolute;
+  display: inline-block;
+  width: 50px;
+}
+
+
+
+
 /***************************************************************
 ******************* DESIGN DE LA ZONE DE JEU *******************
 ***************************************************************/
@@ -221,7 +230,7 @@ button {
   -ms-transform: scaleX(-1);
   -o-transform: scaleX(-1);
 }
-.sol {
+#sol {
   position: absolute;
   bottom: 0;
   width: 100%;
