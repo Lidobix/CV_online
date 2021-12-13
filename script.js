@@ -417,12 +417,18 @@ $(function () {
           switch (actionFeuTricolore[0]) {
             case 1:
               $feuRouge.css("background-color", "rgb(255, 0, 0)");
+              var photo1 = document.getElementById('identite_1');
+              photo1.style.display = 'block';
               break;
             case 2:
               $feuOrange.css("background-color", "rgb(255, 187, 0)");
+              var photo2 = document.getElementById('identite_3');
+              photo2.style.display = 'block';
               break;
             case 3:
               $feuVert.css("background-color", "rgb(9, 251, 70)");
+              var photo3 = document.getElementById('identite_2');
+              photo3.style.display = 'block';
               break;
             case 4:
               actionFeuTricolore[0] = 0;
