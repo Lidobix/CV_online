@@ -263,7 +263,7 @@ $(function () {
       transparence: true,
     },
   ];
-
+  var dernièreDirection;
   var animationADroiteEnCours = false;
   var animationAGaucheEnCours = false;
   var animationSauterEnCours = false;
@@ -287,6 +287,7 @@ $(function () {
   var sautPanneau;
   var listeImagesPanneauPieton = [];
   var gauche_cont = "";
+  var pas;
   var nouveauLeft = 100;
 
   // Création de la liste d'images de panneau piéton:
@@ -306,10 +307,12 @@ $(function () {
   // console.log(listeImagesPanneauPieton);
   var listeBoutonsAction = document.querySelectorAll("button");
   // $bouton = $('button');
-  console.log(listeBoutonsAction);
+  // console.log(listeBoutonsAction);
 
-  var decor_mobile = document.querySelectorAll(".decor_mobile");
+  var decor_mobile = document.getElementsByClassName("decor_mobile");
+  // console.log(decor_mobile);
 
+  //Récupération des styles CSS et affectation dans le DOM
   var affectationStyleDecorMobile = function () {
     for (let i = 0; i < decor_mobile.length; i++) {
       var styleDecor = window.getComputedStyle(decor_mobile[i]);
@@ -320,12 +323,25 @@ $(function () {
       decor_mobile[i].style.height = styleDecor.height;
     }
   };
-
   affectationStyleDecorMobile();
+  // console.log(decor_mobile);
 
   // console.log(boutonsAction);
-  var listeObstacles = document.querySelectorAll(".obstacle");
-  // console.log(obstacle);
+  var listeDesObstacles = document.getElementsByClassName("obstacle");
+  // console.log(listeDesObstacles);
+
+  var affectationStyleObstacles = function () {
+    for (let i = 0; i < listeDesObstacles.length; i++) {
+      var styleObstacle = window.getComputedStyle(listeDesObstacles[i]);
+      // console.log("styledecor : ", styleDecor);
+      // console.log("styleobstacle.left : ", styleObstacle.left);
+      listeDesObstacles[i].style.left = styleObstacle.left;
+      listeDesObstacles[i].style.width = styleObstacle.width;
+      listeDesObstacles[i].style.height = styleObstacle.height;
+    }
+  };
+  affectationStyleObstacles();
+  // console.log(listeDesObstacles);
   ////////////////////////////////////////////////////////////////////////
   //////////////// DECLARATION DES COORDONNEES DE STICKY /////////////////
   ////////////////////////////////////////////////////////////////////////
@@ -357,9 +373,11 @@ $(function () {
       droite: false,
       bas: false,
       gauche: false,
+      derniere: "",
       etatInitial: true,
       coup: false,
       action: false,
+      obstacle: false,
     },
     parametres: {
       debutTimerIntro: NaN,
@@ -391,12 +409,11 @@ $(function () {
       console.log("entrée dans la fonction de lancement d'action");
       switch (idBouton) {
         case "boutonfeutricolore":
-          
-          console.log(
-            "bouton appuyé: feu tricolore, ",
-            "appuin°",
-            actionFeuTricolore[0]
-          );
+          // console.log(
+          //   "bouton appuyé: feu tricolore, ",
+          //   "appuin°",
+          //   actionFeuTricolore[0]
+          // );
           switch (actionFeuTricolore[0]) {
             case 1:
               $feuRouge.css("background-color", "rgb(255, 0, 0)");
@@ -419,30 +436,44 @@ $(function () {
       }
     },
 
-    detectionObstacle: function () {
-      // for (var i = 0; i < listeDesObstacles.length; i++) {
-      //   var $obstacle = listeDesObstacles[i];
-      //   alert($obstacle);
-      //   if (
-      //     parseFloat($container.css("left")) > $obstacle.left &&
-      //     parseFloat($container.css("left")) < $obstacle.left + $obstacle.width
-      //   ) {
-      //     $container.css("bottom", $obstacle.height);
-      //   }
-      // }
+    detectionObstacle: function (increment) {
+      console.log("entrée dans la fonction de détection d'obstacle");
+
+      var extremiteContainer =
+        parseFloat($container.css("left")) +
+        parseFloat($container.css("width"));
+      console.log(
+        "dans la fonction détection d'obstacle; extrémité container :",
+        extremiteContainer
+      );
+
+      for (let i = 0; i < listeDesObstacles.length; i++) {
+        var obstacle = listeDesObstacles[i];
+        console.log("obstacle.style.left : ", obstacle.style.left);
+        // console.log('obstacle.left : ', parseFloat(obstacle.left));
+
+        if (extremiteContainer >= parseFloat(obstacle.style.left)-19) {
+          // increment=0;
+          console.log("obstacle touché ");
+          this.directions.obstacle = true;
+        }
+
+        // this.lancementAction(bouton.id);
+      }
     },
 
     mouvementHorizontal: function (position, increment) {
+      console.log("increment =", increment);
       var positionActuelleContainer = parseFloat($container.css(position));
 
       //Test de la position left du container pour ne pas le faire sortir de l'écran à gauche ou à droite
       if (position == "left" && positionActuelleContainer + increment < 10) {
         //Test marge à gauche, on bloque le left au left mini
         $container.css("left", 10);
-        console.log(
-          "on va à gauche, et on arrive au bord de écran, le left est calibré à 10px: ",
-          $container.css("left")
-        );
+        // console.log(
+        //   "on va à gauche, et on arrive au bord de écran, le left est calibré à 10px: ",
+        //   $container.css("left")
+        // );
         // coordoContainer.bottom = parseFloat($container.css("bottom"));
       } else {
         if (
@@ -451,10 +482,10 @@ $(function () {
         ) {
           // test marge à droite, on bloque le left au left maxi
           $container.css("left", 1300);
-          console.log(
-            "on va à droite, et on arrive au bord de écran, le left est calibré à 1010px :",
-            $container.css("left")
-          );
+          // console.log(
+          //   "on va à droite, et on arrive au bord de écran, le left est calibré à 1010px :",
+          //   $container.css("left")
+          // );
           // coordoContainer.bottom = parseFloat($container.css("bottom"));
         } else {
           if (position == "left") {
@@ -465,6 +496,7 @@ $(function () {
               "indeximage =",
               indexImage
             );
+            console.log("increment =", increment);
           }
         }
       }
@@ -475,6 +507,11 @@ $(function () {
           break;
         case "action":
           indexImage = 9;
+          // if(this.directions.derniere == "gauche") {
+
+          // $container.css('left', parseFloat($container.css('left')) + 10 + 'px');
+
+          // }
           break;
         case "etatInitial":
           indexImage = 0;
@@ -524,7 +561,9 @@ $(function () {
       /////////////////// REGLAGE DU CONTAINER ET DU SPRITE EN COURANT ///////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       if (increment != NaN) {
-        // console.log('on va affecter une nouvelle valeur de left :', $container.css("left"), 'indexImage = ', indexImage);
+      
+        console.log('on va affecter une nouvelle valeur de left :', $container.css("left"), 'indexImage = ', indexImage);
+        console.log("increment =", increment);
         $container.css({
           left: interpos[indexImage].masque.left + increment + "px",
           width: interpos[indexImage].masque.width + "px",
@@ -545,16 +584,19 @@ $(function () {
       if (indexImage == indexImageMaxi) {
         indexImage = indexImageMini;
       }
+
+     
+
+      // this.avancementDecor(increment);
     },
 
     avancementDecor: function (increment) {
-      var avancerDecor = function (element) {
-        // if (nouveauLeft <50) {increment=0}
+      // console.log("on avance le décor");
+      for (let element of decor_mobile) {
         nouveauLeft = parseFloat(element.style.left) + increment;
-
         element.style.left = nouveauLeft + "px";
-      };
-      decor_mobile.forEach(avancerDecor);
+      }
+      //  this.detectionObstacle(increment);
     },
 
     leMoteurPourLesAnimations: function (tempsEcoule) {
@@ -562,25 +604,36 @@ $(function () {
         if (introDuJeu == false) {
           $container.addClass("containerinverse");
           this.detectionObstacle();
-          this.mouvementHorizontal("left", -17);
+          this.mouvementHorizontal("left", -10);
           this.avancementDecor(17);
         }
       }
       if (this.directions.droite) {
         if (introDuJeu == false) {
           console.log(
-            "appui touche droite, intro finie, on calcule le déplacement du container. son left actuel est : ",
+            // "appui touche droite, intro finie, on calcule le déplacement du container. son left actuel est : ",
             $container.css("left")
           );
           $container.removeClass("containerinverse");
+          // this.detectionObstacle();
           this.detectionObstacle();
-          this.mouvementHorizontal("left", 17);
-          this.avancementDecor(-17);
+          if (this.directions.obstacle == false) {
+            this.mouvementHorizontal("left", 10);
+            this.avancementDecor(-17);
+          } else {
+            this.mouvementHorizontal("left", 0);
+            this.avancementDecor(0);
+          }
+          console.log("pas = ", pas);
+          // this.mouvementHorizontal("left", pas);
+          // this.avancementDecor(-17);
+
+          // this.detectionAction();
         } else {
-          console.log(
-            "appui touche droite, intro en cours, le déplacement du container est nul (toujours dans le panneau), son left actuel est : ",
-            $container.css("left")
-          );
+          // console.log(
+          // "appui touche droite, intro en cours, le déplacement du container est nul (toujours dans le panneau), son left actuel est : ",
+          //   $container.css("left")
+          // );
           this.mouvementHorizontal("left", 0);
         }
       }
@@ -604,7 +657,7 @@ $(function () {
       }
       if (this.directions.action) {
         if (introDuJeu == false) {
-          console.log("appui sur la touche action");
+          // console.log("appui sur la touche action");
           this.mouvementHorizontal("action", NaN);
           // this.detectionAction();
         }
@@ -620,11 +673,11 @@ $(function () {
       var ici = this;
       window.addEventListener("keydown", function (event) {
         // console.log('appui touche');
-        console.log("appui touche, left container : ", $container.css("left"));
+        // console.log("appui touche, left container : ", $container.css("left"));
         ici.directions.etatInitial = false;
         var codeTouche = event.keyCode;
 
-        console.log("appui touche, état intro du jeu: ", introDuJeu);
+        // console.log("appui touche, état intro du jeu: ", introDuJeu);
         switch (codeTouche) {
           case 37:
             ici.directions.gauche = true;
@@ -634,7 +687,7 @@ $(function () {
             break;
           case 39:
             if (introDuJeu == true) {
-              console.log("eappui touche ntrée dans l'intro");
+              // console.log("eappui touche ntrée dans l'intro");
               // Chronométrage du temps d'appui sur la touce flèche droite:
               var dateAppui = new Date();
               if (isNaN(ici.parametres.debutTimerIntro)) {
@@ -671,22 +724,22 @@ $(function () {
       });
 
       window.addEventListener("keyup", function (event) {
-        console.log("relache touche");
-        console.log(
-          "relache touche, left container : ",
-          $container.css("left")
-        );
+        // console.log("relache touche");
+        // console.log(
+        //   "relache touche, left container : ",
+        //   $container.css("left")
+        // );
         // if (chronoIntro > delaiFinIntro){
         ici.directions.etatInitial = true;
         // }
 
         if (introDuJeu == true && chronoIntro > delaiFinIntro) {
-          console.log(
-            "relache touche, on est toujours dans lintro mais le seuil chrono est  dépassé, chrono: ",
-            chronoIntro,
-            "délai :",
-            delaiFinIntro
-          );
+          // console.log(
+          //   "relache touche, on est toujours dans lintro mais le seuil chrono est  dépassé, chrono: ",
+          //   chronoIntro,
+          //   "délai :",
+          //   delaiFinIntro
+          // );
           ici.directions.etatInitial = false;
         }
         var codeTouche = event.keyCode;
@@ -694,18 +747,20 @@ $(function () {
         switch (codeTouche) {
           case 37:
             ici.directions.gauche = false;
+            ici.directions.derniere = "gauche";
             break;
           case 38:
             ici.directions.haut = false;
             break;
           case 39:
+            ici.directions.derniere = "droite";
             if (introDuJeu == true) {
-              console.log("relache touche, on est toujours dans l'intro");
+              // console.log("relache touche, on est toujours dans l'intro");
 
               if (chronoIntro < delaiFinIntro) {
-                console.log(
-                  "relache touche, on est toujours dans l'intro et le chrono est encore sous le seuil"
-                );
+                // console.log(
+                //   "relache touche, on est toujours dans l'intro et le chrono est encore sous le seuil"
+                // );
                 // Si le joueur lève la che la touche avant la fin de l'intro
                 ici.parametres.debutTimerIntro = NaN; // Réinitialisation des tempos
                 ici.parametres.currentTimerIntro = NaN;
@@ -727,10 +782,10 @@ $(function () {
 
               //fin lorsqu'on a passé + de 3sec sur la flèche de droite
               if (chronoIntro > delaiFinIntro) {
-                console.log(
-                  "relache touche, on est toujours dans l'intro et le chrono a dépassé seuil"
-                );
-                console.log("on peut sortir de l'intro");
+                // console.log(
+                //   "relache touche, on est toujours dans l'intro et le chrono a dépassé seuil"
+                // );
+                // console.log("on peut sortir de l'intro");
                 //Réinitialisation de l'affichage du panneau
                 for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
                   // console.log("i=", i);
@@ -749,7 +804,7 @@ $(function () {
                 var x = 0;
 
                 var sautPanneau = setInterval(function () {
-                  console.log("lancement du saut du panneau");
+                  // console.log("lancement du saut du panneau");
                   $container.css({
                     left: interpos[17].masque.left,
                     bottom: interpos[17].masque.bottom,
@@ -789,8 +844,8 @@ $(function () {
                       bottom: interpos[10].sprite.bottom,
                       height: interpos[10].sprite.height,
                     });
-                    console.log("sortie du panneau terminée");
-                    console.log("left du container: ", $container.css("left"));
+                    // console.log("sortie du panneau terminée");
+                    // console.log("left du container: ", $container.css("left"));
 
                     $sprite.animate({
                       height: interpos[00].sprite.height,
@@ -829,13 +884,13 @@ $(function () {
                 // });
                 ici.parametres.debutTimerIntro = NaN;
                 ici.parametres.currentTimerIntro = NaN;
-                console.log(
-                  "on efface les chronos après la sortie du panneau ",
-                  ici.parametres.debutTimerIntro,
-                  ici.parametres.currentTimerIntro
-                );
+                // console.log(
+                //   "on efface les chronos après la sortie du panneau ",
+                //   ici.parametres.debutTimerIntro,
+                //   ici.parametres.currentTimerIntro
+                // );
 
-                console.log($container.css("left"));
+                // console.log($container.css("left"));
 
                 // $container.css('left','204px');
 
@@ -856,9 +911,10 @@ $(function () {
             ici.directions.bas = false;
             break;
           case 13:
-            if (introDuJeu==false){
-            ici.detectionAction();}  
-          ici.directions.action = false;
+            if (introDuJeu == false) {
+              ici.detectionAction();
+            }
+            ici.directions.action = false;
 
             break;
           case 32:
