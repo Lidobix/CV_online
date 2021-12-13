@@ -242,25 +242,19 @@ $(function () {
   // var serieRun = [etatInitial, run1, run2, run3, run4, run5, run6, run2, 'run9', run10, run11];
   var timing = 50;
 
-  // var bouton;
+  
   var delaiFinIntro = 100;
   var $hauteurSol = $("#sol").css("height");
   console.log("hauteur du sol :", $hauteurSol);
 
-  var dernièreDirection;
-  var animationADroiteEnCours = false;
-  var animationAGaucheEnCours = false;
-  var animationSauterEnCours = false;
-  var animationEnBasEnCours = false;
-  var position, increment;
+  
   var sautEnCours = false;
-  var compteur = 0;
-  var appuiLong = false;
+ 
   var actionFeuTricolore = [1, 0, 0, 0];
 
-  $feuRouge = $(".feuRouge");
-  $feuOrange = $(".feuOrange");
-  $feuVert = $(".feuVert");
+  var $feuRouge = $(".feuRouge");
+  var $feuOrange = $(".feuOrange");
+  var $feuVert = $(".feuVert");
   var chronoIntro;
   var introDuJeu = true;
   var $container = $("#container");
@@ -268,10 +262,7 @@ $(function () {
   var indexImage = 10;
   var indexImageMini = 11;
   var indexImageMaxi = 18;
-  var sautPanneau;
   var listeImagesPanneauPieton = [];
-  var gauche_cont = "";
-  var pas;
   var nouveauLeft = 100;
 
   // Création de la liste d'images de panneau piéton:
@@ -568,6 +559,79 @@ $(function () {
         };
         saut();
       }
+      //////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////// SAUT EN LONGUEUR GAUCHE /////////////////////////////
+      //////////////////////////////////////////////////////////////////////////////////
+
+
+
+      //////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////// SAUT EN LONGUEUR DROITE/////////////////////////////
+      //////////////////////////////////////////////////////////////////////////////////
+if (position == "sautenlongueur"){
+
+  sautEnCours = true;
+  console.log("demande de saut en longueur");
+  var leftActuel = parseFloat($container.css("left"));
+  console.log("left actuel du container: ", leftActuel);
+  $sprite.css({
+    left: interpos[7].sprite.left + "px",
+    bottom: interpos[7].sprite.bottom + "px",
+  });
+  $container.css({
+    width: interpos[7].masque.width + "px",
+    height: interpos[7].masque.height + "px",
+  });
+  var x = 0;
+  var sautenLongueur = function () {
+    console.log("entrée dans la fonction de calcul de trajectoire");
+    
+    // $container.css("left", x + "px");
+    var angle = (75 * Math.PI) / 80;
+    var vitesseInitiale = 85;
+    var gravite = 15;
+    
+    console.log("hauteur du sol: ", $hauteurSol);
+
+    // Equation de trajectoire:
+    var z =
+      parseFloat($hauteurSol) +
+      (-0.5 *
+        ((gravite / Math.pow(vitesseInitiale, 2)) * Math.pow(x, 2)) *
+        (1 + Math.pow(Math.tan(angle), 2)) +
+        x * Math.tan(angle));
+    // console.log("position z :", z);
+
+    if (z >= parseFloat($hauteurSol)) {
+      $container.css({
+        bottom: z + "px",
+        left: x + leftActuel + "px",
+        
+      });
+      x = x + 10;
+      console.log("exécution du saut");
+      console.log("left actuel du container :", $container.css('left'));
+      console.log("valeur du noouveau z calculé :", z);
+
+      // for (let element of decor_mobile) {
+      //   nouveauLeft = parseFloat(element.style.left) -5;
+      //   element.style.left = nouveauLeft + "px";
+      // }
+
+
+
+
+      requestAnimationFrame(sautenLongueur);
+    }
+  };
+  requestAnimationFrame(sautenLongueur);
+  console.log("valeur du noouveau z calculé à la fin du saut:", z);
+  
+
+
+}
+
+
 
       ////////////////////////////////////////////////////////////////////////////////////
       /////////////////// REGLAGE DU CONTAINER ET DU SPRITE EN COURANT ///////////////////
@@ -602,15 +666,11 @@ $(function () {
 
     avancementDecor: function (increment) {
       // console.log("on avance le décor");
-     
              for (let element of decor_mobile) {
         nouveauLeft = parseFloat(element.style.left) + increment;
         element.style.left = nouveauLeft + "px";
              }
     
-  
-  
-      //  this.detectionObstacle(increment);
     },
 
     leMoteurPourLesAnimations: function () {
@@ -645,98 +705,19 @@ $(function () {
           this.mouvementHorizontal("left", 0);
         }
       }
-      if (this.directions.gauche && this.directions.haut && !introDuJeu) {
-        console.log("demande de saut à gauche");
-        // for (let x = parseFloat($container.css('left')) ; i<parseFloat($container.css('left')) + 50; i++){
-
-        //   $container.css('left',x);
-        // }
-      }
 
       if (this.directions.droite && this.directions.haut && !introDuJeu && !sautEnCours) {
+        $container.removeClass("containerinverse");
+        this.mouvementHorizontal("sautenlongueur", 10);    
+      }
 
-        
-        
-        
-        sautEnCours = true;
-        console.log("demande de saut à droite");
-        var leftActuel = parseFloat($container.css("left"));
-        console.log("left actuel du container: ", leftActuel);
-        $sprite.css({
-          left: interpos[7].sprite.left + "px",
-          bottom: interpos[7].sprite.bottom + "px",
-        });
-        $container.css({
-          width: interpos[7].masque.width + "px",
-          height: interpos[7].masque.height + "px",
-        });
-        var x = 0;
-        var sautenLongueur = function () {
-          console.log("entrée dans la fonction de calcul de trajectoire");
-          
-          // $container.css("left", x + "px");
-          var angle = (75 * Math.PI) / 180;
-          var vitesseInitiale = 85;
-          var gravite = 15;
-          
-          console.log("hauteur du sol: ", $hauteurSol);
-
-          // Equation de trajectoire:
-          var z =
-            parseFloat($hauteurSol) +
-            (-0.5 *
-              ((gravite / Math.pow(vitesseInitiale, 2)) * Math.pow(x, 2)) *
-              (1 + Math.pow(Math.tan(angle), 2)) +
-              x * Math.tan(angle));
-
-        
-
-          // console.log("position z :", z);
-
-          if (z >= parseFloat($hauteurSol)) {
-            $container.css({
-              bottom: z + "px",
-              left: x + leftActuel + "px",
-              
-            });
-            x += 10;
-            console.log("exécution du saut");
-            console.log("left actuel du container :", $container.css('left'));
-            console.log("valeur du noouveau z calculé :", z);
-
-            for (let element of decor_mobile) {
-              nouveauLeft = parseFloat(element.style.left) -5;
-              element.style.left = nouveauLeft + "px";
-            }
-
-
-
-
-            requestAnimationFrame(sautenLongueur);
-          }
-        };
-        requestAnimationFrame(sautenLongueur);
-        console.log("valeur du noouveau z calculé à la fin du saut:", z);
-        
-        
-//         y = 0
-        
-//         // this.avancementDecor(-10);
-// for (let y = 0; y<25; y++){
-
-//         // if (y<250){
-// console.log('y= ', y);
-//           this.avancementDecor(-10);
-//           }
-        // }
-
+      if (this.directions.gauche && this.directions.haut && !introDuJeu && !sautEnCours) {
+        $container.addClass("containerinverse");
+        this.mouvementHorizontal("sautenlongueur", -10);    
       }
 
       if (
-        this.directions.haut &&
-        !this.directions.gauche &&
-        !this.directions.droite
-      ) {
+        this.directions.haut && !this.directions.gauche && !this.directions.droite) {
         console.log("demande de saut vertical uniquement");
         if (introDuJeu == false) {
           this.detectionObstacle();
@@ -751,9 +732,7 @@ $(function () {
         if (introDuJeu == false) {
           this.mouvementHorizontal("etatInitial", NaN);
         } else {
-          // if (sortiePanneauAutorisee == false){²
           this.mouvementHorizontal("etatInitialMini", NaN);
-          // }
         }
       }
       if (this.directions.action) {
