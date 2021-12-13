@@ -392,7 +392,7 @@ button {
   position: absolute;
   width: 362px;
   left: 64px;
-  bottom: -7px;
+  bottom: calc(var(--hauteur-du-sol) + 40px);
   transform: rotate(19deg);
   -webkit-transform: rotate(19deg);
   -moz-transform: rotate(19deg);
