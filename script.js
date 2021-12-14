@@ -240,31 +240,25 @@ $(function () {
   ////////////////////////////////////////////////////////////////////////
 
   // var serieRun = [etatInitial, run1, run2, run3, run4, run5, run6, run2, 'run9', run10, run11];
-  var timing = 50;
+  
   // var sortiePanneauEnCours = false;
 
-  var delaiFinIntro = 100;
+  // var delaiFinIntro = 100;
   var $hauteurSol = $("#sol").css("height");
-  console.log("hauteur du sol :", $hauteurSol);
-
-  var sautEnCours = false;
-
-  var actionFeuTricolore = [1, 0, 0, 0];
-
-  var $feuRouge = $(".feuRouge");
-  var compteurToucheClavier = 0;
+  // console.log("hauteur du sol :", $hauteurSol);
+  // var sautEnCours = false;
+  var timing = 60;
+  var $feuRouge = $(".feuRouge");  
   var $feuOrange = $(".feuOrange");
   var $feuVert = $(".feuVert");
-  var chronoIntro;
-  var introDuJeu = true;
   var $container = $("#container");
   var $sprite = $("#contenu");
   var indexImage = 10;
   var indexImageMini = 11;
   var indexImageMaxi = 18;
   var listeImagesPanneauPieton = [];
-  var nouveauLeft = 100;
-  var animationencours = false;
+  // var nouveauLeft = 100;
+  
 
   // Création de la liste d'images de panneau piéton:
   // for (let i = 0; i < 8; i++) {
@@ -360,6 +354,10 @@ $(function () {
       currentTimerIntro: NaN,
       tempoClous: [0, 200, 400, 600, 800, 1000, 1200, 1500],
       dernièreDirection: "",
+      actionFeuTricolore : [1, 0, 0, 0],
+      chronoIntro:0,
+      delaiFinIntro : 100,
+      introDuJeu : true,
     },
     detectionAction: function () {
       console.log("entrée dans la fonction de détection de bouton");
@@ -385,7 +383,7 @@ $(function () {
       console.log("entrée dans la fonction de lancement d'action");
       switch (idBouton) {
         case "boutonfeutricolore":
-          switch (actionFeuTricolore[0]) {
+          switch (this.parametres.actionFeuTricolore[0]) {
             case 1:
               $feuRouge.css("background-color", "rgb(255, 0, 0)");
               var photo1 = document.getElementById("identite_1");
@@ -402,13 +400,13 @@ $(function () {
               photo3.style.display = "block";
               break;
             case 4:
-              actionFeuTricolore[0] = 0;
+              this.parametres.actionFeuTricolore[0] = 0;
               $feuRouge.css("background-color", "rgb(131, 38, 38)");
               $feuOrange.css("background-color", "rgb(138, 77, 27)");
               $feuVert.css("background-color", "rgb(23, 58, 31)");
               break;
           }
-          actionFeuTricolore[0]++;
+          this.parametres.actionFeuTricolore[0]++;
           break;
       }
     },
@@ -534,7 +532,7 @@ $(function () {
     avancementDecor: function (increment) {
       // console.log("on avance le décor");
       for (let element of decor_mobile) {
-        nouveauLeft = parseFloat(element.style.left) + increment;
+        var nouveauLeft = parseFloat(element.style.left) + increment;
         element.style.left = nouveauLeft + "px";
       }
     },
@@ -543,7 +541,7 @@ $(function () {
       // this.directions.etatInitial = true
       ///////// ALLER A GAUCHE /////////////
       if (this.directions.gauche) {
-        if (introDuJeu == false) {
+        if (this.parametres.introDuJeu == false) {
           $container.addClass("containerinverse");
           this.detectionObstacle();
           this.mouvementHorizontal("left", -13);
@@ -553,7 +551,7 @@ $(function () {
 
       ///////// ALLER A DROITE /////////////
       if (this.directions.droite) {
-        if (!introDuJeu) {
+        if (!this.parametres.introDuJeu ) {
           console.log(
             "appui touche droite, intro finie, on calcule le déplacement du container. son left actuel est : ",
             $container.css("left")
@@ -578,7 +576,7 @@ $(function () {
 
       ///////// RETOUR ETAT INITIAL /////////////
       if (this.directions.etatInitial) {
-        if (introDuJeu == false) {
+        if (this.parametres.introDuJeu  == false) {
           this.mouvementHorizontal("etatInitial", NaN);
         } else {
           this.mouvementHorizontal("etatInitialMini", NaN);
@@ -593,7 +591,7 @@ $(function () {
         !this.directions.coup
       ) {
         // console.log(this.directions.gauche , this.directions.droite, this.directions.bas, this.directions.  )
-        if (introDuJeu == false) {
+        if (this.parametres.introDuJeu  == false) {
           // console.log("appui sur la touche action");
           this.mouvementHorizontal("action", NaN);
           // this.detectionAction();
@@ -602,7 +600,7 @@ $(function () {
 
       ///////// COUP /////////////
       if (this.directions.coup) {
-        if (introDuJeu == false) {
+        if (this.parametres.introDuJeu  == false) {
           this.mouvementHorizontal("coup", NaN);
         }
       }
@@ -623,7 +621,7 @@ $(function () {
               !ici.directions.droite &&
               !ici.directions.action &&
               !ici.directions.coup &&
-              !introDuJeu
+              !ici.parametres.introDuJeu 
             ) {
               ici.directions.gauche = true;
             }
@@ -631,7 +629,7 @@ $(function () {
             break;
 
           case 39:
-            if (introDuJeu == true) {
+            if (ici.parametres.introDuJeu  == true) {
               // console.log("eappui touche ntrée dans l'intro");
               // Chronométrage du temps d'appui sur la touce flèche droite:
               var dateAppui = new Date();
@@ -640,12 +638,12 @@ $(function () {
               } else {
                 ici.parametres.currentTimerIntro = dateAppui.getTime();
               }
-              chronoIntro =
+              ici.parametres.chronoIntro =
                 ici.parametres.currentTimerIntro -
                 ici.parametres.debutTimerIntro;
               // Check des clous à colorer en fonction du temps d'appui
               for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
-                if (chronoIntro > ici.parametres.tempoClous[i]) {
+                if (ici.parametres.chronoIntro > ici.parametres.tempoClous[i]) {
                   // listeImagesPanneauPieton[i][0].style.zIndex = i + 1;
                   listeImagesPanneauPieton[i].style.zIndex = i + 1;
 
@@ -660,7 +658,7 @@ $(function () {
               !ici.directions.gauche &&
               !ici.directions.coup &&
               !ici.directions.action &&
-              !introDuJeu
+              !ici.parametres.introDuJeu 
             ) {
               ici.directions.droite = true;
             }
@@ -672,7 +670,7 @@ $(function () {
               !ici.directions.droite &&
               !ici.directions.coup &&
               !ici.directions.gauche &&
-              !introDuJeu
+              !ici.parametres.introDuJeu 
             ) {
               ici.directions.action = true;
             }
@@ -682,7 +680,7 @@ $(function () {
               !ici.directions.droite &&
               !ici.directions.action &&
               !ici.directions.gauche &&
-              !introDuJeu
+              !ici.parametres.introDuJeu 
             ) {
               ici.directions.coup = true;
             }
@@ -699,7 +697,7 @@ $(function () {
         //   $container.css("left")
         // );
         $container.removeClass("containerinverse");
-        if (introDuJeu == true && chronoIntro > delaiFinIntro) {
+        if (ici.parametres.introDuJeu  == true && ici.parametres.chronoIntro > ici.parametres.delaiFinIntro) {
           // console.log(
           //   "relache touche, on est toujours dans lintro mais le seuil chrono est  dépassé, chrono: ",
           //   chronoIntro,
@@ -722,10 +720,10 @@ $(function () {
             break;
           case 39:
             ici.directions.derniere = "droite";
-            if (introDuJeu == true) {
+            if (ici.parametres.introDuJeu  == true) {
               // console.log("relache touche, on est toujours dans l'intro");
 
-              if (chronoIntro < delaiFinIntro) {
+              if (ici.parametres.chronoIntro < ici.parametres.delaiFinIntro) {
                 // console.log(
                 //   "relache touche, on est toujours dans l'intro et le chrono est encore sous le seuil"
                 // );
@@ -749,7 +747,7 @@ $(function () {
               }
 
               //fin lorsqu'on a passé + de 3sec sur la flèche de droite
-              if (chronoIntro > delaiFinIntro) {
+              if (ici.parametres.chronoIntro > ici.parametres.delaiFinIntro) {
                 // console.log(
                 //   "relache touche, on est toujours dans l'intro et le chrono a dépassé seuil"
                 // );
@@ -870,11 +868,11 @@ $(function () {
                 // indexImageMaxi = 7;
                 initialiseSticky(indexImage);
 
-                introDuJeu = false;
+                ici.parametres.introDuJeu  = false;
 
                 console.log(
                   "intro du jeu: ",
-                  introDuJeu,
+                  ici.parametres.introDuJeu ,
                   "sortiepanneau en cours : ",
                   ici.directions.sortiePanneauEnCours
                 );
@@ -894,7 +892,7 @@ $(function () {
             break;
 
           case 13:
-            if (introDuJeu == false) {
+            if (ici.parametres.introDuJeu  == false) {
               ici.directions.action = false;
               ici.detectionAction();
 
