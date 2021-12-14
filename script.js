@@ -431,6 +431,8 @@ $(function () {
           // increment=0;
           console.log("obstacle touché ");
           this.directions.obstacle = true;
+          // var offsetObstacle = parseFloat($container.css('left') - 30 + 'px');
+          // $container.css('left',offsetObstacle);
         } else {
           this.directions.obstacle = false;
           console.log(
@@ -444,17 +446,17 @@ $(function () {
     },
 
     mouvementHorizontal: function (position, increment) {
-      // console.log("increment =", increment);
+      console.log(" début de la fonction mouvement horizontal increment =", increment);
       var positionActuelleContainer = parseFloat($container.css(position));
 
       //Test de la position left du container pour ne pas le faire sortir de l'écran à gauche ou à droite
       if (position == "left" && positionActuelleContainer + increment < 10) {
         //Test marge à gauche, on bloque le left au left mini
         $container.css("left", 10);
-        // console.log(
-        //   "on va à gauche, et on arrive au bord de écran, le left est calibré à 10px: ",
-        //   $container.css("left")
-        // );
+        console.log(
+          "on va à gauche, et on arrive au bord de écran, le left est calibré à 10px: ",
+          $container.css("left")
+        );
         // coordoContainer.bottom = parseFloat($container.css("bottom"));
       } else {
         if (
@@ -463,10 +465,10 @@ $(function () {
         ) {
           // test marge à droite, on bloque le left au left maxi
           $container.css("left", parseFloat(screen.width) - 30);
-          // console.log(
-          //   "on va à droite, et on arrive au bord de écran, le left est calibré à 1010px :",
-          //   $container.css("left")
-          // );
+          console.log(
+            "on va à droite, et on arrive au bord de écran, le left est calibré à 1010px :",
+            $container.css("left")
+          );
           // coordoContainer.bottom = parseFloat($container.css("bottom"));
         } else {
           if (position == "left") {
@@ -502,14 +504,24 @@ $(function () {
       /////////////////// REGLAGE DU CONTAINER ET DU SPRITE EN COURANT ///////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       if (increment != NaN) {
-        // console.log("on va changer le sprite");
-        // console.log('on va affecter une nouvelle valeur de left :', $container.css("left"), 'indexImage = ', indexImage);
-        // console.log("increment =", increment);
+        console.log("on va changer le sprite");
+        console.log('on va affecter une nouvelle valeur de left :', $container.css("left"), 'indexImage = ', indexImage);
+        console.log("interpos[indexImage].masque.left = ",interpos[indexImage].masque.left)
+        console.log("interpos[indexImage].masque.width = ",interpos[indexImage].masque.width)
+        console.log("interpos[indexImage].masque.heigth = ",interpos[indexImage].masque.height)
+                console.log("interpos[indexImage].masque.bottom = ",interpos[indexImage].masque.bottom)
+        console.log("increment =", increment);
+        // $container.css({
+        //   left: interpos[indexImage].masque.left + increment + "px",
+        //   width: interpos[indexImage].masque.width + "px",
+        //   height: interpos[indexImage].masque.height + "px",
+        //   bottom: interpos[indexImage].masque.bottom + "px",
+        // });
         $container.css({
-          left: interpos[indexImage].masque.left + increment + "px",
+          // left: interpos[indexImage].masque.left + increment + "px",
           width: interpos[indexImage].masque.width + "px",
           height: interpos[indexImage].masque.height + "px",
-          bottom: interpos[indexImage].masque.bottom + "px",
+          // bottom: interpos[indexImage].masque.bottom + "px",
         });
 
         $sprite.css({
@@ -530,7 +542,7 @@ $(function () {
     },
 
     avancementDecor: function (increment) {
-      // console.log("on avance le décor");
+      console.log("on avance le décor, l'incrément est de: ", increment);
       for (let element of decor_mobile) {
         var nouveauLeft = parseFloat(element.style.left) + increment;
         element.style.left = nouveauLeft + "px";
@@ -538,7 +550,7 @@ $(function () {
     },
 
     leMoteurPourLesAnimations: function () {
-      // this.directions.etatInitial = true
+      
       ///////// ALLER A GAUCHE /////////////
       if (this.directions.gauche) {
         if (this.parametres.introDuJeu == false) {
@@ -562,8 +574,9 @@ $(function () {
             this.mouvementHorizontal("left", 10);
             this.avancementDecor(-20);
           } else {
-            this.mouvementHorizontal("left", 0);
-            this.avancementDecor(-12);
+            console.log('obstacle détecté, incrément est de 0');
+            this.mouvementHorizontal("left", -10);
+            this.avancementDecor(20);
           }
         } else {
           console.log(
@@ -587,7 +600,6 @@ $(function () {
         this.directions.action &&
         !this.directions.gauche &&
         !this.directions.droite &&
-        !this.directions.haut &&
         !this.directions.coup
       ) {
         // console.log(this.directions.gauche , this.directions.droite, this.directions.bas, this.directions.  )
@@ -601,6 +613,7 @@ $(function () {
       ///////// COUP /////////////
       if (this.directions.coup) {
         if (this.parametres.introDuJeu  == false) {
+             
           this.mouvementHorizontal("coup", NaN);
         }
       }
