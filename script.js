@@ -254,7 +254,7 @@ $(function () {
   var $container = $("#container");
   var $sprite = $("#contenu");
   var indexImage = 10;
-  var indexImageMini = 11;
+  var indexImageMini = 11;   
   var indexImageMaxi = 18;
   var listeImagesPanneauPieton = [];
   // var nouveauLeft = 100;
@@ -298,7 +298,7 @@ $(function () {
 
   // console.log(boutonsAction);
   var listeDesObstacles = document.getElementsByClassName("obstacle");
-  // console.log(listeDesObstacles);
+  console.log(listeDesObstacles);
 
   var affectationStyleObstacles = function () {
     for (let i = 0; i < listeDesObstacles.length; i++) {
@@ -308,6 +308,8 @@ $(function () {
       listeDesObstacles[i].style.left = styleObstacle.left;
       listeDesObstacles[i].style.width = styleObstacle.width;
       listeDesObstacles[i].style.height = styleObstacle.height;
+      listeDesObstacles[i].style.opacity = styleObstacle.opacity;
+
     }
   };
   affectationStyleObstacles();
@@ -379,6 +381,30 @@ $(function () {
       }
     },
 
+
+    gestionDesCoups:function(indexObstacleATraiter){
+      if (listeDesObstacles.length >0) {
+console.log('obstacle à traiter: ', indexObstacleATraiter);
+
+      var opaciteObstacle = listeDesObstacles[indexObstacleATraiter].style.opacity;
+      opaciteObstacle = opaciteObstacle - 0.1;
+      listeDesObstacles[indexObstacleATraiter].style.opacity = opaciteObstacle;
+      console.log(listeDesObstacles);
+
+      if (opaciteObstacle < 0.1) {
+  listeDesObstacles[indexObstacleATraiter].parentNode.removeChild(listeDesObstacles[indexObstacleATraiter])
+  this.directions.obstacle = false;
+        //  listeDesObstacles.splice(indexObstacleATraiter, 1)
+        // listeDesObstacles[indexObstacleATraiter].classList.remove = ("obstacle");
+      console.log(listeDesObstacles);
+      // listeDesObstacles = document.getElementsByClassName("obstacle");
+      //   console.log(listeDesObstacles);
+      }
+    }
+    },
+
+
+
     lancementAction: function (idBouton) {
       console.log("entrée dans la fonction de lancement d'action");
       switch (idBouton) {
@@ -412,8 +438,9 @@ $(function () {
     },
 
     detectionObstacle: function (increment) {
+      if (listeDesObstacles.length > 0) {
       console.log("entrée dans la fonction de détection d'obstacle");
-
+console.log(listeDesObstacles);
       var extremiteContainer =
         parseFloat($container.css("left")) +
         parseFloat($container.css("width"));
@@ -425,23 +452,18 @@ $(function () {
       for (let i = 0; i < listeDesObstacles.length; i++) {
         var obstacle = listeDesObstacles[i];
         console.log("obstacle.style.left : ", obstacle.style.left);
-        // console.log('obstacle.left : ', parseFloat(obstacle.left));
 
         if (extremiteContainer >= parseFloat(obstacle.style.left) - 20) {
-          // increment=0;
           console.log("obstacle touché ");
           this.directions.obstacle = true;
-          // var offsetObstacle = parseFloat($container.css('left') - 30 + 'px');
-          // $container.css('left',offsetObstacle);
+          return (i);
         } else {
           this.directions.obstacle = false;
           console.log(
-            "aucun obstacle détecté, bottom actuel :",
-            $container.css("bottom")
-          );
+            "aucun obstacle détecté");
         }
 
-        // this.lancementAction(bouton.id);
+      }
       }
     },
 
@@ -504,13 +526,13 @@ $(function () {
       /////////////////// REGLAGE DU CONTAINER ET DU SPRITE EN COURANT ///////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       if (increment != NaN) {
-        console.log("on va changer le sprite");
-        console.log('on va affecter une nouvelle valeur de left :', $container.css("left"), 'indexImage = ', indexImage);
-        console.log("interpos[indexImage].masque.left = ",interpos[indexImage].masque.left)
-        console.log("interpos[indexImage].masque.width = ",interpos[indexImage].masque.width)
-        console.log("interpos[indexImage].masque.heigth = ",interpos[indexImage].masque.height)
-                console.log("interpos[indexImage].masque.bottom = ",interpos[indexImage].masque.bottom)
-        console.log("increment =", increment);
+        // console.log("on va changer le sprite");
+        // console.log('on va affecter une nouvelle valeur de left :', $container.css("left"), 'indexImage = ', indexImage);
+        // console.log("interpos[indexImage].masque.left = ",interpos[indexImage].masque.left)
+        // console.log("interpos[indexImage].masque.width = ",interpos[indexImage].masque.width)
+        // console.log("interpos[indexImage].masque.heigth = ",interpos[indexImage].masque.height)
+        //         console.log("interpos[indexImage].masque.bottom = ",interpos[indexImage].masque.bottom)
+        // console.log("increment =", increment);
         // $container.css({
         //   left: interpos[indexImage].masque.left + increment + "px",
         //   width: interpos[indexImage].masque.width + "px",
@@ -542,12 +564,13 @@ $(function () {
     },
 
     avancementDecor: function (increment) {
-      console.log("on avance le décor, l'incrément est de: ", increment);
+      // console.log("on avance le décor, l'incrément est de: ", increment);
       for (let element of decor_mobile) {
         var nouveauLeft = parseFloat(element.style.left) + increment;
         element.style.left = nouveauLeft + "px";
       }
     },
+
 
     leMoteurPourLesAnimations: function () {
       
@@ -568,13 +591,14 @@ $(function () {
             "appui touche droite, intro finie, on calcule le déplacement du container. son left actuel est : ",
             $container.css("left")
           );
+
           // $container.removeClass("containerinverse");
           this.detectionObstacle();
           if (this.directions.obstacle == false) {
             this.mouvementHorizontal("left", 10);
             this.avancementDecor(-20);
           } else {
-            console.log('obstacle détecté, incrément est de 0');
+            // console.log('obstacle détecté, incrément est de 0');
             this.mouvementHorizontal("left", -10);
             this.avancementDecor(20);
           }
@@ -590,8 +614,10 @@ $(function () {
       ///////// RETOUR ETAT INITIAL /////////////
       if (this.directions.etatInitial) {
         if (this.parametres.introDuJeu  == false) {
+          // console.log('retour etat initial normal')
           this.mouvementHorizontal("etatInitial", NaN);
         } else {
+          // console.log('retour etat initial mini')
           this.mouvementHorizontal("etatInitialMini", NaN);
         }
       }
@@ -604,7 +630,7 @@ $(function () {
       ) {
         // console.log(this.directions.gauche , this.directions.droite, this.directions.bas, this.directions.  )
         if (this.parametres.introDuJeu  == false) {
-          // console.log("appui sur la touche action");
+          console.log("appui sur la touche action");
           this.mouvementHorizontal("action", NaN);
           // this.detectionAction();
         }
@@ -613,8 +639,16 @@ $(function () {
       ///////// COUP /////////////
       if (this.directions.coup) {
         if (this.parametres.introDuJeu  == false) {
-             
+          
           this.mouvementHorizontal("coup", NaN);
+          var indexObstacle = this.detectionObstacle();
+          console.log(this.directions.obstacle);
+          if (this.directions.obstacle== true){
+          console.log('coup porté sur obstacle: ', indexObstacle)
+          this.gestionDesCoups(indexObstacle);
+        } else {
+          console.log('coup dans le vent')
+        }
         }
       }
     }, // fin du moteur animations
