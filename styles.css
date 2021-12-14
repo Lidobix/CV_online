@@ -6,6 +6,7 @@
   font-display: block;
   src: url("Fonts/Righteous/Righteous-Regular.ttf") format("truetype");
 }
+
 /******************************************************************
 ********************  DEFINITION DES VARIABLES ********************
 ******************************************************************/
@@ -128,17 +129,17 @@ a :visited {
   background-image: url("images/briques.jfif");
   /* left:0; */
   bottom: var(--hauteur-du-sol);
-  height: 370px;
+  height: 400px;
   /* background-repeat: repeat; */
   position: absolute;
   /* z-index: 1; */
 }
 
 #affiche {
-  top: 30px;
-  left: 200px;
+bottom: calc(var(--hauteur-du-sol) + 11px);
+ left: 200px;
   height: 280px;
-  position: relative;
+  position: absolute;
   z-index: 2;
   transform: rotate(15deg);
   -webkit-transform: rotate(15deg);
@@ -572,3 +573,4 @@ button {
   bottom: calc(var(--hauteur-du-sol) - 5px);
   left: 5400px;
 }
+
