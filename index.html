@@ -5,110 +5,126 @@
     <script src="jquery.js"></script>
     <title>Ludovic Manet</title>
     <link rel="icon" type="image/x-icon" href="" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" as="font" href="Fonts/Righteous/Righteous-Regular.ttf">
+  
+<link rel="stylesheet" href="styles.css" />
+
   </head>
   <body>
     <main>
       <header>
         <h1>Ludovic Manet</h1>
-        <a href="#"><img src="images/linkedin_icone.png" alt="" class="icone"></a>
-        <a href="#"><img src="images/whire_icone.jpg" alt="" class = "icone"></a>
-        <div class="lienCV">
+
+        
+        <div id="espace_pro">
+        <div id="lienCV">
           <a href="page_CV.html"
-            >Je n'ai pas le temps de jouer, accéder directement au CV</a
+          >Je n'ai pas le temps de jouer, accéder directement au CV</a
           >
         </div>
+   
+        <div class = "icones">
+          <a href="https://www.linkedin.com/in/ludovic-manet/" target="blank"><img src="images/linkedin.svg" alt=""></a>
+          <a href="https://www.whire.me/@lidobix" target="blank"><img src="images/whire.svg" alt=""></a>
+          <a href="https://github.com/Lidobix" target="blank"><img src="images/github.svg" alt=""></a>
+      </div>
+
+
+
+
+
       </header>
       <nav></nav>
       <section>
+        <div id="murdebriques" class="decor_mobile"> <img src="images/affiche.png" alt="" id="affiche"></div>
+
+       
+        
         <div id="container">
           <img src="images/sticky_run_action.png" id="contenu" class="sprite" />
         </div>
-
         <!-- <div class="decormobile"> -->
           <div class="decor_mobile obstacle" id="panneaupieton" >
             <img
-              src="images/00_passage_pieton_clous_color_Etat_initial.svg"
-              alt=""
-              id="panneau_pieton_0"
-              class = "calque_panneau_pieton"
-            />
-
-            <img
-              src="images/01_passage_pieton_clous_color_1sur7.svg"
-              alt=""
-              id="panneau_pieton_1"
-              class = "calque_panneau_pieton"
-            />
-
-            <img
-              src="images/02_passage_pieton_clous_color_2sur7.svg"
-              alt=""
-              id="panneau_pieton_2"
-              class = "calque_panneau_pieton"
+            src="images/00_passage_pieton_clous_color_Etat_initial.svg"
+            alt=""
+            id="panneau_pieton_0"
+            class = "calque_panneau_pieton"
             />
             <img
-              src="images/03_passage_pieton_clous_color_3sur7.svg"
-              alt=""
-              id="panneau_pieton_3"
-              class = "calque_panneau_pieton"
+            src="images/01_passage_pieton_clous_color_1sur7.svg"
+            alt=""
+            id="panneau_pieton_1"
+            class = "calque_panneau_pieton"
             />
             <img
-              src="images/04_passage_pieton_clous_color_4sur7.svg"
+            src="images/02_passage_pieton_clous_color_2sur7.svg"
+            alt=""
+            id="panneau_pieton_2"
+            class = "calque_panneau_pieton"
+            />
+            
+            <img
+            src="images/03_passage_pieton_clous_color_3sur7.svg"
+            alt=""
+            id="panneau_pieton_3"
+            class = "calque_panneau_pieton"
+            />
+            <img
+            src="images/04_passage_pieton_clous_color_4sur7.svg"
               alt=""
               id="panneau_pieton_4"
               class = "calque_panneau_pieton"
-            />
-            <img
+              />
+              
+              <img
               src="images/05_passage_pieton_clous_color_5sur7.svg"
               alt=""
               id="panneau_pieton_5"
               class = "calque_panneau_pieton"
-            />
-            <img
+              />
+              <img
               src="images/06_passage_pieton_clous_color_6sur7.svg"
               alt=""
               id="panneau_pieton_6"
               class = "calque_panneau_pieton"
-            />
-            <img
+              />
+              <img
               src="images/07_passage_pieton_clous_color_7sur7.svg"
               alt=""
               id="panneau_pieton_7"
               class = "calque_panneau_pieton"
-            />
-            <div class="poteaupieton"></div>
-          </div>
-          
-          <div id="feuTricolore" class="decor_mobile">
-
-            
-            <div class="coque">
-              <div class="feuRouge"></div>
-              <div class="feuOrange"></div>
-              <div class="feuVert"></div>
+              />
+                <div class="poteaupieton"></div>
             </div>
-            <div class="poteau"></div>
-          
             
-          </div>
-          
-          <div id="voitureEnFeu" class="decor_mobile obstacle"  >
+            <div id="feuTricolore" class="decor_mobile">
+              
+              
+              <div class="coque">
+                <div class="feuRouge"></div>
+                <div class="feuOrange"></div>
+                <div class="feuVert"></div>
+              </div>
+              <div class="poteau"></div>
+              
+              
+            </div>
+            
+            <div id="voitureEnFeu" class="decor_mobile obstacle"  >
             <img src="images/voiture.svg" alt="" class="voiture" />
             <img src="images/feu.svg" alt="" class="feu" />
           </div>
 
           <div id="bus" class="decor_mobile">
-            <img src="images/bus_scolaire_pneus.svg" alt="" />
-            <img src="images/tag.svg" alt="" class="tag" />
-            <img src="images/ifocop.png" alt="" class="logo_ifocop" />
-            <div>Ce bus mérite bien mieux que sa peinture jaune!</div>
+            <img src="images/bus_JS.svg" alt="" />
+            <img src="images/tag.svg" alt="" id="tag" />
+            <img src="images/ifocop.png" alt="" id="logo_ifocop" />
+            <img src="images/bombe_sans_spray_noire.svg" alt="" id ="bombe_1" class="bombe_decor">
+            <img src="images/bombe_sans_spray_jaune.svg" alt="" id ="bombe_2" class="bombe_decor">
+            <img src="images/bombe_sans_spray_verte.svg" alt="" id ="bombe_3" class="bombe_decor">
+
+            <!-- <div>Ce bus mérite bien mieux que sa peinture jaune!</div> -->
           </div>
 
           <div id="filleauballon" class="decor_mobile"  class="obstacle">
@@ -157,15 +173,18 @@
         <button id="boutonbus" class="decor_mobile"></button>
         <button id="boutontracteur"class="decor_mobile"></button>
         <button id="boutonfille" class="decor_mobile"></button>
+        <button id="boutonaffiche" class="decor_mobile"></button>
 
         <img src="images/identite_1.png" alt="" class="decor_mobile" id="identite_1">
-        <img src="images/identite_3.png" alt="" class="decor_mobile" id="identite_2">
-        <img src="images/identite_4.png" alt="" class="decor_mobile" id="identite_3">
+        <img src="images/identite_2.png" alt="" class="decor_mobile" id="identite_2">
+        <img src="images/identite_3.png" alt="" class="decor_mobile" id="identite_3">
         </section>
       <noscript>
         <p>Veuillez activer JavaScript</p>
       </noscript>
       <script src="script.js"></script>
     </main>
+
+
   </body>
 </html>

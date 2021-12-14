@@ -1,3 +1,11 @@
+/************************************************************
+********************  IMPORT DES POLICES ********************
+************************************************************/
+@font-face {
+  font-family: "Righteous";
+  font-display: block;
+  src: url("Fonts/Righteous/Righteous-Regular.ttf") format("truetype");
+}
 /******************************************************************
 ********************  DEFINITION DES VARIABLES ********************
 ******************************************************************/
@@ -7,17 +15,12 @@
 }
 
 /************************************************************
-********************  IMPORT DES POLICES ********************
-************************************************************/
-
-/* @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap"); */
-
-/************************************************************
 **************** DESIGN DE LA PAGE D'ACCUEIL ****************
 ************************************************************/
 body {
   font-size: 2.3em;
   margin: 0;
+  font-family: "Righteous";
   padding: 0;
   height: 100vh;
   overflow-x: hidden;
@@ -53,15 +56,33 @@ section {
 }
 h1 {
   margin: 15px 0 15px 15px;
-  font-family: "Righteous", cursive;
+  font-family: "Righteous";
 }
-.lienCV {
+#espace_pro {
+  display: flex;
+  flex-direction: column;
+  margin-right: 40px;
+}
+.icones {
+  text-align: end;
+}
+
+.icones a {
+  margin-right: 10px;
+}
+
+a img {
+  width: 35px;
+  vertical-align: bottom;
+}
+
+#lienCV {
   font-family: "Righteous";
   font-size: 0.4em;
   background-color: rgb(0, 0, 0);
 
   height: fit-content;
-  margin-right: 40px;
+  /* margin-right: 40px; */
   padding: 5px;
   border-radius: 7px;
   -webkit-border-radius: 7px;
@@ -69,31 +90,25 @@ h1 {
   -ms-border-radius: 7px;
   -o-border-radius: 7px;
   border: 3px solid black;
+  /* flex-basis: 100%; */
 }
 a {
   text-decoration: none;
   color: white;
+  display: inline-block;
 }
 
 a :visited {
   color: white;
 }
 
-.lienCV:hover {
+#lienCV:hover {
   background-color: rgb(255, 255, 255);
 }
 
-.lienCV:hover a {
+#lienCV:hover a {
   color: black;
 }
-.icone{
-  position: absolute;
-  display: inline-block;
-  width: 50px;
-}
-
-
-
 
 /***************************************************************
 ******************* DESIGN DE LA ZONE DE JEU *******************
@@ -107,41 +122,66 @@ a :visited {
   bottom: 0;
 }
 
-#identite_1 {
+#murdebriques {
+  width: 100000px;
+  border-top: 8px solid black;
+  background-image: url("images/briques.jfif");
+  /* left:0; */
+  bottom: var(--hauteur-du-sol);
+  height: 370px;
+  /* background-repeat: repeat; */
   position: absolute;
-  left: 310px;
-  bottom: calc(var(--hauteur-du-sol) + 320px);
-  width: 300px;
+  /* z-index: 1; */
+}
+
+#affiche {
+  top: 30px;
+  left: 200px;
+  height: 280px;
+  position: relative;
+  z-index: 2;
   transform: rotate(15deg);
   -webkit-transform: rotate(15deg);
   -moz-transform: rotate(15deg);
   -ms-transform: rotate(15deg);
   -o-transform: rotate(15deg);
+}
+
+#identite_1 {
+  position: absolute;
+  left: 657px;
+  bottom: calc(var(--hauteur-du-sol) + 296px);
+  width: 300px;
+  transform: rotate(-35deg);
+  -webkit-transform: rotate(-35deg);
+  -moz-transform: rotate(-35deg);
+  -ms-transform: rotate(-35deg);
+  -o-transform: rotate(-35deg);
   display: none;
 }
 
 #identite_2 {
   position: absolute;
-  left: 290px;
-  bottom: calc(var(--hauteur-du-sol) + 111px);
+  left: 675px;
+  bottom: calc(var(--hauteur-du-sol) + 176px);
   width: 300px;
-  transform: rotate(-24deg);
-  -webkit-transform: rotate(-24deg);
-  -moz-transform: rotate(-24deg);
-  -ms-transform: rotate(-24deg);
-  -o-transform: rotate(-24deg);
+  transform: rotate(-15deg);
+  -webkit-transform: rotate(-15deg);
+  -moz-transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg);
+  -o-transform: rotate(-15deg);
   display: none;
 }
 #identite_3 {
   position: absolute;
-  left: 675px;
-  bottom: calc(var(--hauteur-du-sol) + 185px);
-  width: 250px;
-  transform: rotate(-9deg);
-  -webkit-transform: rotate(-9deg);
-  -moz-transform: rotate(-9deg);
-  -ms-transform: rotate(-9deg);
-  -o-transform: rotate(-9deg);
+  left: 651px;
+  bottom: calc(var(--hauteur-du-sol) + 58px);
+  width: 300px;
+  transform: rotate(8deg);
+  -webkit-transform: rotate(8deg);
+  -moz-transform: rotate(8deg);
+  -ms-transform: rotate(8deg);
+  -o-transform: rotate(8deg);
   display: none;
 }
 
@@ -174,11 +214,16 @@ button {
   -o-border-radius: 50%;
   z-index: 3;
 }
+#boutonaffiche {
+  left: 269px;
+  bottom: calc(var(--hauteur-du-sol) + 120px);
+}
+
 #boutonfeutricolore {
   left: 610px;
 }
 #boutonbus {
-  left: 1550px;
+  left: 1450px;
 }
 #boutontracteur {
   left: 3850px;
@@ -260,31 +305,30 @@ button {
   bottom: 132px;
 }
 
-/* 
-#panneaupieton img:nth-child(1){
-  z-index: 8;
+#panneaupieton img:nth-child(1) {
+  z-index: 2;
 }
-#panneaupieton img:nth-child(2){
-  z-index: 7;
+#panneaupieton img:nth-child(2) {
+  z-index: 1;
 }
-#panneaupieton img:nth-child(3){
-    z-index: 6;
+#panneaupieton img:nth-child(3) {
+  z-index: 1;
 }
-#panneaupieton img:nth-child(4){
-    z-index: 5;
+#panneaupieton img:nth-child(4) {
+  z-index: 1;
 }
-#panneaupieton img:nth-child(5){
-    z-index: 4;
+#panneaupieton img:nth-child(5) {
+  z-index: 1;
 }
-#panneaupieton img:nth-child(6){
-    z-index: 3;
+#panneaupieton img:nth-child(6) {
+  z-index: 1;
 }
-#panneaupieton img:nth-child(7){
-    z-index: 2;
+#panneaupieton img:nth-child(7) {
+  z-index: 1;
 }
-#panneaupieton img:nth-child(8){
-    z-index: 1;
-} */
+#panneaupieton img:nth-child(8) {
+  z-index: 1;
+}
 
 .poteaupieton {
   position: relative;
@@ -384,23 +428,26 @@ button {
   position: absolute;
   height: calc(270px * var(--facteuragrandissement));
   bottom: calc(var(--hauteur-du-sol) - 0px);
-  left: 1500px;
+  left: 1400px;
   /* display: none; */
 }
 #bus img:first-of-type {
   height: calc(270px * var(--facteuragrandissement));
 }
 
-.logo_ifocop {
+#logo_ifocop {
+  transform: rotate(-10deg);
   position: absolute;
   height: calc(50px * var(--facteuragrandissement));
-
-  bottom: calc(49px * var(--facteuragrandissement));
-
-  right: calc(11px * var(--facteuragrandissement));
+  bottom: calc(73px * var(--facteuragrandissement));
+  right: calc(45px * var(--facteuragrandissement));
+  -webkit-transform: rotate(-10deg);
+  -moz-transform: rotate(-10deg);
+  -ms-transform: rotate(-10deg);
+  -o-transform: rotate(-10deg);
 }
 
-.tag {
+#tag {
   position: absolute;
   width: 362px;
   left: 64px;
@@ -411,6 +458,29 @@ button {
   -ms-transform: rotate(19deg);
   -o-transform: rotate(19deg);
   opacity: 0;
+}
+
+.bombe_decor {
+  position: absolute;
+  height: 30px;
+}
+
+#bombe_1 {
+  bottom: 0;
+  left: 30px;
+}
+#bombe_2 {
+  bottom: 0;
+  left: 286px;
+}
+#bombe_3 {
+  bottom: -9px;
+  left: 318px;
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
 }
 
 /******************************************************
