@@ -361,6 +361,8 @@ $(function () {
       autorisationInit: false,
       introDuJeu: true,
       compteurBoutonFille: 0,
+      compteurActionFille: 0,
+      apparitionBoutonFille: false,
     },
     detectionAction: function () {
       console.log("entrée dans la fonction de détection de bouton");
@@ -395,39 +397,40 @@ $(function () {
           console.log(listeDesObstacles);
 
           if (opaciteObstacle < 0.1) {
-            // listeDesObstacles[indexObstacleATraiter].parentNode.removeChild(
-            //   listeDesObstacles[indexObstacleATraiter]
-            // );
             listeDesObstacles[indexObstacleATraiter].style.left = "100000px";
-            //   listeDesObstacles[indexObstacleATraiter]
-
             this.directions.obstacle = false;
             console.log(listeDesObstacles);
           }
         }
 
         if (indexObstacleATraiter == 1) {
-          var $ballon = $(".ballon");
-          $ballon.animate({
-            bottom: "3000px",
-            left: "6000px",
-          });
-          listeBoutonsAction[2].style.display = "block";
+          if (this.parametres.compteurBoutonFille == 0) {
+            var $ballon = $(".ballon");
+            $ballon.animate({
+              bottom: "3000px",
+              left: "6000px",
+            });
+            listeBoutonsAction[2].style.display = "block";
+            this.parametres.apparitionBoutonFille = true;
+          }
 
-          // var opaciteObstacle =
-          //   listeDesObstacles[indexObstacleATraiter].style.opacity;
-          // opaciteObstacle = opaciteObstacle - 0.1;
-          // listeDesObstacles[indexObstacleATraiter].style.opacity =
-          //   opaciteObstacle;
-          // console.log(listeDesObstacles);
+          if (
+            this.parametres.apparitionBoutonFille &&
+            this.parametres.compteurActionFille > 0
+          ) {
+            var $fille = $("#filleauballon");
+            $fille.animate({
+              bottom: "3000px",
+              left: "6000px",
+            });
 
-          // if (opaciteObstacle < 0.1) {
-          //   listeDesObstacles[indexObstacleATraiter].parentNode.removeChild(
-          //     listeDesObstacles[indexObstacleATraiter]
-          //   );
-          //   this.directions.obstacle = false;
-          //   console.log(listeDesObstacles);
-          // }
+            listeBoutonsAction[2].style.display = "none";
+          }
+
+          console.log(
+            "parametres.compteurActionFille",
+            this.parametres.compteurActionFille
+          );
         }
       }
     },
@@ -463,11 +466,12 @@ $(function () {
           break;
         case "boutonfille":
           var $message = $("#message");
-          console.log(
-            "compteurBoutonFille :",
-            this.parametres.compteurBoutonFille
-          );
+          // console.log(
+          //   "compteurBoutonFille :",
+          //   this.parametres.compteurBoutonFille
+          // );
           this.parametres.compteurBoutonFille++;
+
           if (this.parametres.compteurBoutonFille == 1) {
             $message.text(
               "lui rendre son ballon...",
@@ -1023,13 +1027,13 @@ $(function () {
               ici.directions.action = false;
               ici.detectionAction();
 
-              console.log(
-                "sortie action ",
-                ici.directions.coup,
-                ici.directions.gauche,
-                ici.directions.droite,
-                ici.directions.sortiePanneauEnCours
-              );
+              // console.log(
+              //   "sortie action ",
+              //   ici.directions.coup,
+              //   ici.directions.gauche,
+              //   ici.directions.droite,
+              //   ici.directions.sortiePanneauEnCours
+              // );
               if (
                 !ici.directions.coup &&
                 !ici.directions.gauche &&
@@ -1043,14 +1047,19 @@ $(function () {
             break;
           case 32:
             ici.directions.coup = false;
-            console.log(
-              "sortie de coup ",
-              ici.directions.coup,
-              ici.directions.action,
-              ici.directions.gauche,
-              ici.directions.droite,
-              ici.directions.sortiePanneauEnCours
-            );
+
+            if (ici.parametres.apparitionBoutonFille) {
+              ici.parametres.compteurActionFille++;
+            }
+
+            // console.log(
+            //   "sortie de coup ",
+            //   ici.directions.coup,
+            //   ici.directions.action,
+            //   ici.directions.gauche,
+            //   ici.directions.droite,
+            //   ici.directions.sortiePanneauEnCours
+            // );
 
             if (
               !ici.directions.action &&
