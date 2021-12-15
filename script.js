@@ -349,6 +349,7 @@ $(function () {
       coup: false,
       action: false,
       obstacle: false,
+      
       sortiePanneauEnCours: false,
     },
     parametres: {
@@ -359,6 +360,7 @@ $(function () {
       actionFeuTricolore : [1, 0, 0, 0],
       chronoIntro:0,
       delaiFinIntro : 100,
+      autorisationInit: false,
       introDuJeu : true,
     },
     detectionAction: function () {
@@ -737,7 +739,10 @@ console.log(listeDesObstacles);
       });
 
       window.addEventListener("keyup", function (event) {
+// console.log('autorisation:', ici.parametres.autorisationInit);
+        if (ici.parametres.autorisationInit == true){
         ici.directions.sortiePanneauEnCours = false;
+      }
         // console.log("relache touche");
         // console.log(
         //   "relache touche, left container : ",
@@ -815,9 +820,9 @@ console.log(listeDesObstacles);
                 var vitesseInitiale = 60;
                 var gravite = 15;
                 var x = 0;
-
+                ici.directions.sortiePanneauEnCours = true;
                 var sautPanneau = setInterval(function () {
-                  ici.directions.sortiePanneauEnCours = true;
+                  // ici.directions.sortiePanneauEnCours = true;
                   // console.log("lancement du saut du panneau");
                   $container.css({
                     left: interpos[17].masque.left,
@@ -847,7 +852,7 @@ console.log(listeDesObstacles);
                   x++;
                   if (z < parseFloat($hauteurSol)) {
                     clearInterval(sautPanneau);
-
+                    ici.directions.sortiePanneauEnCours = false;
                     // Passage sur le sprite image etatinitial mini:
                     $container.css({
                       left: 50 + x + "px",
@@ -882,37 +887,17 @@ console.log(listeDesObstacles);
                     indexImage = 0;
                     indexImageMini = 1;
                     indexImageMaxi = 7;
+                    // ici.parametres.autorisationInit = true;
+
+                    
                   }
+                  
                 }, 4);
+                
 
-                // console.log(z);
-                // $container.css({
-                //   left: interpos[7].masque.left,
-                //   bottom: interpos[7].masque.bottom,
-                //   width: interpos[7].masque.width,
-                //   height: interpos[7].masque.height,
-                // });
-
-                // $sprite.css({
-                //   left: interpos[7].sprite.left,
-                //   bottom: interpos[7].sprite.bottom,
-                //   height: '630px',
-                // });
                 ici.parametres.debutTimerIntro = NaN;
                 ici.parametres.currentTimerIntro = NaN;
-                // console.log(
-                //   "on efface les chronos après la sortie du panneau ",
-                //   ici.parametres.debutTimerIntro,
-                //   ici.parametres.currentTimerIntro
-                // );
-
-                // console.log($container.css("left"));
-
-                // $container.css('left','204px');
-
-                // indexImage = 0;
-                // indexImageMini = 1;
-                // indexImageMaxi = 7;
+            
                 initialiseSticky(indexImage);
 
                 ici.parametres.introDuJeu  = false;
@@ -928,11 +913,20 @@ console.log(listeDesObstacles);
             ici.directions.droite = false;
             // ici.directions.sortiePanneauEnCours=false;
             if (
-              !ici.directions.gauche &&
-              !ici.directions.coup &&
-              !ici.directions.action &&
-              !ici.directions.sortiePanneauEnCours
-            ) {
+              ici.directions.gauche == false &&
+              ici.directions.coup == false &&
+              ici.directions.action == false &&
+              ici.directions.sortiePanneauEnCours == false 
+              // &&               ici.parametres.autorisationInit == false 
+            ) { 
+              // console.log(
+              // ici.directions.gauche ,
+              // ici.directions.coup ,
+              // ici.directions.action ,
+              // ici.directions.sortiePanneauEnCours ,
+              //  ici.parametres.autorisationInit);
+
+              // console.log('retour à init par la droite');
               ici.directions.etatInitial = true;
             }
             // }

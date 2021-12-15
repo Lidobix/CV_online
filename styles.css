@@ -114,6 +114,18 @@ a :visited {
 /***************************************************************
 ******************* DESIGN DE LA ZONE DE JEU *******************
 ***************************************************************/
+#texte1{
+  color: white;
+  top: 8px;
+  left: 10px;
+  
+  font-size: 0.7em;
+  position: absolute;
+  
+}
+
+
+
 
 .decormobile {
   height: 300px;
