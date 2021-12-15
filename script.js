@@ -385,56 +385,49 @@ $(function () {
       if (listeDesObstacles.length > 0) {
         console.log("obstacle à traiter: ", indexObstacleATraiter);
 
-
         if (indexObstacleATraiter == 0) {
-        var opaciteObstacle =
-          listeDesObstacles[indexObstacleATraiter].style.opacity;
-        opaciteObstacle = opaciteObstacle - 0.1;
-        listeDesObstacles[indexObstacleATraiter].style.opacity =
-          opaciteObstacle;
-        console.log(listeDesObstacles);
-        
-        if (opaciteObstacle < 0.1) {
-          // listeDesObstacles[indexObstacleATraiter].parentNode.removeChild(
-          //   listeDesObstacles[indexObstacleATraiter]
-          // );
-          listeDesObstacles[indexObstacleATraiter].style.left = '100000px';
+          var opaciteObstacle =
+            listeDesObstacles[indexObstacleATraiter].style.opacity;
+          opaciteObstacle = opaciteObstacle - 0.1;
+          listeDesObstacles[indexObstacleATraiter].style.opacity =
+            opaciteObstacle;
+          console.log(listeDesObstacles);
+
+          if (opaciteObstacle < 0.1) {
+            // listeDesObstacles[indexObstacleATraiter].parentNode.removeChild(
+            //   listeDesObstacles[indexObstacleATraiter]
+            // );
+            listeDesObstacles[indexObstacleATraiter].style.left = "100000px";
             //   listeDesObstacles[indexObstacleATraiter]
 
-
-          this.directions.obstacle = false;
-          console.log(listeDesObstacles);
+            this.directions.obstacle = false;
+            console.log(listeDesObstacles);
+          }
         }
-      }
 
-      if (indexObstacleATraiter == 1) {
-        var $ballon = $('.ballon');
-        $ballon.animate({
-          bottom: '3000px',
-          left: '6000px',
-          duration: 1000,
-        })
-        
-        
-        // var opaciteObstacle =
-        //   listeDesObstacles[indexObstacleATraiter].style.opacity;
-        // opaciteObstacle = opaciteObstacle - 0.1;
-        // listeDesObstacles[indexObstacleATraiter].style.opacity =
-        //   opaciteObstacle;
-        // console.log(listeDesObstacles);
-        
-        // if (opaciteObstacle < 0.1) {
-        //   listeDesObstacles[indexObstacleATraiter].parentNode.removeChild(
-        //     listeDesObstacles[indexObstacleATraiter]
-        //   );
-        //   this.directions.obstacle = false;
-        //   console.log(listeDesObstacles);
-        // }
-      }
+        if (indexObstacleATraiter == 1) {
+          var $ballon = $(".ballon");
+          $ballon.animate({
+            bottom: "3000px",
+            left: "6000px",
+            duration: 1000,
+          });
 
+          // var opaciteObstacle =
+          //   listeDesObstacles[indexObstacleATraiter].style.opacity;
+          // opaciteObstacle = opaciteObstacle - 0.1;
+          // listeDesObstacles[indexObstacleATraiter].style.opacity =
+          //   opaciteObstacle;
+          // console.log(listeDesObstacles);
 
-
-
+          // if (opaciteObstacle < 0.1) {
+          //   listeDesObstacles[indexObstacleATraiter].parentNode.removeChild(
+          //     listeDesObstacles[indexObstacleATraiter]
+          //   );
+          //   this.directions.obstacle = false;
+          //   console.log(listeDesObstacles);
+          // }
+        }
       }
     },
 
@@ -598,10 +591,13 @@ $(function () {
     },
 
     avancementDecor: function (increment) {
-      // console.log("on avance le décor, l'incrément est de: ", increment);
-      for (let element of decor_mobile) {
-        var nouveauLeft = parseFloat(element.style.left) + increment;
-        element.style.left = nouveauLeft + "px";
+      console.log("on avance le décor, l'incrément est de: ", increment);
+
+      if (parseFloat(decor_mobile[0].style.left) + increment <= -500) {
+        for (let element of decor_mobile) {
+          var nouveauLeft = parseFloat(element.style.left) + increment;
+          element.style.left = nouveauLeft + "px";
+        }
       }
     },
 
@@ -709,23 +705,32 @@ $(function () {
           case 39:
             if (ici.parametres.introDuJeu == true) {
               console.log("eappui touche ntrée dans l'intro");
-              console.log('ici.parametres.chronoIntro', ici.parametres.chronoIntro)
-              console.log('ici.parametres.debutTimerIntro ',ici.parametres.debutTimerIntro )
-// console.log('ici.parametres.delaiFinIntro',ici.parametres.delaiFinIntro)
-console.log('ici.parametres.currentTimerIntro',ici.parametres.currentTimerIntro)
+              console.log(
+                "ici.parametres.chronoIntro",
+                ici.parametres.chronoIntro
+              );
+              console.log(
+                "ici.parametres.debutTimerIntro ",
+                ici.parametres.debutTimerIntro
+              );
+              // console.log('ici.parametres.delaiFinIntro',ici.parametres.delaiFinIntro)
+              console.log(
+                "ici.parametres.currentTimerIntro",
+                ici.parametres.currentTimerIntro
+              );
               // Chronométrage du temps d'appui sur la touce flèche droite:
               var dateAppui = new Date();
               if (isNaN(ici.parametres.debutTimerIntro)) {
                 ici.parametres.debutTimerIntro = dateAppui.getTime();
-                console.log('nouvelle date dappui créée');
+                console.log("nouvelle date dappui créée");
               } else {
-                var dateActuelle = new Date()
+                var dateActuelle = new Date();
                 ici.parametres.currentTimerIntro = dateActuelle.getTime();
               }
               ici.parametres.chronoIntro =
                 ici.parametres.currentTimerIntro -
                 ici.parametres.debutTimerIntro;
-                console.log(  ici.parametres.chronoIntro );
+              console.log(ici.parametres.chronoIntro);
               // Check des clous à colorer en fonction du temps d'appui
               for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
                 if (ici.parametres.chronoIntro > ici.parametres.tempoClous[i]) {
@@ -814,10 +819,22 @@ console.log('ici.parametres.currentTimerIntro',ici.parametres.currentTimerIntro)
             ici.directions.derniere = "droite";
             if (ici.parametres.introDuJeu == true) {
               console.log("relache touche, on est toujours dans l'intro");
-console.log('ici.parametres.chronoIntro', ici.parametres.chronoIntro)
-console.log('ici.parametres.delaiFinIntro',ici.parametres.delaiFinIntro)
-console.log('ici.parametres.currentTimerIntro',ici.parametres.currentTimerIntro)
-console.log('ici.parametres.debutTimerIntro ',ici.parametres.debutTimerIntro )
+              console.log(
+                "ici.parametres.chronoIntro",
+                ici.parametres.chronoIntro
+              );
+              console.log(
+                "ici.parametres.delaiFinIntro",
+                ici.parametres.delaiFinIntro
+              );
+              console.log(
+                "ici.parametres.currentTimerIntro",
+                ici.parametres.currentTimerIntro
+              );
+              console.log(
+                "ici.parametres.debutTimerIntro ",
+                ici.parametres.debutTimerIntro
+              );
               if (ici.parametres.chronoIntro <= ici.parametres.delaiFinIntro) {
                 console.log(
                   "relache touche, on est toujours dans l'intro et le chrono est encore sous le seuil"
@@ -841,7 +858,7 @@ console.log('ici.parametres.debutTimerIntro ',ici.parametres.debutTimerIntro )
                   ici.parametres.currentTimerIntro
                 );
                 console.log(listeImagesPanneauPieton);
-                
+
                 // ici.parametres.debutTimerIntro = NaN;
                 // ici.parametres.currentTimerIntro = NaN;
               }

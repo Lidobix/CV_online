@@ -142,6 +142,7 @@ a :visited {
   /* left:0; */
   bottom: var(--hauteur-du-sol);
   height: 400px;
+  left: -500px;
   /* background-repeat: repeat; */
   position: absolute;
   /* z-index: 1; */
@@ -149,7 +150,7 @@ a :visited {
 
 #affiche {
 bottom: calc(var(--hauteur-du-sol) + 11px);
- left: 200px;
+ left: 700px;
   height: 280px;
   position: absolute;
   z-index: 2;
