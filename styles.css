@@ -11,7 +11,7 @@
 ********************  DEFINITION DES VARIABLES ********************
 ******************************************************************/
 :root {
-  --hauteur-du-sol: 50px;
+  --hauteur-du-sol: 30px;
   --facteuragrandissement: 1;
 }
 
@@ -123,10 +123,16 @@ a :visited {
 }
 #succes {
   position: absolute;
-  right: 10px;
-  /* width: 1000px; */
-  top: 9px;
-  height: 100px;
+  right: 20px;
+  border: 4px solid black;
+  border-radius: 5px;
+  top: 4px;
+  padding: 8px;
+  height: 75px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 
 #succes img {
@@ -213,13 +219,13 @@ a :visited {
   border-top: 8px solid black;
   background-image: url("images/briques.jfif");
   bottom: var(--hauteur-du-sol);
-  height: 400px;
+  height: 392px;
   left: 0px;
   position: absolute;
 }
 
 #affiche {
-  bottom: calc(var(--hauteur-du-sol) + 11px);
+  bottom: calc(var(--hauteur-du-sol) + 61px);
   left: 200px;
   height: 280px;
   position: absolute;

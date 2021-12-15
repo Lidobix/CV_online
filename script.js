@@ -1,5 +1,8 @@
 "use-strict";
 $(function () {
+
+  var $hauteurSol = $("#sol").css("height");
+  
   var interpos = [
     {
       masque: {
@@ -124,7 +127,7 @@ $(function () {
     {
       masque: {
         left: 61,
-        bottom: 207,
+        bottom: parseFloat($hauteurSol) + 157,
         width: 21,
         height: 55,
       },
@@ -138,7 +141,7 @@ $(function () {
     {
       masque: {
         left: 52,
-        bottom: 207,
+        bottom: parseFloat($hauteurSol) + 157,
         width: 30,
         height: 53,
       },
@@ -152,7 +155,7 @@ $(function () {
     {
       masque: {
         left: 52,
-        bottom: 207,
+        bottom: parseFloat($hauteurSol) + 157,
         width: 26,
         height: 53,
       },
@@ -166,7 +169,7 @@ $(function () {
     {
       masque: {
         left: 60,
-        bottom: 207,
+        bottom: parseFloat($hauteurSol) + 157,
         width: 23,
         height: 53,
       },
@@ -180,7 +183,7 @@ $(function () {
     {
       masque: {
         left: 52,
-        bottom: 207,
+        bottom: parseFloat($hauteurSol) + 157,
         width: 30,
         height: 49,
       },
@@ -194,7 +197,7 @@ $(function () {
     {
       masque: {
         left: 54,
-        bottom: 207,
+        bottom: parseFloat($hauteurSol) + 157,
         width: 25,
         height: 50,
       },
@@ -208,7 +211,7 @@ $(function () {
     {
       masque: {
         left: 52,
-        bottom: 207,
+        bottom: parseFloat($hauteurSol) + 157,
         width: 29,
         height: 48,
       },
@@ -222,7 +225,7 @@ $(function () {
     {
       masque: {
         left: 50,
-        bottom: 207,
+        bottom: parseFloat($hauteurSol) + 157,
         width: 37,
         height: 47,
       },
@@ -244,7 +247,7 @@ $(function () {
   // var sortiePanneauEnCours = false;
 
   // var delaiFinIntro = 100;
-  var $hauteurSol = $("#sol").css("height");
+  
   // console.log("hauteur du sol :", $hauteurSol);
   // var sautEnCours = false;
   var timing = 60;
@@ -451,25 +454,33 @@ $(function () {
           );
         }
 
-        // if (indexObstacleATraiter == 2) {
+        if (indexObstacleATraiter == 2) {
         
-        //   console.log("poubelle touchée");
-        //   $poubelle = $('#poubellefrappe');
-        //   compteurRats++;
-        //   // $poubelle.append(`<img src="images/rat.svg" class="rat` + compteurRats + `"rat>`);
-        //   // $ratCree = $('.rat' + compteurRats);
-        //   $poubelle.append(`<img src="images/rat.svg" class="rat">`);
-        //   $ratCree = $('.rat');
+          console.log("poubelle touchée");
+          $poubelle = $('#poubellefrappe');
+          compteurRats++;
+          // $poubelle.append(`<img src="images/rat.svg" class="rat` + compteurRats + `"rat>`);
+          // $ratCree = $('.rat' + compteurRats);
+          $poubelle.append(`<img src="images/rat.svg" class="rat">`);
+          $ratCree = $('.rat');
           
-        //   // $ratCree.css('width', '75px');
-        //   $ratCree.animate({
-        //     bottom: "1000px",
-        //     left: "6000px",
-        //   })
+          $ratCree.css({
+            width: '75px',
+            position: 'absolute',
+            bottom:'0'
+          });
+          $ratCree.animate({
+            bottom: "0",
+            left: "4000px",
+            opacity: '0'
+          } ,4000
+          );
 
-        //   // setTimeout($ratCree.remove(), 1000);
+          this.attributionSucces(5);
+          
+          // $ratCree.remove();
 
-        // }
+        }
 
 
 
