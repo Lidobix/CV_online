@@ -479,7 +479,7 @@ $(function () {
             );
           }
           if (this.parametres.compteurBoutonFille == 2) {
-            $message.text("ballon rendu", this.parametres.compteurBoutonFille);
+            $message.text("");
             var $ballon = $(".ballon");
             $ballon.animate({
               bottom: "100px",
@@ -538,12 +538,14 @@ $(function () {
         );
         // coordoContainer.bottom = parseFloat($container.css("bottom"));
       } else {
+        
         if (
           position == "left" &&
-          positionActuelleContainer + increment > parseFloat(screen.width) - 30
-        ) {
+          
+          (positionActuelleContainer + increment) > (screen.width - 0.7*screen.width)
+        ) {console.log('largeur ecran : ', screen.width)
           // test marge à droite, on bloque le left au left maxi
-          $container.css("left", parseFloat(screen.width) - 30);
+          $container.css("left", parseFloat(screen.width) - 0.7*screen.width);
           console.log(
             "on va à droite, et on arrive au bord de écran, le left est calibré à 1010px :",
             $container.css("left")
@@ -915,6 +917,8 @@ $(function () {
                 var gravite = 15;
                 var x = 0;
                 ici.directions.sortiePanneauEnCours = true;
+                var $message = $("#message");
+                $message.text("");
                 var sautPanneau = setInterval(function () {
                   // ici.directions.sortiePanneauEnCours = true;
                   // console.log("lancement du saut du panneau");
