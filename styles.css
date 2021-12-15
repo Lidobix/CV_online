@@ -116,10 +116,10 @@ a :visited {
 ***************************************************************/
 #texte1{
   color: white;
-  top: 8px;
+  top: 10px;
   left: 10px;
   
-  font-size: 0.7em;
+  font-size: 0.65em;
   position: absolute;
   
 }
@@ -266,10 +266,10 @@ button {
 #container {
   position: absolute;
   overflow: hidden;
-  border-right: 3px solid rgb(255, 0, 0);
+  /* border-right: 3px solid rgb(255, 0, 0);
   border-left: 3px solid rgb(255, 0, 0);
   border-top: 1px solid rgb(255, 0, 0);
-  border-bottom: 1px solid rgb(255, 0, 0);
+  border-bottom: 1px solid rgb(255, 0, 0); */
   z-index: 10;
 }
 

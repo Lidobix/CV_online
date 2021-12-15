@@ -353,11 +353,11 @@ $(function () {
     parametres: {
       debutTimerIntro: NaN,
       currentTimerIntro: NaN,
-      tempoClous: [0, 200, 400, 600, 800, 1000, 1200, 1500],
+      tempoClous: [0, 100, 200, 350, 500, 700, 900, 1000],
       dernièreDirection: "",
       actionFeuTricolore: [1, 0, 0, 0],
       chronoIntro: 0,
-      delaiFinIntro: 100,
+      delaiFinIntro: 1100,
       autorisationInit: false,
       introDuJeu: true,
     },
@@ -619,10 +619,10 @@ $(function () {
       ///////// ALLER A DROITE /////////////
       if (this.directions.droite) {
         if (!this.parametres.introDuJeu) {
-          console.log(
-            "appui touche droite, intro finie, on calcule le déplacement du container. son left actuel est : ",
-            $container.css("left")
-          );
+          // console.log(
+          //   "appui touche droite, intro finie, on calcule le déplacement du container. son left actuel est : ",
+          //   $container.css("left")
+          // );
 
           // $container.removeClass("containerinverse");
           this.detectionObstacle();
@@ -635,10 +635,10 @@ $(function () {
             this.avancementDecor(20);
           }
         } else {
-          console.log(
-            "appui touche droite, intro en cours, le déplacement du container est nul (toujours dans le panneau), son left actuel est : ",
-            $container.css("left")
-          );
+          // console.log(
+          //   "appui touche droite, intro en cours, le déplacement du container est nul (toujours dans le panneau), son left actuel est : ",
+          //   $container.css("left")
+          // );
           this.mouvementHorizontal("left", 0);
         }
       }
@@ -708,17 +708,24 @@ $(function () {
 
           case 39:
             if (ici.parametres.introDuJeu == true) {
-              // console.log("eappui touche ntrée dans l'intro");
+              console.log("eappui touche ntrée dans l'intro");
+              console.log('ici.parametres.chronoIntro', ici.parametres.chronoIntro)
+              console.log('ici.parametres.debutTimerIntro ',ici.parametres.debutTimerIntro )
+// console.log('ici.parametres.delaiFinIntro',ici.parametres.delaiFinIntro)
+console.log('ici.parametres.currentTimerIntro',ici.parametres.currentTimerIntro)
               // Chronométrage du temps d'appui sur la touce flèche droite:
               var dateAppui = new Date();
               if (isNaN(ici.parametres.debutTimerIntro)) {
                 ici.parametres.debutTimerIntro = dateAppui.getTime();
+                console.log('nouvelle date dappui créée');
               } else {
-                ici.parametres.currentTimerIntro = dateAppui.getTime();
+                var dateActuelle = new Date()
+                ici.parametres.currentTimerIntro = dateActuelle.getTime();
               }
               ici.parametres.chronoIntro =
                 ici.parametres.currentTimerIntro -
                 ici.parametres.debutTimerIntro;
+                console.log(  ici.parametres.chronoIntro );
               // Check des clous à colorer en fonction du temps d'appui
               for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
                 if (ici.parametres.chronoIntro > ici.parametres.tempoClous[i]) {
@@ -768,6 +775,7 @@ $(function () {
       });
 
       window.addEventListener("keyup", function (event) {
+        ici.parametres.debutTimerIntro = NaN;
         // console.log('autorisation:', ici.parametres.autorisationInit);
         if (ici.parametres.autorisationInit == true) {
           ici.directions.sortiePanneauEnCours = false;
@@ -805,15 +813,19 @@ $(function () {
           case 39:
             ici.directions.derniere = "droite";
             if (ici.parametres.introDuJeu == true) {
-              // console.log("relache touche, on est toujours dans l'intro");
-
-              if (ici.parametres.chronoIntro < ici.parametres.delaiFinIntro) {
-                // console.log(
-                //   "relache touche, on est toujours dans l'intro et le chrono est encore sous le seuil"
-                // );
+              console.log("relache touche, on est toujours dans l'intro");
+console.log('ici.parametres.chronoIntro', ici.parametres.chronoIntro)
+console.log('ici.parametres.delaiFinIntro',ici.parametres.delaiFinIntro)
+console.log('ici.parametres.currentTimerIntro',ici.parametres.currentTimerIntro)
+console.log('ici.parametres.debutTimerIntro ',ici.parametres.debutTimerIntro )
+              if (ici.parametres.chronoIntro <= ici.parametres.delaiFinIntro) {
+                console.log(
+                  "relache touche, on est toujours dans l'intro et le chrono est encore sous le seuil"
+                );
                 // Si le joueur lève la che la touche avant la fin de l'intro
                 ici.parametres.debutTimerIntro = NaN; // Réinitialisation des tempos
                 ici.parametres.currentTimerIntro = NaN;
+                ici.parametres.chronoIntro = NaN;
                 //Réinitialisation de l'affichage du panneau
                 for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
                   // listeImagesPanneauPieton[i][0].style.zIndex = 1;
@@ -821,13 +833,17 @@ $(function () {
                 }
                 // listeImagesPanneauPieton[0][0].style.zIndex = 2;
                 listeImagesPanneauPieton[0].style.zIndex = 2;
-                ici.parametres.debutTimerIntro = NaN;
-                ici.parametres.currentTimerIntro = NaN;
+                // ici.parametres.debutTimerIntro = NaN;
+                // ici.parametres.currentTimerIntro = NaN;
                 console.log(
                   "relache touche dans l'intro on remet les compteurs à zéro: ",
                   ici.parametres.debutTimerIntro,
                   ici.parametres.currentTimerIntro
                 );
+                console.log(listeImagesPanneauPieton);
+                
+                // ici.parametres.debutTimerIntro = NaN;
+                // ici.parametres.currentTimerIntro = NaN;
               }
 
               //fin lorsqu'on a passé + de 3sec sur la flèche de droite
