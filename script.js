@@ -363,6 +363,18 @@ $(function () {
       compteurBoutonFille: 0,
       compteurActionFille: 0,
       apparitionBoutonFille: false,
+      succes : ['#html_pic',"#css","#js","#bootstrap","#node", "#mongo"],
+    },
+    attributionSucces: function(indexSucces){
+      $succes = $(this.parametres.succes[indexSucces])
+      // alert($succes);
+      $succes.animate({
+      opacity: 1,
+
+    })
+
+
+
     },
     detectionAction: function () {
       console.log("entrée dans la fonction de détection de bouton");
@@ -385,6 +397,7 @@ $(function () {
     },
 
     gestionDesCoups: function (indexObstacleATraiter) {
+      var $message = $("#message");
       if (listeDesObstacles.length > 0) {
         console.log("obstacle à traiter: ", indexObstacleATraiter);
 
@@ -398,6 +411,7 @@ $(function () {
 
           if (opaciteObstacle < 0.1) {
             listeDesObstacles[indexObstacleATraiter].style.left = "100000px";
+            this.attributionSucces(3);
             this.directions.obstacle = false;
             console.log(listeDesObstacles);
           }
@@ -419,12 +433,15 @@ $(function () {
             this.parametres.compteurActionFille > 0
           ) {
             var $fille = $("#filleauballon");
+
             $fille.animate({
               bottom: "3000px",
               left: "6000px",
             });
 
             listeBoutonsAction[2].style.display = "none";
+            this.attributionSucces(4);
+            // $message.text('...ou pas!');
           }
 
           console.log(
@@ -436,6 +453,7 @@ $(function () {
     },
 
     lancementAction: function (idBouton) {
+      var $message = $("#message");
       console.log("entrée dans la fonction de lancement d'action");
       switch (idBouton) {
         case "boutonfeutricolore":
@@ -454,6 +472,7 @@ $(function () {
               $feuVert.css("background-color", "rgb(9, 251, 70)");
               var photo3 = document.getElementById("identite_3");
               photo3.style.display = "block";
+              this.attributionSucces(1);
               break;
             case 4:
               this.parametres.actionFeuTricolore[0] = 0;
@@ -465,11 +484,8 @@ $(function () {
           this.parametres.actionFeuTricolore[0]++;
           break;
         case "boutonfille":
-          var $message = $("#message");
-          // console.log(
-          //   "compteurBoutonFille :",
-          //   this.parametres.compteurBoutonFille
-          // );
+          // var $message = $("#message");
+
           this.parametres.compteurBoutonFille++;
 
           if (this.parametres.compteurBoutonFille == 1) {
@@ -489,6 +505,21 @@ $(function () {
             listeBoutonsAction[2].style.display = "none";
           }
 
+          break;
+
+        case "boutonbus":
+          // var $message = $("#message");
+          $message.text(
+            "Sticky aime l'art de rue, ce bus est sa future oeuvre!"
+          );
+          setTimeout(function () {
+            $message.text("");
+          }, 5000);
+
+          break;
+
+        case "boutonpoubelle":
+          $message.text("Sticky aime quand c'est propre...");
           break;
       }
     },
@@ -538,14 +569,14 @@ $(function () {
         );
         // coordoContainer.bottom = parseFloat($container.css("bottom"));
       } else {
-        
         if (
           position == "left" &&
-          
-          (positionActuelleContainer + increment) > (screen.width - 0.7*screen.width)
-        ) {console.log('largeur ecran : ', screen.width)
+          positionActuelleContainer + increment >
+            screen.width - 0.7 * screen.width
+        ) {
+          console.log("largeur ecran : ", screen.width);
           // test marge à droite, on bloque le left au left maxi
-          $container.css("left", parseFloat(screen.width) - 0.7*screen.width);
+          $container.css("left", parseFloat(screen.width) - 0.7 * screen.width);
           console.log(
             "on va à droite, et on arrive au bord de écran, le left est calibré à 1010px :",
             $container.css("left")
@@ -917,6 +948,7 @@ $(function () {
                 var gravite = 15;
                 var x = 0;
                 ici.directions.sortiePanneauEnCours = true;
+                ici.attributionSucces(0);
                 var $message = $("#message");
                 $message.text("");
                 var sautPanneau = setInterval(function () {
@@ -968,8 +1000,7 @@ $(function () {
 
                     $sprite.animate({
                       height: interpos[00].sprite.height,
-                      // width: "100px",
-                      left: interpos[00].sprite.left,
+                    left: interpos[00].sprite.left,
                       bottom: interpos[00].sprite.bottom,
                       duration: 10,
                     });
@@ -977,14 +1008,15 @@ $(function () {
                     $container.animate({
                       height: interpos[00].masque.height,
                       width: interpos[00].masque.width,
-                      // left: $leftInitialFille + "px",
                       bottom: interpos[00].masque.bottom,
                       duration: 10,
                     });
+                    
 
                     indexImage = 0;
                     indexImageMini = 1;
                     indexImageMaxi = 7;
+                    
                     // ici.parametres.autorisationInit = true;
                   }
                 }, 4);
@@ -995,7 +1027,7 @@ $(function () {
                 initialiseSticky(indexImage);
 
                 ici.parametres.introDuJeu = false;
-
+                
                 console.log(
                   "intro du jeu: ",
                   ici.parametres.introDuJeu,
@@ -1127,6 +1159,9 @@ $(function () {
 
   $tag.mousemove(function () {
     $tag.css("opacity", $tagOpacity);
+
+
+    if ($tagOpacity>0.5){monJeu.attributionSucces(2);}
     $tagOpacity = parseFloat($tagOpacity) + 0.003;
   });
 });

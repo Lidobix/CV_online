@@ -114,18 +114,78 @@ a :visited {
 /***************************************************************
 ******************* DESIGN DE LA ZONE DE JEU *******************
 ***************************************************************/
-#message{
+#message {
   color: white;
   top: 10px;
   left: 10px;
-  
   font-size: 0.65em;
   position: absolute;
-  
+}
+#succes {
+  position: absolute;
+  right: 10px;
+  /* width: 1000px; */
+  top: 9px;
+  height: 100px;
+}
+
+#succes img {
+  height: 75px;
+  opacity: 0;
 }
 
 
 
+/* 
+#html_pic_mini{
+  position: absolute;
+  bottom: var(--hauteur-du-sol);
+  height: 25px;
+  left: 58px;
+  z-index: 3;
+}
+
+
+#css_mini{
+  position: absolute;
+  bottom: var(--hauteur-du-sol);
+  z-index: 3;
+  height: 25px;
+}
+#js_mini{
+   position: absolute;
+   bottom: var(--hauteur-du-sol);
+     z-index: 3;
+  height: 25px;
+}
+#bootstrap_mini{
+  position: absolute;
+  bottom: var(--hauteur-du-sol);
+    z-index: 3;
+  height: 25px;
+}
+#mongo_mini{
+   position: absolute;
+   bottom: var(--hauteur-du-sol);
+     z-index: 3;
+  height: 25px;
+}
+#node_mini{
+    position: absolute;
+    bottom: var(--hauteur-du-sol);
+      z-index: 3;
+  height: 25px;
+}  */
+
+
+
+#sol {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: var(--hauteur-du-sol);
+  background-color: black;
+}
 
 .decormobile {
   height: 300px;
@@ -139,18 +199,15 @@ a :visited {
   width: 100000px;
   border-top: 8px solid black;
   background-image: url("images/briques.jfif");
-  
   bottom: var(--hauteur-du-sol);
   height: 400px;
   left: 0px;
-  
   position: absolute;
-  
 }
 
 #affiche {
-bottom: calc(var(--hauteur-du-sol) + 11px);
- left: 200px;
+  bottom: calc(var(--hauteur-du-sol) + 11px);
+  left: 200px;
   height: 280px;
   position: absolute;
   z-index: 2;
@@ -204,7 +261,6 @@ bottom: calc(var(--hauteur-du-sol) + 11px);
 ***************************************************************/
 
 button {
-  
   position: absolute;
   bottom: calc(var(--hauteur-du-sol) + 73px);
   border: 2px solid rgb(196, 162, 13);
@@ -229,14 +285,16 @@ button {
 #boutonbus {
   left: 1450px;
 }
-#boutontracteur {
+/* #boutontracteur {
   left: 3850px;
-}
+} */
 #boutonfille {
   left: 3000px;
   display: none;
 }
-
+#boutonpoubelle {
+  left: 3470px;
+}
 
 /***************************************************************
 *********************** DESIGN DE STICKY ***********************
@@ -267,23 +325,9 @@ button {
   -ms-transform: scaleX(-1);
   -o-transform: scaleX(-1);
 }
-#sol {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: var(--hauteur-du-sol);
-  background-color: black;
-}
 /*******************************************************************
 ********************  DESIGN DU PANNEAU PIETON  ********************
 ********************************************************************/
-
-/* .panneau_pieton_initial {
-  position: absolute;
-  width: 120px;
-  bottom: 132px; 
-  z-index: 1; 
-} */
 
 #panneaupieton {
   position: absolute;
@@ -528,7 +572,7 @@ button {
 /******************************************************
 *****************  DESIGN DU TRACTEUR *****************
 ******************************************************/
-#tracteur {
+/* #tracteur {
   position: absolute;
   transform: scaleX(-1);
   left: 4000px;
@@ -550,12 +594,12 @@ button {
   position: absolute;
   height: calc(200px * var(--facteuragrandissement));
   opacity: 0;
-}
+} */
 
 /******************************************************
 *****************  DESIGN DE LA FERME *****************
 ******************************************************/
-
+/* 
 #ferme {
   position: absolute;
   height: calc(520px * var(--facteuragrandissement));
@@ -568,5 +612,22 @@ button {
   height: calc(50px * var(--facteuragrandissement));
   bottom: calc(var(--hauteur-du-sol) - 5px);
   left: 5400px;
+} */
+
+/*******************************************************
+****************  DESIGN DE LA POUBELLE ****************
+********************************************************/
+
+#poubelle {
+  position: absolute;
+  height: calc(100px * var(--facteuragrandissement));
+  bottom: calc(var(--hauteur-du-sol) - 2px);
+  left: 1100px;
 }
 
+#poubelle + .obstacle {
+  position: absolute;
+  height: calc(100px * var(--facteuragrandissement));
+  bottom: calc(var(--hauteur-du-sol) - 2px);
+  left: 3500px;
+}
