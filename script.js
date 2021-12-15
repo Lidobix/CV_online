@@ -363,7 +363,7 @@ $(function () {
       compteurBoutonFille: 0,
       compteurActionFille: 0,
       apparitionBoutonFille: false,
-      succes : ['#html_pic',"#css","#js","#bootstrap","#node", "#mongo"],
+      succes : ['#html_pic',"#css","#js","#jquery","#node", "#mongo"],
     },
     attributionSucces: function(indexSucces){
       $succes = $(this.parametres.succes[indexSucces])
