@@ -276,7 +276,7 @@ $(function () {
   // console.log(listeImagesPanneauPieton);
   var listeBoutonsAction = document.querySelectorAll("button");
   // $bouton = $('button');
-  // console.log(listeBoutonsAction);
+  console.log(listeBoutonsAction);
 
   var decor_mobile = document.getElementsByClassName("decor_mobile");
   // console.log(decor_mobile);
@@ -360,6 +360,7 @@ $(function () {
       delaiFinIntro: 1100,
       autorisationInit: false,
       introDuJeu: true,
+      compteurBoutonFille: 0,
     },
     detectionAction: function () {
       console.log("entrée dans la fonction de détection de bouton");
@@ -410,8 +411,8 @@ $(function () {
           $ballon.animate({
             bottom: "3000px",
             left: "6000px",
-            duration: 1000,
           });
+          listeBoutonsAction[2].style.display = "block";
 
           // var opaciteObstacle =
           //   listeDesObstacles[indexObstacleATraiter].style.opacity;
@@ -459,6 +460,31 @@ $(function () {
               break;
           }
           this.parametres.actionFeuTricolore[0]++;
+          break;
+        case "boutonfille":
+          var $message = $("#message");
+          console.log(
+            "compteurBoutonFille :",
+            this.parametres.compteurBoutonFille
+          );
+          this.parametres.compteurBoutonFille++;
+          if (this.parametres.compteurBoutonFille == 1) {
+            $message.text(
+              "lui rendre son ballon...",
+              this.parametres.compteurBoutonFille
+            );
+          }
+          if (this.parametres.compteurBoutonFille == 2) {
+            $message.text("ballon rendu", this.parametres.compteurBoutonFille);
+            var $ballon = $(".ballon");
+            $ballon.animate({
+              bottom: "100px",
+              left: "48px",
+            });
+            this.parametres.compteurBoutonFille = 0;
+            listeBoutonsAction[2].style.display = "none";
+          }
+
           break;
       }
     },
@@ -591,9 +617,8 @@ $(function () {
     },
 
     avancementDecor: function (increment) {
-      console.log("on avance le décor, l'incrément est de: ", increment);
-
-      if (parseFloat(decor_mobile[0].style.left) + increment <= -500) {
+      // console.log("on avance le décor, l'incrément est de: ", increment);
+      if (parseFloat(decor_mobile[0].style.left) + increment <= 0) {
         for (let element of decor_mobile) {
           var nouveauLeft = parseFloat(element.style.left) + increment;
           element.style.left = nouveauLeft + "px";

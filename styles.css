@@ -114,7 +114,7 @@ a :visited {
 /***************************************************************
 ******************* DESIGN DE LA ZONE DE JEU *******************
 ***************************************************************/
-#texte1{
+#message{
   color: white;
   top: 10px;
   left: 10px;
@@ -139,18 +139,18 @@ a :visited {
   width: 100000px;
   border-top: 8px solid black;
   background-image: url("images/briques.jfif");
-  /* left:0; */
+  
   bottom: var(--hauteur-du-sol);
   height: 400px;
-  left: -500px;
-  /* background-repeat: repeat; */
+  left: 0px;
+  
   position: absolute;
-  /* z-index: 1; */
+  
 }
 
 #affiche {
 bottom: calc(var(--hauteur-du-sol) + 11px);
- left: 700px;
+ left: 200px;
   height: 280px;
   position: absolute;
   z-index: 2;
@@ -203,18 +203,8 @@ bottom: calc(var(--hauteur-du-sol) + 11px);
 ***************** DESIGN DES BOUTONS D'ACTION *****************
 ***************************************************************/
 
-/* .boutondaction {
-  position: absolute;
-  border: 3px solid rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
-  background-color: rgb(240, 237, 52);
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-} */
 button {
-  /* box-shadow: unset; */
+  
   position: absolute;
   bottom: calc(var(--hauteur-du-sol) + 73px);
   border: 2px solid rgb(196, 162, 13);
@@ -243,22 +233,10 @@ button {
   left: 3850px;
 }
 #boutonfille {
-  left: 3100px;
+  left: 2975px;
+  display: none;
 }
 
-/* #boutonfille{
-  height: 10px;
-  width: 10px;
-  left: 75px;
-  bottom: 75px;
-}
-#boutontracteur{
-  height: 10px;
-  width: 10px;
-  left: 130px;
-  bottom: 75px;
-  z-index: 3;
-} */
 
 /***************************************************************
 *********************** DESIGN DE STICKY ***********************
@@ -416,10 +394,15 @@ button {
 ********************************************************/
 #voitureEnFeu {
   position: absolute;
-  bottom: calc(var(--hauteur-du-sol) - 15px);
+  bottom: calc(var(--hauteur-du-sol) - 21px);
   left: 2400px;
   height: 500px;
   width: 200px;
+  transform: rotate(11deg);
+  -webkit-transform: rotate(11deg);
+  -moz-transform: rotate(11deg);
+  -ms-transform: rotate(11deg);
+  -o-transform: rotate(11deg);
 }
 
 .voiture {
