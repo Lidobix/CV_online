@@ -141,7 +141,11 @@ a :visited {
   width: 1000px;
   left: 2500px;
   bottom: 75px;
-
+  transform: rotate(6deg);
+  -webkit-transform: rotate(6deg);
+  -moz-transform: rotate(6deg);
+  -ms-transform: rotate(6deg);
+  -o-transform: rotate(6deg);
 }
 
 
@@ -205,7 +209,7 @@ a :visited {
 }
 
 #murdebriques {
-  width: 100000px;
+  width: 5000px;
   border-top: 8px solid black;
   background-image: url("images/briques.jfif");
   bottom: var(--hauteur-du-sol);
@@ -634,9 +638,21 @@ button {
   left: 1100px;
 }
 
-#poubelle + .obstacle {
+#poubellefrappe {
   position: absolute;
-  height: calc(100px * var(--facteuragrandissement));
-  bottom: calc(var(--hauteur-du-sol) - 2px);
+  height:100px;
+  bottom: var(--hauteur-du-sol) ;
   left: 3500px;
 }
+
+#poubellefrappe img:first-of-type {
+  position: absolute;
+  height: 100px;
+}
+#poubellefrappe img:nth-of-type(2) {
+  position: absolute;
+  height: 50px;
+  left: 50px;
+  bottom:0;
+}
+

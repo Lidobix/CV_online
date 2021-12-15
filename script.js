@@ -257,6 +257,7 @@ $(function () {
   var indexImageMini = 11;
   var indexImageMaxi = 18;
   var listeImagesPanneauPieton = [];
+  var compteurRats = 0;
   // var nouveauLeft = 100;
 
   // Création de la liste d'images de panneau piéton:
@@ -449,6 +450,34 @@ $(function () {
             this.parametres.compteurActionFille
           );
         }
+
+        // if (indexObstacleATraiter == 2) {
+        
+        //   console.log("poubelle touchée");
+        //   $poubelle = $('#poubellefrappe');
+        //   compteurRats++;
+        //   // $poubelle.append(`<img src="images/rat.svg" class="rat` + compteurRats + `"rat>`);
+        //   // $ratCree = $('.rat' + compteurRats);
+        //   $poubelle.append(`<img src="images/rat.svg" class="rat">`);
+        //   $ratCree = $('.rat');
+          
+        //   // $ratCree.css('width', '75px');
+        //   $ratCree.animate({
+        //     bottom: "1000px",
+        //     left: "6000px",
+        //   })
+
+        //   // setTimeout($ratCree.remove(), 1000);
+
+        // }
+
+
+
+
+
+
+
+
       }
     },
 
@@ -521,6 +550,8 @@ $(function () {
         case "boutonpoubelle":
           $message.text("Sticky aime quand c'est propre...");
           break;
+          
+
       }
     },
 
@@ -740,7 +771,8 @@ $(function () {
           }
         }
       }
-    }, // fin du moteur animations
+    },
+     // fin du moteur animations
 
     start: function () {
       var ici = this;
