@@ -240,7 +240,7 @@ $(function () {
   ////////////////////////////////////////////////////////////////////////
 
   // var serieRun = [etatInitial, run1, run2, run3, run4, run5, run6, run2, 'run9', run10, run11];
-  
+
   // var sortiePanneauEnCours = false;
 
   // var delaiFinIntro = 100;
@@ -248,17 +248,16 @@ $(function () {
   // console.log("hauteur du sol :", $hauteurSol);
   // var sautEnCours = false;
   var timing = 60;
-  var $feuRouge = $(".feuRouge");  
+  var $feuRouge = $(".feuRouge");
   var $feuOrange = $(".feuOrange");
   var $feuVert = $(".feuVert");
   var $container = $("#container");
   var $sprite = $("#contenu");
   var indexImage = 10;
-  var indexImageMini = 11;   
+  var indexImageMini = 11;
   var indexImageMaxi = 18;
   var listeImagesPanneauPieton = [];
   // var nouveauLeft = 100;
-  
 
   // Création de la liste d'images de panneau piéton:
   // for (let i = 0; i < 8; i++) {
@@ -309,7 +308,6 @@ $(function () {
       listeDesObstacles[i].style.width = styleObstacle.width;
       listeDesObstacles[i].style.height = styleObstacle.height;
       listeDesObstacles[i].style.opacity = styleObstacle.opacity;
-
     }
   };
   affectationStyleObstacles();
@@ -349,7 +347,7 @@ $(function () {
       coup: false,
       action: false,
       obstacle: false,
-      
+
       sortiePanneauEnCours: false,
     },
     parametres: {
@@ -357,11 +355,11 @@ $(function () {
       currentTimerIntro: NaN,
       tempoClous: [0, 200, 400, 600, 800, 1000, 1200, 1500],
       dernièreDirection: "",
-      actionFeuTricolore : [1, 0, 0, 0],
-      chronoIntro:0,
-      delaiFinIntro : 100,
+      actionFeuTricolore: [1, 0, 0, 0],
+      chronoIntro: 0,
+      delaiFinIntro: 100,
       autorisationInit: false,
-      introDuJeu : true,
+      introDuJeu: true,
     },
     detectionAction: function () {
       console.log("entrée dans la fonction de détection de bouton");
@@ -383,29 +381,62 @@ $(function () {
       }
     },
 
+    gestionDesCoups: function (indexObstacleATraiter) {
+      if (listeDesObstacles.length > 0) {
+        console.log("obstacle à traiter: ", indexObstacleATraiter);
 
-    gestionDesCoups:function(indexObstacleATraiter){
-      if (listeDesObstacles.length >0) {
-console.log('obstacle à traiter: ', indexObstacleATraiter);
 
-      var opaciteObstacle = listeDesObstacles[indexObstacleATraiter].style.opacity;
-      opaciteObstacle = opaciteObstacle - 0.1;
-      listeDesObstacles[indexObstacleATraiter].style.opacity = opaciteObstacle;
-      console.log(listeDesObstacles);
+        if (indexObstacleATraiter == 0) {
+        var opaciteObstacle =
+          listeDesObstacles[indexObstacleATraiter].style.opacity;
+        opaciteObstacle = opaciteObstacle - 0.1;
+        listeDesObstacles[indexObstacleATraiter].style.opacity =
+          opaciteObstacle;
+        console.log(listeDesObstacles);
+        
+        if (opaciteObstacle < 0.1) {
+          // listeDesObstacles[indexObstacleATraiter].parentNode.removeChild(
+          //   listeDesObstacles[indexObstacleATraiter]
+          // );
+          listeDesObstacles[indexObstacleATraiter].style.left = '100000px';
+            //   listeDesObstacles[indexObstacleATraiter]
 
-      if (opaciteObstacle < 0.1) {
-  listeDesObstacles[indexObstacleATraiter].parentNode.removeChild(listeDesObstacles[indexObstacleATraiter])
-  this.directions.obstacle = false;
-        //  listeDesObstacles.splice(indexObstacleATraiter, 1)
-        // listeDesObstacles[indexObstacleATraiter].classList.remove = ("obstacle");
-      console.log(listeDesObstacles);
-      // listeDesObstacles = document.getElementsByClassName("obstacle");
-      //   console.log(listeDesObstacles);
+
+          this.directions.obstacle = false;
+          console.log(listeDesObstacles);
+        }
       }
-    }
+
+      if (indexObstacleATraiter == 1) {
+        var $ballon = $('.ballon');
+        $ballon.animate({
+          bottom: '3000px',
+          left: '6000px',
+          duration: 1000,
+        })
+        
+        
+        // var opaciteObstacle =
+        //   listeDesObstacles[indexObstacleATraiter].style.opacity;
+        // opaciteObstacle = opaciteObstacle - 0.1;
+        // listeDesObstacles[indexObstacleATraiter].style.opacity =
+        //   opaciteObstacle;
+        // console.log(listeDesObstacles);
+        
+        // if (opaciteObstacle < 0.1) {
+        //   listeDesObstacles[indexObstacleATraiter].parentNode.removeChild(
+        //     listeDesObstacles[indexObstacleATraiter]
+        //   );
+        //   this.directions.obstacle = false;
+        //   console.log(listeDesObstacles);
+        // }
+      }
+
+
+
+
+      }
     },
-
-
 
     lancementAction: function (idBouton) {
       console.log("entrée dans la fonction de lancement d'action");
@@ -441,36 +472,37 @@ console.log('obstacle à traiter: ', indexObstacleATraiter);
 
     detectionObstacle: function (increment) {
       if (listeDesObstacles.length > 0) {
-      console.log("entrée dans la fonction de détection d'obstacle");
-console.log(listeDesObstacles);
-      var extremiteContainer =
-        parseFloat($container.css("left")) +
-        parseFloat($container.css("width"));
-      console.log(
-        "dans la fonction détection d'obstacle; extrémité container :",
-        extremiteContainer
-      );
+        console.log("entrée dans la fonction de détection d'obstacle");
+        console.log(listeDesObstacles);
+        var extremiteContainer =
+          parseFloat($container.css("left")) +
+          parseFloat($container.css("width"));
+        console.log(
+          "dans la fonction détection d'obstacle; extrémité container :",
+          extremiteContainer
+        );
 
-      for (let i = 0; i < listeDesObstacles.length; i++) {
-        var obstacle = listeDesObstacles[i];
-        console.log("obstacle.style.left : ", obstacle.style.left);
+        for (let i = 0; i < listeDesObstacles.length; i++) {
+          var obstacle = listeDesObstacles[i];
+          console.log("obstacle.style.left : ", obstacle.style.left);
 
-        if (extremiteContainer >= parseFloat(obstacle.style.left) - 20) {
-          console.log("obstacle touché ");
-          this.directions.obstacle = true;
-          return (i);
-        } else {
-          this.directions.obstacle = false;
-          console.log(
-            "aucun obstacle détecté");
+          if (extremiteContainer >= parseFloat(obstacle.style.left) - 20) {
+            console.log("obstacle touché ");
+            this.directions.obstacle = true;
+            return i;
+          } else {
+            this.directions.obstacle = false;
+            console.log("aucun obstacle détecté");
+          }
         }
-
-      }
       }
     },
 
     mouvementHorizontal: function (position, increment) {
-      console.log(" début de la fonction mouvement horizontal increment =", increment);
+      console.log(
+        " début de la fonction mouvement horizontal increment =",
+        increment
+      );
       var positionActuelleContainer = parseFloat($container.css(position));
 
       //Test de la position left du container pour ne pas le faire sortir de l'écran à gauche ou à droite
@@ -517,7 +549,7 @@ console.log(listeDesObstacles);
           break;
         case "etatInitial":
           indexImage = 0;
-          increment='0';
+          increment = "0";
           break;
         case "etatInitialMini":
           indexImage = 10;
@@ -573,9 +605,7 @@ console.log(listeDesObstacles);
       }
     },
 
-
     leMoteurPourLesAnimations: function () {
-      
       ///////// ALLER A GAUCHE /////////////
       if (this.directions.gauche) {
         if (this.parametres.introDuJeu == false) {
@@ -588,7 +618,7 @@ console.log(listeDesObstacles);
 
       ///////// ALLER A DROITE /////////////
       if (this.directions.droite) {
-        if (!this.parametres.introDuJeu ) {
+        if (!this.parametres.introDuJeu) {
           console.log(
             "appui touche droite, intro finie, on calcule le déplacement du container. son left actuel est : ",
             $container.css("left")
@@ -615,7 +645,7 @@ console.log(listeDesObstacles);
 
       ///////// RETOUR ETAT INITIAL /////////////
       if (this.directions.etatInitial) {
-        if (this.parametres.introDuJeu  == false) {
+        if (this.parametres.introDuJeu == false) {
           // console.log('retour etat initial normal')
           this.mouvementHorizontal("etatInitial", NaN);
         } else {
@@ -631,7 +661,7 @@ console.log(listeDesObstacles);
         !this.directions.coup
       ) {
         // console.log(this.directions.gauche , this.directions.droite, this.directions.bas, this.directions.  )
-        if (this.parametres.introDuJeu  == false) {
+        if (this.parametres.introDuJeu == false) {
           console.log("appui sur la touche action");
           this.mouvementHorizontal("action", NaN);
           // this.detectionAction();
@@ -640,17 +670,16 @@ console.log(listeDesObstacles);
 
       ///////// COUP /////////////
       if (this.directions.coup) {
-        if (this.parametres.introDuJeu  == false) {
-          
+        if (this.parametres.introDuJeu == false) {
           this.mouvementHorizontal("coup", NaN);
           var indexObstacle = this.detectionObstacle();
           console.log(this.directions.obstacle);
-          if (this.directions.obstacle== true){
-          console.log('coup porté sur obstacle: ', indexObstacle)
-          this.gestionDesCoups(indexObstacle);
-        } else {
-          console.log('coup dans le vent')
-        }
+          if (this.directions.obstacle == true) {
+            console.log("coup porté sur obstacle: ", indexObstacle);
+            this.gestionDesCoups(indexObstacle);
+          } else {
+            console.log("coup dans le vent");
+          }
         }
       }
     }, // fin du moteur animations
@@ -670,7 +699,7 @@ console.log(listeDesObstacles);
               !ici.directions.droite &&
               !ici.directions.action &&
               !ici.directions.coup &&
-              !ici.parametres.introDuJeu 
+              !ici.parametres.introDuJeu
             ) {
               ici.directions.gauche = true;
             }
@@ -678,7 +707,7 @@ console.log(listeDesObstacles);
             break;
 
           case 39:
-            if (ici.parametres.introDuJeu  == true) {
+            if (ici.parametres.introDuJeu == true) {
               // console.log("eappui touche ntrée dans l'intro");
               // Chronométrage du temps d'appui sur la touce flèche droite:
               var dateAppui = new Date();
@@ -707,7 +736,7 @@ console.log(listeDesObstacles);
               !ici.directions.gauche &&
               !ici.directions.coup &&
               !ici.directions.action &&
-              !ici.parametres.introDuJeu 
+              !ici.parametres.introDuJeu
             ) {
               ici.directions.droite = true;
             }
@@ -719,7 +748,7 @@ console.log(listeDesObstacles);
               !ici.directions.droite &&
               !ici.directions.coup &&
               !ici.directions.gauche &&
-              !ici.parametres.introDuJeu 
+              !ici.parametres.introDuJeu
             ) {
               ici.directions.action = true;
             }
@@ -729,7 +758,7 @@ console.log(listeDesObstacles);
               !ici.directions.droite &&
               !ici.directions.action &&
               !ici.directions.gauche &&
-              !ici.parametres.introDuJeu 
+              !ici.parametres.introDuJeu
             ) {
               ici.directions.coup = true;
             }
@@ -739,17 +768,20 @@ console.log(listeDesObstacles);
       });
 
       window.addEventListener("keyup", function (event) {
-// console.log('autorisation:', ici.parametres.autorisationInit);
-        if (ici.parametres.autorisationInit == true){
-        ici.directions.sortiePanneauEnCours = false;
-      }
+        // console.log('autorisation:', ici.parametres.autorisationInit);
+        if (ici.parametres.autorisationInit == true) {
+          ici.directions.sortiePanneauEnCours = false;
+        }
         // console.log("relache touche");
         // console.log(
         //   "relache touche, left container : ",
         //   $container.css("left")
         // );
         $container.removeClass("containerinverse");
-        if (ici.parametres.introDuJeu  == true && ici.parametres.chronoIntro > ici.parametres.delaiFinIntro) {
+        if (
+          ici.parametres.introDuJeu == true &&
+          ici.parametres.chronoIntro > ici.parametres.delaiFinIntro
+        ) {
           // console.log(
           //   "relache touche, on est toujours dans lintro mais le seuil chrono est  dépassé, chrono: ",
           //   chronoIntro,
@@ -772,7 +804,7 @@ console.log(listeDesObstacles);
             break;
           case 39:
             ici.directions.derniere = "droite";
-            if (ici.parametres.introDuJeu  == true) {
+            if (ici.parametres.introDuJeu == true) {
               // console.log("relache touche, on est toujours dans l'intro");
 
               if (ici.parametres.chronoIntro < ici.parametres.delaiFinIntro) {
@@ -888,23 +920,19 @@ console.log(listeDesObstacles);
                     indexImageMini = 1;
                     indexImageMaxi = 7;
                     // ici.parametres.autorisationInit = true;
-
-                    
                   }
-                  
                 }, 4);
-                
 
                 ici.parametres.debutTimerIntro = NaN;
                 ici.parametres.currentTimerIntro = NaN;
-            
+
                 initialiseSticky(indexImage);
 
-                ici.parametres.introDuJeu  = false;
+                ici.parametres.introDuJeu = false;
 
                 console.log(
                   "intro du jeu: ",
-                  ici.parametres.introDuJeu ,
+                  ici.parametres.introDuJeu,
                   "sortiepanneau en cours : ",
                   ici.directions.sortiePanneauEnCours
                 );
@@ -916,9 +944,9 @@ console.log(listeDesObstacles);
               ici.directions.gauche == false &&
               ici.directions.coup == false &&
               ici.directions.action == false &&
-              ici.directions.sortiePanneauEnCours == false 
-              // &&               ici.parametres.autorisationInit == false 
-            ) { 
+              ici.directions.sortiePanneauEnCours == false
+              // &&               ici.parametres.autorisationInit == false
+            ) {
               // console.log(
               // ici.directions.gauche ,
               // ici.directions.coup ,
@@ -933,7 +961,7 @@ console.log(listeDesObstacles);
             break;
 
           case 13:
-            if (ici.parametres.introDuJeu  == false) {
+            if (ici.parametres.introDuJeu == false) {
               ici.directions.action = false;
               ici.detectionAction();
 

@@ -526,7 +526,7 @@ button {
 
 .fillesansballon {
   position: relative;
-  /* display: none; */
+  display: none;
   /* bottom: var(--hauteur-du-sol); */
   height: 110px;
   display: none;
