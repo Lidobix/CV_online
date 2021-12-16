@@ -180,6 +180,7 @@ a :visited {
   bottom: calc(var(--hauteur-du-sol) + 61px);
   left: 200px;
   height: 280px;
+  width:  auto;
   position: absolute;
   z-index: 2;
   transform: rotate(15deg);
