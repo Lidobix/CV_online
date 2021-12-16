@@ -1,8 +1,7 @@
 "use-strict";
 $(function () {
-
   var $hauteurSol = $("#sol").css("height");
-  
+
   var interpos = [
     {
       masque: {
@@ -242,14 +241,6 @@ $(function () {
   /////////////////////// DECLARATION DE VARIABLES ///////////////////////
   ////////////////////////////////////////////////////////////////////////
 
-  // var serieRun = [etatInitial, run1, run2, run3, run4, run5, run6, run2, 'run9', run10, run11];
-
-  // var sortiePanneauEnCours = false;
-
-  // var delaiFinIntro = 100;
-  
-  // console.log("hauteur du sol :", $hauteurSol);
-  // var sautEnCours = false;
   var timing = 60;
   var $feuRouge = $(".feuRouge");
   var $feuOrange = $(".feuOrange");
@@ -261,53 +252,30 @@ $(function () {
   var indexImageMaxi = 18;
   var listeImagesPanneauPieton = [];
   var compteurRats = 0;
-  // var nouveauLeft = 100;
-
   // Création de la liste d'images de panneau piéton:
-  // for (let i = 0; i < 8; i++) {
-  //   var imagePanneau = document.getElementsByClassName("panneau_pieton_" + i);
-  //   listeImagesPanneauPieton[i] = imagePanneau;
-  // }
 
   var listeImagesPanneauPieton = document.querySelectorAll(
     ".calque_panneau_pieton"
   );
-  // var appliZIndex = function (element, item, objet) {
-  //   element.style.zIndex = "1";
-  // };
-  // listeImagesPanneauPieton.forEach(appliZIndex);
-  // listeImagesPanneauPieton[0].style.zIndex = "2";
-  // console.log(listeImagesPanneauPieton);
   var listeBoutonsAction = document.querySelectorAll("button");
-  // $bouton = $('button');
-  console.log(listeBoutonsAction);
 
   var decor_mobile = document.getElementsByClassName("decor_mobile");
-  // console.log(decor_mobile);
 
   //Récupération des styles CSS et affectation dans le DOM
   var affectationStyleDecorMobile = function () {
     for (let i = 0; i < decor_mobile.length; i++) {
       var styleDecor = window.getComputedStyle(decor_mobile[i]);
-      // console.log("styledecor : ", styleDecor);
-      // console.log("styledecor.left : ", styleDecor.left);
       decor_mobile[i].style.left = styleDecor.left;
       decor_mobile[i].style.width = styleDecor.width;
       decor_mobile[i].style.height = styleDecor.height;
     }
   };
   affectationStyleDecorMobile();
-  // console.log(decor_mobile);
-
-  // console.log(boutonsAction);
   var listeDesObstacles = document.getElementsByClassName("obstacle");
-  console.log(listeDesObstacles);
 
   var affectationStyleObstacles = function () {
     for (let i = 0; i < listeDesObstacles.length; i++) {
       var styleObstacle = window.getComputedStyle(listeDesObstacles[i]);
-      // console.log("styledecor : ", styleDecor);
-      // console.log("styleobstacle.left : ", styleObstacle.left);
       listeDesObstacles[i].style.left = styleObstacle.left;
       listeDesObstacles[i].style.width = styleObstacle.width;
       listeDesObstacles[i].style.height = styleObstacle.height;
@@ -315,7 +283,7 @@ $(function () {
     }
   };
   affectationStyleObstacles();
-  // console.log(listeDesObstacles);
+
   ////////////////////////////////////////////////////////////////////////
   //////////////// DECLARATION DES COORDONNEES DE STICKY /////////////////
   ////////////////////////////////////////////////////////////////////////
@@ -367,21 +335,18 @@ $(function () {
       compteurBoutonFille: 0,
       compteurActionFille: 0,
       apparitionBoutonFille: false,
-      succes : ['#html_pic',"#css","#js","#jquery","#node", "#mongo"],
+      succes: ["#html_pic", "#css", "#js", "#jquery", "#node", "#mongo"],
+      finDuJeu: false,
     },
-    attributionSucces: function(indexSucces){
-      $succes = $(this.parametres.succes[indexSucces])
-      // alert($succes);
+
+    attributionSucces: function (indexSucces) {
+      $succes = $(this.parametres.succes[indexSucces]);
       $succes.animate({
-      opacity: 1,
-
-    })
-
-
-
+        opacity: 1,
+      });
     },
+
     detectionAction: function () {
-      console.log("entrée dans la fonction de détection de bouton");
       for (var i = 0; i < listeBoutonsAction.length; i++) {
         var bouton = listeBoutonsAction[i];
         var extremiteContainer =
@@ -401,7 +366,7 @@ $(function () {
     },
 
     gestionDesCoups: function (indexObstacleATraiter) {
-      var $message = $("#message");
+      // var $message = $("#message");
       if (listeDesObstacles.length > 0) {
         console.log("obstacle à traiter: ", indexObstacleATraiter);
 
@@ -415,6 +380,8 @@ $(function () {
 
           if (opaciteObstacle < 0.1) {
             listeDesObstacles[indexObstacleATraiter].style.left = "100000px";
+            var $boutonvoiture = $("#boutonvoitureenfeu");
+            $boutonvoiture.css("display", "none");
             this.attributionSucces(3);
             this.directions.obstacle = false;
             console.log(listeDesObstacles);
@@ -445,50 +412,46 @@ $(function () {
 
             listeBoutonsAction[2].style.display = "none";
             this.attributionSucces(4);
-            // $message.text('...ou pas!');
           }
-
-          console.log(
-            "parametres.compteurActionFille",
-            this.parametres.compteurActionFille
-          );
         }
 
         if (indexObstacleATraiter == 2) {
-        
-          console.log("poubelle touchée");
-          $poubelle = $('#poubellefrappe');
-          compteurRats++;
-          // $poubelle.append(`<img src="images/rat.svg" class="rat` + compteurRats + `"rat>`);
-          // $ratCree = $('.rat' + compteurRats);
-          $poubelle.append(`<img src="images/rat.svg" class="rat">`);
-          $ratCree = $('.rat');
-          
-          $ratCree.css({
-            width: '75px',
-            position: 'absolute',
-            bottom:'0'
-          });
-          $ratCree.animate({
-            bottom: "0",
-            left: "4000px",
-            opacity: '0'
-          } ,4000
-          );
+          if (compteurRats < 30) {
+            console.log("poubelle touchée");
+            $poubelle = $("#poubellefrappe");
+            $boitearats = $("#boitearats");
+            compteurRats++;
+            $boitearats.append(`<img src="images/rat.svg" class="rat">`);
+            $nouveauRat = $(".rat");
 
-          this.attributionSucces(5);
-          
-          // $ratCree.remove();
+            $nouveauRat.css({
+              width: "75px",
+              position: "absolute",
+              bottom: "0",
+            });
+            $nouveauRat.animate(
+              {
+                bottom: "0",
+                left: "4000px",
+                opacity: "0",
+              },
+              4000
+            );
 
+            this.attributionSucces(5);
+          } else {
+            $poubelle.animate(
+              {
+                bottom: "3000px",
+                left: "4000px",
+                opacity: "0",
+              },
+              500
+            );
+            var $boutonpoubelle = $("#boutonpoubelle");
+            $boutonpoubelle.css("display", "none");
+          }
         }
-
-
-
-
-
-
-
-
       }
     },
 
@@ -524,10 +487,7 @@ $(function () {
           this.parametres.actionFeuTricolore[0]++;
           break;
         case "boutonfille":
-          // var $message = $("#message");
-
           this.parametres.compteurBoutonFille++;
-
           if (this.parametres.compteurBoutonFille == 1) {
             $message.text(
               "lui rendre son ballon...",
@@ -548,28 +508,53 @@ $(function () {
           break;
 
         case "boutonbus":
-          // var $message = $("#message");
           $message.text(
-            "Sticky aime l'art de rue, ce bus est sa future oeuvre!"
+            "Sticky aime l'art de rue, sur ce bus sera sa future oeuvre ! Prenez une bombe créez ensemble !"
           );
           setTimeout(function () {
             $message.text("");
           }, 5000);
+          break;
+
+        case "boutonvoitureenfeu":
+          $message.text("Kickez moi cette voiture !");
+          setTimeout(function () {
+            $message.text("");
+          }, 4000);
 
           break;
 
         case "boutonpoubelle":
-          $message.text("Sticky aime quand c'est propre...");
-          break;
-          
+          $message.text(
+            "Sticky aime quand c'est propre, aidez le à nettoyer..."
+          );
+          setTimeout(function () {
+            $message.text("");
+          }, 4000);
 
+          break;
+
+        case "boutonparasol":
+          $message.text(
+            "Bravo! Sticky est désormais libre et a aquis les succès nécessaires à la poursuite de sa vie rêvée !"
+          );
+          var $parasol = $("#parasol");
+          var $plagiste = $("#plagiste");
+          var $messagefin = $("#messagefin");
+          var $boutonparasol = $("#boutonparasol");
+
+          $container.animate({ opacity: 0 }, 500);
+          $parasol.animate({ opacity: 0 }, 500);
+          $plagiste.animate({ opacity: 1 }, 500);
+          $messagefin.animate({ opacity: 1 }, 500);
+          $boutonparasol.css("display", "none");
+
+          this.parametres.finDuJeu = true;
       }
     },
 
     detectionObstacle: function (increment) {
       if (listeDesObstacles.length > 0) {
-        console.log("entrée dans la fonction de détection d'obstacle");
-        console.log(listeDesObstacles);
         var extremiteContainer =
           parseFloat($container.css("left")) +
           parseFloat($container.css("width"));
@@ -580,60 +565,39 @@ $(function () {
 
         for (let i = 0; i < listeDesObstacles.length; i++) {
           var obstacle = listeDesObstacles[i];
-          console.log("obstacle.style.left : ", obstacle.style.left);
 
           if (extremiteContainer >= parseFloat(obstacle.style.left) - 20) {
-            console.log("obstacle touché ");
             this.directions.obstacle = true;
             return i;
           } else {
             this.directions.obstacle = false;
-            console.log("aucun obstacle détecté");
           }
         }
       }
     },
 
-    mouvementHorizontal: function (position, increment) {
-      console.log(
-        " début de la fonction mouvement horizontal increment =",
-        increment
-      );
+    mouvementSticky: function (position, increment) {
       var positionActuelleContainer = parseFloat($container.css(position));
 
       //Test de la position left du container pour ne pas le faire sortir de l'écran à gauche ou à droite
       if (position == "left" && positionActuelleContainer + increment < 10) {
         //Test marge à gauche, on bloque le left au left mini
         $container.css("left", 10);
-        console.log(
-          "on va à gauche, et on arrive au bord de écran, le left est calibré à 10px: ",
-          $container.css("left")
-        );
+
         // coordoContainer.bottom = parseFloat($container.css("bottom"));
       } else {
         if (
           position == "left" &&
           positionActuelleContainer + increment >
-            screen.width - 0.7 * screen.width
+            screen.width - 0.6 * screen.width
         ) {
-          console.log("largeur ecran : ", screen.width);
           // test marge à droite, on bloque le left au left maxi
-          $container.css("left", parseFloat(screen.width) - 0.7 * screen.width);
-          console.log(
-            "on va à droite, et on arrive au bord de écran, le left est calibré à 1010px :",
-            $container.css("left")
-          );
+          $container.css("left", parseFloat(screen.width) - 0.6 * screen.width);
+
           // coordoContainer.bottom = parseFloat($container.css("bottom"));
         } else {
           if (position == "left") {
             $container.css(position, positionActuelleContainer + increment);
-            console.log(
-              "on va à droite, les left du container est de :",
-              $container.css("left"),
-              "indeximage =",
-              indexImage
-            );
-            console.log("increment =", increment);
           }
         }
       }
@@ -658,24 +622,9 @@ $(function () {
       /////////////////// REGLAGE DU CONTAINER ET DU SPRITE EN COURANT ///////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       if (increment != NaN) {
-        // console.log("on va changer le sprite");
-        // console.log('on va affecter une nouvelle valeur de left :', $container.css("left"), 'indexImage = ', indexImage);
-        // console.log("interpos[indexImage].masque.left = ",interpos[indexImage].masque.left)
-        // console.log("interpos[indexImage].masque.width = ",interpos[indexImage].masque.width)
-        // console.log("interpos[indexImage].masque.heigth = ",interpos[indexImage].masque.height)
-        //         console.log("interpos[indexImage].masque.bottom = ",interpos[indexImage].masque.bottom)
-        // console.log("increment =", increment);
-        // $container.css({
-        //   left: interpos[indexImage].masque.left + increment + "px",
-        //   width: interpos[indexImage].masque.width + "px",
-        //   height: interpos[indexImage].masque.height + "px",
-        //   bottom: interpos[indexImage].masque.bottom + "px",
-        // });
         $container.css({
-          // left: interpos[indexImage].masque.left + increment + "px",
           width: interpos[indexImage].masque.width + "px",
           height: interpos[indexImage].masque.height + "px",
-          // bottom: interpos[indexImage].masque.bottom + "px",
         });
 
         $sprite.css({
@@ -685,19 +634,17 @@ $(function () {
         });
       }
 
-      // console.log('on a affecté une nouvelle valeur de left :', $container.css("left"),  'indexImage = ', indexImage);
-
       indexImage++;
       if (indexImage == indexImageMaxi) {
         indexImage = indexImageMini;
       }
-
-      // this.avancementDecor(increment);
     },
 
     avancementDecor: function (increment) {
-      // console.log("on avance le décor, l'incrément est de: ", increment);
-      if (parseFloat(decor_mobile[0].style.left) + increment <= 0) {
+      if (
+        parseFloat(decor_mobile[0].style.left) + increment <= 0 &&
+        parseFloat(decor_mobile[0].style.left) + increment > -4600
+      ) {
         for (let element of decor_mobile) {
           var nouveauLeft = parseFloat(element.style.left) + increment;
           element.style.left = nouveauLeft + "px";
@@ -711,7 +658,7 @@ $(function () {
         if (this.parametres.introDuJeu == false) {
           $container.addClass("containerinverse");
           this.detectionObstacle();
-          this.mouvementHorizontal("left", -13);
+          this.mouvementSticky("left", -13);
           this.avancementDecor(17);
         }
       }
@@ -719,38 +666,25 @@ $(function () {
       ///////// ALLER A DROITE /////////////
       if (this.directions.droite) {
         if (!this.parametres.introDuJeu) {
-          // console.log(
-          //   "appui touche droite, intro finie, on calcule le déplacement du container. son left actuel est : ",
-          //   $container.css("left")
-          // );
-
-          // $container.removeClass("containerinverse");
           this.detectionObstacle();
           if (this.directions.obstacle == false) {
-            this.mouvementHorizontal("left", 10);
+            this.mouvementSticky("left", 10);
             this.avancementDecor(-20);
           } else {
-            // console.log('obstacle détecté, incrément est de 0');
-            this.mouvementHorizontal("left", -10);
+            this.mouvementSticky("left", -10);
             this.avancementDecor(20);
           }
         } else {
-          // console.log(
-          //   "appui touche droite, intro en cours, le déplacement du container est nul (toujours dans le panneau), son left actuel est : ",
-          //   $container.css("left")
-          // );
-          this.mouvementHorizontal("left", 0);
+          this.mouvementSticky("left", 0);
         }
       }
 
       ///////// RETOUR ETAT INITIAL /////////////
       if (this.directions.etatInitial) {
         if (this.parametres.introDuJeu == false) {
-          // console.log('retour etat initial normal')
-          this.mouvementHorizontal("etatInitial", NaN);
+          this.mouvementSticky("etatInitial", NaN);
         } else {
-          // console.log('retour etat initial mini')
-          this.mouvementHorizontal("etatInitialMini", NaN);
+          this.mouvementSticky("etatInitialMini", NaN);
         }
       }
       ///////// ACTION /////////////
@@ -760,18 +694,16 @@ $(function () {
         !this.directions.droite &&
         !this.directions.coup
       ) {
-        // console.log(this.directions.gauche , this.directions.droite, this.directions.bas, this.directions.  )
         if (this.parametres.introDuJeu == false) {
           console.log("appui sur la touche action");
-          this.mouvementHorizontal("action", NaN);
-          // this.detectionAction();
+          this.mouvementSticky("action", NaN);
         }
       }
 
       ///////// COUP /////////////
       if (this.directions.coup) {
         if (this.parametres.introDuJeu == false) {
-          this.mouvementHorizontal("coup", NaN);
+          this.mouvementSticky("coup", NaN);
           var indexObstacle = this.detectionObstacle();
           console.log(this.directions.obstacle);
           if (this.directions.obstacle == true) {
@@ -783,17 +715,14 @@ $(function () {
         }
       }
     },
-     // fin du moteur animations
+    // fin du moteur animations
 
     start: function () {
       var ici = this;
       window.addEventListener("keydown", function (event) {
-        // console.log('appui touche');
-        // console.log("appui touche, left container : ", $container.css("left"));
         ici.directions.etatInitial = false;
         var codeTouche = event.keyCode;
 
-        // console.log("appui touche, état intro du jeu: ", introDuJeu);
         switch (codeTouche) {
           case 37:
             if (
@@ -809,25 +738,10 @@ $(function () {
 
           case 39:
             if (ici.parametres.introDuJeu == true) {
-              console.log("eappui touche ntrée dans l'intro");
-              console.log(
-                "ici.parametres.chronoIntro",
-                ici.parametres.chronoIntro
-              );
-              console.log(
-                "ici.parametres.debutTimerIntro ",
-                ici.parametres.debutTimerIntro
-              );
-              // console.log('ici.parametres.delaiFinIntro',ici.parametres.delaiFinIntro)
-              console.log(
-                "ici.parametres.currentTimerIntro",
-                ici.parametres.currentTimerIntro
-              );
               // Chronométrage du temps d'appui sur la touce flèche droite:
               var dateAppui = new Date();
               if (isNaN(ici.parametres.debutTimerIntro)) {
                 ici.parametres.debutTimerIntro = dateAppui.getTime();
-                console.log("nouvelle date dappui créée");
               } else {
                 var dateActuelle = new Date();
                 ici.parametres.currentTimerIntro = dateActuelle.getTime();
@@ -835,18 +749,14 @@ $(function () {
               ici.parametres.chronoIntro =
                 ici.parametres.currentTimerIntro -
                 ici.parametres.debutTimerIntro;
-              console.log(ici.parametres.chronoIntro);
+
               // Check des clous à colorer en fonction du temps d'appui
               for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
                 if (ici.parametres.chronoIntro > ici.parametres.tempoClous[i]) {
-                  // listeImagesPanneauPieton[i][0].style.zIndex = i + 1;
                   listeImagesPanneauPieton[i].style.zIndex = i + 1;
-
-                  // console.log(ici.parametres.listeImagesPanneauPieton);
                 }
               }
 
-              // console.log('eappui touche mais on est sorti de l\'intro');
               ici.directions.droite = true;
             }
             if (
@@ -886,26 +796,16 @@ $(function () {
 
       window.addEventListener("keyup", function (event) {
         ici.parametres.debutTimerIntro = NaN;
-        // console.log('autorisation:', ici.parametres.autorisationInit);
+
         if (ici.parametres.autorisationInit == true) {
           ici.directions.sortiePanneauEnCours = false;
         }
-        // console.log("relache touche");
-        // console.log(
-        //   "relache touche, left container : ",
-        //   $container.css("left")
-        // );
+
         $container.removeClass("containerinverse");
         if (
           ici.parametres.introDuJeu == true &&
           ici.parametres.chronoIntro > ici.parametres.delaiFinIntro
         ) {
-          // console.log(
-          //   "relache touche, on est toujours dans lintro mais le seuil chrono est  dépassé, chrono: ",
-          //   chronoIntro,
-          //   "délai :",
-          //   delaiFinIntro
-          // );
           ici.directions.etatInitial = false;
         }
         var codeTouche = event.keyCode;
@@ -923,23 +823,6 @@ $(function () {
           case 39:
             ici.directions.derniere = "droite";
             if (ici.parametres.introDuJeu == true) {
-              console.log("relache touche, on est toujours dans l'intro");
-              console.log(
-                "ici.parametres.chronoIntro",
-                ici.parametres.chronoIntro
-              );
-              console.log(
-                "ici.parametres.delaiFinIntro",
-                ici.parametres.delaiFinIntro
-              );
-              console.log(
-                "ici.parametres.currentTimerIntro",
-                ici.parametres.currentTimerIntro
-              );
-              console.log(
-                "ici.parametres.debutTimerIntro ",
-                ici.parametres.debutTimerIntro
-              );
               if (ici.parametres.chronoIntro <= ici.parametres.delaiFinIntro) {
                 console.log(
                   "relache touche, on est toujours dans l'intro et le chrono est encore sous le seuil"
@@ -950,38 +833,19 @@ $(function () {
                 ici.parametres.chronoIntro = NaN;
                 //Réinitialisation de l'affichage du panneau
                 for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
-                  // listeImagesPanneauPieton[i][0].style.zIndex = 1;
                   listeImagesPanneauPieton[i].style.zIndex = 1;
                 }
-                // listeImagesPanneauPieton[0][0].style.zIndex = 2;
-                listeImagesPanneauPieton[0].style.zIndex = 2;
-                // ici.parametres.debutTimerIntro = NaN;
-                // ici.parametres.currentTimerIntro = NaN;
-                console.log(
-                  "relache touche dans l'intro on remet les compteurs à zéro: ",
-                  ici.parametres.debutTimerIntro,
-                  ici.parametres.currentTimerIntro
-                );
-                console.log(listeImagesPanneauPieton);
 
-                // ici.parametres.debutTimerIntro = NaN;
-                // ici.parametres.currentTimerIntro = NaN;
+                listeImagesPanneauPieton[0].style.zIndex = 2;
               }
 
               //fin lorsqu'on a passé + de 3sec sur la flèche de droite
               if (ici.parametres.chronoIntro > ici.parametres.delaiFinIntro) {
-                // console.log(
-                //   "relache touche, on est toujours dans l'intro et le chrono a dépassé seuil"
-                // );
-                // console.log("on peut sortir de l'intro");
                 //Réinitialisation de l'affichage du panneau
                 for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
-                  // console.log("i=", i);
-                  // listeImagesPanneauPieton[i][0].style.zIndex = 1;
                   listeImagesPanneauPieton[i].style.zIndex = 1;
                 }
                 listeImagesPanneauPieton[0].style.zIndex = 2;
-                // listeImagesPanneauPieton[0][0].style.zIndex = 2;
 
                 // Passage sur le sprite image run8mini:
 
@@ -995,8 +859,6 @@ $(function () {
                 var $message = $("#message");
                 $message.text("");
                 var sautPanneau = setInterval(function () {
-                  // ici.directions.sortiePanneauEnCours = true;
-                  // console.log("lancement du saut du panneau");
                   $container.css({
                     left: interpos[17].masque.left,
                     bottom: interpos[17].masque.bottom,
@@ -1038,12 +900,10 @@ $(function () {
                       bottom: interpos[10].sprite.bottom,
                       height: interpos[10].sprite.height,
                     });
-                    // console.log("sortie du panneau terminée");
-                    // console.log("left du container: ", $container.css("left"));
 
                     $sprite.animate({
                       height: interpos[00].sprite.height,
-                    left: interpos[00].sprite.left,
+                      left: interpos[00].sprite.left,
                       bottom: interpos[00].sprite.bottom,
                       duration: 10,
                     });
@@ -1054,13 +914,10 @@ $(function () {
                       bottom: interpos[00].masque.bottom,
                       duration: 10,
                     });
-                    
 
                     indexImage = 0;
                     indexImageMini = 1;
                     indexImageMaxi = 7;
-                    
-                    // ici.parametres.autorisationInit = true;
                   }
                 }, 4);
 
@@ -1070,35 +927,19 @@ $(function () {
                 initialiseSticky(indexImage);
 
                 ici.parametres.introDuJeu = false;
-                
-                console.log(
-                  "intro du jeu: ",
-                  ici.parametres.introDuJeu,
-                  "sortiepanneau en cours : ",
-                  ici.directions.sortiePanneauEnCours
-                );
               }
             }
             ici.directions.droite = false;
-            // ici.directions.sortiePanneauEnCours=false;
+
             if (
               ici.directions.gauche == false &&
               ici.directions.coup == false &&
               ici.directions.action == false &&
               ici.directions.sortiePanneauEnCours == false
-              // &&               ici.parametres.autorisationInit == false
             ) {
-              // console.log(
-              // ici.directions.gauche ,
-              // ici.directions.coup ,
-              // ici.directions.action ,
-              // ici.directions.sortiePanneauEnCours ,
-              //  ici.parametres.autorisationInit);
-
-              // console.log('retour à init par la droite');
               ici.directions.etatInitial = true;
             }
-            // }
+
             break;
 
           case 13:
@@ -1106,13 +947,6 @@ $(function () {
               ici.directions.action = false;
               ici.detectionAction();
 
-              // console.log(
-              //   "sortie action ",
-              //   ici.directions.coup,
-              //   ici.directions.gauche,
-              //   ici.directions.droite,
-              //   ici.directions.sortiePanneauEnCours
-              // );
               if (
                 !ici.directions.coup &&
                 !ici.directions.gauche &&
@@ -1120,7 +954,6 @@ $(function () {
                 !ici.directions.sortiePanneauEnCours
               ) {
                 ici.directions.etatInitial = true;
-                console.log(ici.directions.etatInitial);
               }
             }
             break;
@@ -1130,15 +963,6 @@ $(function () {
             if (ici.parametres.apparitionBoutonFille) {
               ici.parametres.compteurActionFille++;
             }
-
-            // console.log(
-            //   "sortie de coup ",
-            //   ici.directions.coup,
-            //   ici.directions.action,
-            //   ici.directions.gauche,
-            //   ici.directions.droite,
-            //   ici.directions.sortiePanneauEnCours
-            // );
 
             if (
               !ici.directions.action &&
@@ -1153,17 +977,16 @@ $(function () {
         }
       });
 
-      // requestAnimationFrame(
-      //  ici.leMoteurPourLesAnimations()
-      // )
-
-      window.setInterval(function () {
+      var jeu = window.setInterval(function () {
         ici.leMoteurPourLesAnimations(0);
+        if (ici.parametres.finDuJeu) {
+          clearInterval(jeu);
+        }
       }, timing);
     },
   };
-  monJeu.start();
 
+  monJeu.start();
   ////////////////////////////////////////////////////////////////////////
   //////////////////////// GESTION DES ANIMATIONS ////////////////////////
   ////////////////////////////////////////////////////////////////////////
@@ -1198,13 +1021,16 @@ $(function () {
   //////////////////////// GESTION DES EVENEMENTS ////////////////////////
   ////////////////////////////////////////////////////////////////////////
   var $tag = $("#tag");
+  var $bus = $("#bus");
+
   var $tagOpacity = $tag.css("opacity");
 
-  $tag.mousemove(function () {
+  $bus.mousemove(function (event) {
     $tag.css("opacity", $tagOpacity);
 
-
-    if ($tagOpacity>0.5){monJeu.attributionSucces(2);}
-    $tagOpacity = parseFloat($tagOpacity) + 0.003;
+    if ($tagOpacity > 0.3) {
+      monJeu.attributionSucces(2);
+    }
+    $tagOpacity = parseFloat($tagOpacity) + 0.004;
   });
 });

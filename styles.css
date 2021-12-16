@@ -81,17 +81,14 @@ a img {
   font-family: "Righteous";
   font-size: 0.4em;
   background-color: rgb(0, 0, 0);
-
   height: fit-content;
-  /* margin-right: 40px; */
   padding: 5px;
   border-radius: 7px;
   -webkit-border-radius: 7px;
-  /* -moz-border-radius: 7px; */
+  -moz-border-radius: 7px;
   -ms-border-radius: 7px;
   -o-border-radius: 7px;
   border: 3px solid black;
-  /* flex-basis: 100%; */
 }
 a {
   text-decoration: none;
@@ -125,14 +122,14 @@ a :visited {
   position: absolute;
   right: 20px;
   border: 4px solid black;
-  border-radius: 5px;
+  border-radius: 10px;
   top: 4px;
   padding: 8px;
   height: 75px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 
 #succes img {
@@ -140,9 +137,7 @@ a :visited {
   opacity: 0;
 }
 
-
-
-#bootstrap{
+#bootstrap {
   position: absolute;
   width: 1000px;
   left: 2500px;
@@ -153,50 +148,6 @@ a :visited {
   -ms-transform: rotate(6deg);
   -o-transform: rotate(6deg);
 }
-
-
-/* 
-#html_pic_mini{
-  position: absolute;
-  bottom: var(--hauteur-du-sol);
-  height: 25px;
-  left: 58px;
-  z-index: 3;
-}
-
-
-#css_mini{
-  position: absolute;
-  bottom: var(--hauteur-du-sol);
-  z-index: 3;
-  height: 25px;
-}
-#js_mini{
-   position: absolute;
-   bottom: var(--hauteur-du-sol);
-     z-index: 3;
-  height: 25px;
-}
-#bootstrap_mini{
-  position: absolute;
-  bottom: var(--hauteur-du-sol);
-    z-index: 3;
-  height: 25px;
-}
-#mongo_mini{
-   position: absolute;
-   bottom: var(--hauteur-du-sol);
-     z-index: 3;
-  height: 25px;
-}
-#node_mini{
-    position: absolute;
-    bottom: var(--hauteur-du-sol);
-      z-index: 3;
-  height: 25px;
-}  */
-
-
 
 #sol {
   position: absolute;
@@ -215,8 +166,9 @@ a :visited {
 }
 
 #murdebriques {
-  width: 5000px;
+  width: 4200px;
   border-top: 8px solid black;
+  border-right: 8px solid black;
   background-image: url("images/briques.jfif");
   bottom: var(--hauteur-du-sol);
   height: 392px;
@@ -275,6 +227,26 @@ a :visited {
   display: none;
 }
 
+#messagefin{
+ position: absolute;
+ color: white;
+ background-color: black;
+text-align: center;
+ left: 885px;
+ bottom: calc(var(--hauteur-du-sol) + 50px);
+ width: 300px;
+ font-size: 0.65em;
+ border: 3px solid black;
+ border-radius:15px ;
+ -webkit-border-radius:15px ;
+ -moz-border-radius:15px ;
+ -ms-border-radius:15px ;
+ -o-border-radius:15px ;
+ padding: 30px;
+ opacity: 0;
+}
+
+
 /**************************************************************
 ***************** DESIGN DES BOUTONS D'ACTION *****************
 ***************************************************************/
@@ -288,7 +260,7 @@ button {
   background-color: rgb(7, 253, 171);
   border-radius: 50%;
   -webkit-border-radius: 50%;
-  /* -moz-border-radius: 50%; */
+  -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   z-index: 3;
@@ -304,15 +276,18 @@ button {
 #boutonbus {
   left: 1450px;
 }
-/* #boutontracteur {
-  left: 3850px;
-} */
+#boutonvoitureenfeu {
+  left: 2325px;
+}
 #boutonfille {
   left: 3000px;
   display: none;
 }
 #boutonpoubelle {
   left: 3470px;
+}
+#boutonparasol {
+  left: 5250px;
 }
 
 /***************************************************************
@@ -322,10 +297,6 @@ button {
 #container {
   position: absolute;
   overflow: hidden;
-  /* border-right: 3px solid rgb(255, 0, 0);
-  border-left: 3px solid rgb(255, 0, 0);
-  border-top: 1px solid rgb(255, 0, 0);
-  border-bottom: 1px solid rgb(255, 0, 0); */
   z-index: 10;
 }
 
@@ -428,9 +399,7 @@ button {
   width: 30px;
   height: 30px;
   background-color: rgb(138, 77, 27);
-  /* background-color: rgb(255, 187, 0); couleur allumée*/
   border-radius: 50%;
-  /* display: none; */
 }
 .feuVert {
   position: relative;
@@ -439,9 +408,7 @@ button {
   width: 30px;
   height: 30px;
   background-color: rgb(23, 58, 31);
-  /* background-color: rgb(9, 251, 70); couleur allumée */
   border-radius: 50%;
-  /* display: none; */
 }
 .poteau {
   position: relative;
@@ -450,22 +417,21 @@ button {
   width: 15px;
   height: 200px;
   background-color: rgb(0, 0, 0);
-  /* border:2px solid black; */
 }
 /*******************************************************
 *************  DESIGN DE LA VOITURE EN FEU *************
 ********************************************************/
 #voitureEnFeu {
   position: absolute;
-  bottom: calc(var(--hauteur-du-sol) - 21px);
+  bottom: calc(var(--hauteur-du-sol) - 15px);
   left: 2400px;
   height: 500px;
   width: 200px;
-  transform: rotate(11deg);
-  -webkit-transform: rotate(11deg);
-  -moz-transform: rotate(11deg);
-  -ms-transform: rotate(11deg);
-  -o-transform: rotate(11deg);
+  transform: rotate(9deg);
+  -webkit-transform: rotate(9deg);
+  -moz-transform: rotate(9deg);
+  -ms-transform: rotate(9deg);
+  -o-transform: rotate(9deg);
 }
 
 .voiture {
@@ -511,7 +477,7 @@ button {
   position: absolute;
   width: 362px;
   left: 64px;
-  bottom: calc(var(--hauteur-du-sol) + 40px);
+  bottom: calc(var(--hauteur-du-sol) + 61px);
   transform: rotate(19deg);
   -webkit-transform: rotate(19deg);
   -moz-transform: rotate(19deg);
@@ -524,6 +490,13 @@ button {
   position: absolute;
   height: 30px;
 }
+#bombe{
+
+  height:30px;
+  position: absolute;
+  display: none;
+}
+
 
 #bombe_1 {
   bottom: 0;
@@ -566,15 +539,12 @@ button {
 
 .filleavecballon {
   position: relative;
-  /* bottom: calc(var(--hauteur-du-sol) - 1px); */
   height: 110px;
-  /* display: none; */
 }
 
 .fillesansballon {
   position: relative;
   display: none;
-  /* bottom: var(--hauteur-du-sol); */
   height: 110px;
   display: none;
 }
@@ -582,57 +552,9 @@ button {
 .ballon {
   position: absolute;
   left: 48px;
-  /* bottom: calc(var(--hauteur-du-sol) + 70px); */
   bottom: 100px;
   height: 70px;
-  /* display: none; */
 }
-
-/******************************************************
-*****************  DESIGN DU TRACTEUR *****************
-******************************************************/
-/* #tracteur {
-  position: absolute;
-  transform: scaleX(-1);
-  left: 4000px;
-  bottom: calc(var(--hauteur-du-sol) - 5px);
-  height: calc(200px * var(--facteuragrandissement));
-
-  -webkit-transform: scaleX(-1);
-  -moz-transform: scaleX(-1);
-  -ms-transform: scaleX(-1);
-  -o-transform: scaleX(-1);
-}
-
-.tracteurvide {
-  position: absolute;
-  height: calc(200px * var(--facteuragrandissement));
-  opacity: 1;
-}
-.tracteuravecsticky {
-  position: absolute;
-  height: calc(200px * var(--facteuragrandissement));
-  opacity: 0;
-} */
-
-/******************************************************
-*****************  DESIGN DE LA FERME *****************
-******************************************************/
-/* 
-#ferme {
-  position: absolute;
-  height: calc(520px * var(--facteuragrandissement));
-  bottom: calc(var(--hauteur-du-sol) - 2px);
-  left: 4500px;
-}
-
-#mouton {
-  position: absolute;
-  height: calc(50px * var(--facteuragrandissement));
-  bottom: calc(var(--hauteur-du-sol) - 5px);
-  left: 5400px;
-} */
-
 /*******************************************************
 ****************  DESIGN DE LA POUBELLE ****************
 ********************************************************/
@@ -646,19 +568,53 @@ button {
 
 #poubellefrappe {
   position: absolute;
-  height:100px;
-  bottom: var(--hauteur-du-sol) ;
+  height: 100px;
+  bottom: calc(var(--hauteur-du-sol) - 2px);
   left: 3500px;
 }
 
-#poubellefrappe img:first-of-type {
+#boitearats {
   position: absolute;
   height: 100px;
+  bottom: calc(var(--hauteur-du-sol) - 2px);
+  left: 3500px;
 }
-#poubellefrappe img:nth-of-type(2) {
+
+
+/******************************************************
+*****************  DESIGN DE LA FERME *****************
+******************************************************/
+
+#findujeu {
   position: absolute;
-  height: 50px;
-  left: 50px;
-  bottom:0;
+  /* height: calc(470px * var(--facteuragrandissement)); */
+  bottom: calc(var(--hauteur-du-sol) - 2px);
+  left: 4700px;
+}
+
+#mouton {
+  position: absolute;
+  bottom: 0;
+  height: calc(60px * var(--facteuragrandissement));
+}
+#ferme {
+  position: absolute;
+  height: calc(398px * var(--facteuragrandissement));
+
+  bottom: 0;
+}
+#parasol {
+  position: absolute;
+  height: calc(173px * var(--facteuragrandissement));
+
+  bottom: -12px;
+  left: 580px;
+}
+#plagiste {
+  position: absolute;
+  height: calc(173px * var(--facteuragrandissement));
+  bottom: -12px;
+  left: 580px;
+  opacity: 0;
 }
 
