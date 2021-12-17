@@ -258,7 +258,7 @@ $(function () {
     ".calque_panneau_pieton"
   );
   var listeBoutonsAction = document.querySelectorAll("button");
-
+alert();
   var decor_mobile = document.getElementsByClassName("decor_mobile");
 
   //Récupération des styles CSS et affectation dans le DOM
