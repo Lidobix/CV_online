@@ -271,6 +271,8 @@ $(function () {
     }
   };
   affectationStyleDecorMobile();
+
+  console.log(decor_mobile);
   var listeDesObstacles = document.getElementsByClassName("obstacle");
 
   var affectationStyleObstacles = function () {
