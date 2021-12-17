@@ -85,7 +85,6 @@ a img {
   padding: 5px;
   border-radius: 7px;
   -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
   -ms-border-radius: 7px;
   -o-border-radius: 7px;
   border: 3px solid black;
@@ -127,7 +126,6 @@ a :visited {
   padding: 8px;
   height: 75px;
   -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
@@ -240,7 +238,6 @@ text-align: center;
  border: 3px solid black;
  border-radius:15px ;
  -webkit-border-radius:15px ;
- -moz-border-radius:15px ;
  -ms-border-radius:15px ;
  -o-border-radius:15px ;
  padding: 30px;
@@ -261,7 +258,6 @@ button {
   background-color: rgb(7, 253, 171);
   border-radius: 50%;
   -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   z-index: 3;
@@ -383,6 +379,9 @@ button {
   bottom: 198px;
   background-color: black;
   border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
 }
 .feuRouge {
   position: relative;
@@ -391,7 +390,10 @@ button {
   width: 30px;
   height: 30px;
   background-color: rgb(121, 38, 38);
-  border-radius: 50%;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
 }
 .feuOrange {
   position: relative;
@@ -400,7 +402,10 @@ button {
   width: 30px;
   height: 30px;
   background-color: rgb(138, 77, 27);
-  border-radius: 50%;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
 }
 .feuVert {
   position: relative;
@@ -409,7 +414,10 @@ button {
   width: 30px;
   height: 30px;
   background-color: rgb(23, 58, 31);
-  border-radius: 50%;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
 }
 .poteau {
   position: relative;
