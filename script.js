@@ -524,7 +524,7 @@ $(function () {
           break;
 
         case "boutonvoitureenfeu":
-          $message.text("Kickez moi cette voiture !");
+          $message.text("Kickez moi cette épave !");
           setTimeout(function () {
             $message.text("");
           }, 4000);
