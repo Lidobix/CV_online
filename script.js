@@ -362,9 +362,9 @@ $(function () {
         var styleBouton = window.getComputedStyle(bouton);
 
         if (
-          extremiteContainer > parseFloat(styleBouton.left) - 3 &&
+          extremiteContainer > parseFloat(styleBouton.left) - 10 &&
           extremiteContainer <
-            parseFloat(styleBouton.left) + parseFloat(styleBouton.width) + 3
+            parseFloat(styleBouton.left) + parseFloat(styleBouton.width) + 10
         ) {
   
           this.lancementAction(bouton.id);
