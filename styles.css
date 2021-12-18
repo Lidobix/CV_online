@@ -511,15 +511,15 @@ button {
 
 #bombe_1 {
   bottom: 0;
-  left: 30px;
+  left: 270px;
 }
 #bombe_2 {
   bottom: 0;
-  left: 286px;
+  left: 570px;
 }
 #bombe_3 {
   bottom: -9px;
-  left: 318px;
+  left: 600px;
   transform: rotate(-90deg);
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);

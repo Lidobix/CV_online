@@ -401,6 +401,7 @@ $(function () {
             $ballon.animate({
               bottom: "3000px",
               left: "6000px",
+              opacity: 0
             });
             listeBoutonsAction[2].style.display = "block";
             this.parametres.apparitionBoutonFille = true;
@@ -415,6 +416,7 @@ $(function () {
             $fille.animate({
               bottom: "3000px",
               left: "6000px",
+              opacity:0
             });
 
             listeBoutonsAction[2].style.display = "none";
@@ -550,10 +552,10 @@ $(function () {
           var $messagefin = $("#messagefin");
           var $boutonparasol = $("#boutonparasol");
 
-          $container.animate({ opacity: 0 }, 500);
-          $parasol.animate({ opacity: 0 }, 500);
-          $plagiste.animate({ opacity: 1 }, 500);
-          $messagefin.animate({ opacity: 1 }, 500);
+          $container.animate({ opacity: 0 }, 600);
+          $parasol.animate({ opacity: 0 }, 600);
+          $plagiste.animate({ opacity: 1 }, 600);
+          $messagefin.animate({ opacity: 1 }, 600);
           $boutonparasol.css("display", "none");
 
           this.parametres.finDuJeu = true;
