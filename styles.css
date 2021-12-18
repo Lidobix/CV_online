@@ -452,7 +452,7 @@ button {
 .feu {
   position: absolute;
   height: calc(200px * var(--facteuragrandissement));
-  width: calc(185px * var(--facteuragrandissement));
+  width: calc(205px * var(--facteuragrandissement));
   bottom: calc(70px * var(--facteuragrandissement));
   left: calc(-13px * var(--facteuragrandissement));
 }
