@@ -477,7 +477,7 @@ button {
   bottom: calc(73px * var(--facteuragrandissement));
   height: calc(50px * var(--facteuragrandissement));
   width: calc(50px * var(--facteuragrandissement));
-  right: calc(45px * var(--facteuragrandissement));
+  left: calc(570px * var(--facteuragrandissement));
   -webkit-transform: rotate(-10deg);
   -moz-transform: rotate(-10deg);
   -ms-transform: rotate(-10deg);
