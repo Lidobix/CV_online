@@ -263,8 +263,8 @@ button {
   z-index: 3;
 }
 #boutonaffiche {
-  left: 269px;
-  bottom: calc(var(--hauteur-du-sol) + 120px);
+  left: 264px;
+  bottom: calc(var(--hauteur-du-sol) + 106px);
 }
 
 #boutonfeutricolore {
