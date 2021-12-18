@@ -284,7 +284,7 @@ button {
   left: 3470px;
 }
 #boutonparasol {
-  left: 5250px;
+  left: 5274px;
 }
 
 /***************************************************************
@@ -622,13 +622,13 @@ button {
   height: calc(173px * var(--facteuragrandissement));
 
   bottom: -12px;
-  left: 580px;
+  left: 610px;
 }
 #plagiste {
   position: absolute;
   height: calc(173px * var(--facteuragrandissement));
   bottom: -12px;
-  left: 580px;
+  left: 610px;
   opacity: 0;
 }
 
