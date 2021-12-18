@@ -571,6 +571,7 @@ button {
 #poubelle {
   position: absolute;
   height: calc(100px * var(--facteuragrandissement));
+  width: 75px;
   bottom: calc(var(--hauteur-du-sol) - 2px);
   left: 1100px;
 }
