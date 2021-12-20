@@ -451,6 +451,7 @@ button {
 .feu {
   position: absolute;
   height: calc(200px * var(--facteuragrandissement));
+  width: calc(200px * var(--facteuragrandissement));
   bottom: calc(70px * var(--facteuragrandissement));
   left: calc(-13px * var(--facteuragrandissement));
 }
@@ -496,6 +497,7 @@ button {
 #logo_ifocop {
   transform: rotate(-10deg);
   position: absolute;
+  width: calc(50px * var(--facteuragrandissement));
   height: calc(50px * var(--facteuragrandissement));
   bottom: calc(73px * var(--facteuragrandissement));
   right: calc(45px * var(--facteuragrandissement));
