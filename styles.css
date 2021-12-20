@@ -178,7 +178,7 @@ a :visited {
   bottom: calc(var(--hauteur-du-sol) + 61px);
   left: 200px;
   height: 280px;
-  width:  301px;
+  width: auto;
   position: absolute;
   z-index: 2;
   transform: rotate(15deg);
@@ -226,24 +226,23 @@ a :visited {
   display: none;
 }
 
-#messagefin{
- position: absolute;
- color: white;
- background-color: black;
-text-align: center;
- left: 885px;
- bottom: calc(var(--hauteur-du-sol) + 50px);
- width: 400px;
- font-size: 0.65em;
- border: 3px solid black;
- border-radius:15px ;
- -webkit-border-radius:15px ;
- -ms-border-radius:15px ;
- -o-border-radius:15px ;
- padding: 30px;
- opacity: 0;
+#messagefin {
+  position: absolute;
+  color: white;
+  background-color: black;
+  text-align: center;
+  left: 885px;
+  bottom: calc(var(--hauteur-du-sol) + 50px);
+  width: 300px;
+  font-size: 0.65em;
+  border: 3px solid black;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+  padding: 30px;
+  opacity: 0;
 }
-
 
 /**************************************************************
 ***************** DESIGN DES BOUTONS D'ACTION *****************
@@ -263,8 +262,8 @@ button {
   z-index: 3;
 }
 #boutonaffiche {
-  left: 264px;
-  bottom: calc(var(--hauteur-du-sol) + 106px);
+  left: 269px;
+  bottom: calc(var(--hauteur-du-sol) + 120px);
 }
 
 #boutonfeutricolore {
@@ -284,7 +283,7 @@ button {
   left: 3470px;
 }
 #boutonparasol {
-  left: 5274px;
+  left: 5250px;
 }
 
 /***************************************************************
@@ -452,7 +451,6 @@ button {
 .feu {
   position: absolute;
   height: calc(200px * var(--facteuragrandissement));
-  width: calc(205px * var(--facteuragrandissement));
   bottom: calc(70px * var(--facteuragrandissement));
   left: calc(-13px * var(--facteuragrandissement));
 }
@@ -471,13 +469,36 @@ button {
   height: calc(270px * var(--facteuragrandissement));
 }
 
+#logo_company {
+  position: absolute;
+  width: 300px;
+  height: 72px;
+  left: 284px;
+  bottom: 102px;
+}
+#barre1 {
+  position: absolute;
+  background-color: black;
+  width: 272px;
+  height: 5px;
+  left: 30px;
+  bottom: 130px;
+}
+#barre2 {
+  position: absolute;
+  background-color: black;
+  width: 58px;
+  height: 5px;
+  left: 576px;
+  bottom: 149px;
+}
+
 #logo_ifocop {
   transform: rotate(-10deg);
   position: absolute;
-  bottom: calc(73px * var(--facteuragrandissement));
   height: calc(50px * var(--facteuragrandissement));
-  width: calc(50px * var(--facteuragrandissement));
-  left: calc(570px * var(--facteuragrandissement));
+  bottom: calc(73px * var(--facteuragrandissement));
+  right: calc(45px * var(--facteuragrandissement));
   -webkit-transform: rotate(-10deg);
   -moz-transform: rotate(-10deg);
   -ms-transform: rotate(-10deg);
@@ -501,25 +522,23 @@ button {
   position: absolute;
   height: 30px;
 }
-#bombe{
-
-  height:30px;
+#bombe {
+  height: 30px;
   position: absolute;
   display: none;
 }
 
-
 #bombe_1 {
   bottom: 0;
-  left: 270px;
+  left: 30px;
 }
 #bombe_2 {
   bottom: 0;
-  left: 570px;
+  left: 286px;
 }
 #bombe_3 {
   bottom: -9px;
-  left: 600px;
+  left: 318px;
   transform: rotate(-90deg);
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
@@ -573,7 +592,6 @@ button {
 #poubelle {
   position: absolute;
   height: calc(100px * var(--facteuragrandissement));
-  width: 75px;
   bottom: calc(var(--hauteur-du-sol) - 2px);
   left: 1100px;
 }
@@ -581,7 +599,6 @@ button {
 #poubellefrappe {
   position: absolute;
   height: 100px;
-  width: 75px;
   bottom: calc(var(--hauteur-du-sol) - 2px);
   left: 3500px;
 }
@@ -589,11 +606,9 @@ button {
 #boitearats {
   position: absolute;
   height: 100px;
-  width:0;
   bottom: calc(var(--hauteur-du-sol) - 2px);
   left: 3500px;
 }
-
 
 /******************************************************
 *****************  DESIGN DE LA FERME *****************
@@ -622,13 +637,12 @@ button {
   height: calc(173px * var(--facteuragrandissement));
 
   bottom: -12px;
-  left: 610px;
+  left: 580px;
 }
 #plagiste {
   position: absolute;
   height: calc(173px * var(--facteuragrandissement));
   bottom: -12px;
-  left: 610px;
+  left: 580px;
   opacity: 0;
 }
-
