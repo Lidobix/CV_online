@@ -55,10 +55,23 @@ section {
   flex-direction: column;
   justify-content: flex-end;
 }
-h1 {
-  margin: 15px 0 15px 15px;
-  font-family: "Righteous";
-}
+
+
+#identite{
+  display: flex;
+  flex-direction: row;;
+  }
+
+  h1 {
+    margin: 15px 0 15px 15px;
+    font-family: "Righteous";
+  }
+
+  h5{
+    align-self: flex-end;
+    margin-bottom: 6px;
+    margin-left: 16px;
+  }
 #espace_pro {
   display: flex;
   flex-direction: column;
@@ -111,7 +124,7 @@ a :visited {
 ******************* DESIGN DE LA ZONE DE JEU *******************
 ***************************************************************/
 #message {
-  color: white;
+  color: rgb(255, 255, 255);
   top: 10px;
   left: 10px;
   font-size: 0.65em;
@@ -532,15 +545,15 @@ button {
 
 #bombe_1 {
   bottom: 0;
-  left: 30px;
+  left: 350px;
 }
 #bombe_2 {
   bottom: 0;
-  left: 286px;
+  left: 622px;
 }
 #bombe_3 {
   bottom: -9px;
-  left: 318px;
+  left: 565px;
   transform: rotate(-90deg);
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
