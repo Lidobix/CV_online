@@ -11,7 +11,7 @@
 ********************  DEFINITION DES VARIABLES ********************
 ******************************************************************/
 :root {
-  --hauteur-du-sol: 30px;
+  --hauteur-du-sol: 40px;
   --facteuragrandissement: 1;
 }
 
@@ -43,8 +43,7 @@ header {
 nav {
   position: relative;
   width: 100%;
-
-  height: 50px;
+  height: 30px;
   background-color: black;
 }
 section {
@@ -125,7 +124,7 @@ a :visited {
 ***************************************************************/
 #message {
   color: rgb(255, 255, 255);
-  top: 10px;
+  top: 5px;
   left: 10px;
   font-size: 0.65em;
   position: absolute;
@@ -246,7 +245,7 @@ a :visited {
   text-align: center;
   left: 885px;
   bottom: calc(var(--hauteur-du-sol) + 50px);
-  width: 300px;
+  width: 420px;
   font-size: 0.65em;
   border: 3px solid black;
   border-radius: 15px;
@@ -296,7 +295,7 @@ button {
   left: 3470px;
 }
 #boutonparasol {
-  left: 5250px;
+  left: 5282px;
 }
 
 /***************************************************************
@@ -654,12 +653,12 @@ button {
   height: calc(173px * var(--facteuragrandissement));
 
   bottom: -12px;
-  left: 580px;
+  left: 625px;
 }
 #plagiste {
   position: absolute;
   height: calc(173px * var(--facteuragrandissement));
   bottom: -12px;
-  left: 580px;
+  left: 625px;
   opacity: 0;
 }
