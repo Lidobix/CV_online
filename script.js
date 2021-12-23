@@ -2,334 +2,21 @@
 
 window.addEventListener("DOMContentLoaded", function () {
   $(function () {
-    var $hauteurSol = $("#sol").css("height");
-
-    var interpos = [
-      {
-        masque: {
-          width: 58,
-          height: 149,
-        },
-        sprite: {
-          nom: "etatInitial",
-          left: -600,
-          bottom: -452,
-          height: 630,
-        },
-      },
-      {
-        masque: {
-          width: 83,
-          height: 135,
-        },
-        sprite: {
-          nom: "run5",
-          left: -50,
-          bottom: -264,
-          height: 630,
-        },
-      },
-      {
-        masque: {
-          width: 69,
-          height: 136,
-        },
-        sprite: {
-          nom: "run9",
-          left: -57,
-          bottom: -78,
-          height: 630,
-        },
-      },
-      {
-        masque: {
-          width: 73,
-          height: 139,
-        },
-        sprite: {
-          nom: "run6",
-          left: -176,
-          bottom: -264,
-          height: 630,
-        },
-      },
-      {
-        masque: {
-          width: 83,
-          height: 133,
-        },
-        sprite: {
-          nom: "run11",
-          left: -310,
-          bottom: -78,
-          height: 630,
-        },
-      },
-      {
-        masque: {
-          width: 68,
-          height: 136,
-        },
-        sprite: {
-          nom: "run3",
-          left: -318,
-          bottom: -457,
-          height: 630,
-        },
-      },
-      {
-        masque: {
-          width: 77,
-          height: 129,
-        },
-        sprite: {
-          nom: "run10",
-          left: -180,
-          bottom: -79,
-          height: 630,
-        },
-      },
-      {
-        masque: {
-          width: 101,
-          height: 126,
-        },
-        sprite: {
-          nom: "run8",
-          left: -439,
-          bottom: -265,
-          height: 630,
-        },
-      },
-      {
-        masque: {
-          width: 136,
-          height: 141,
-        },
-        sprite: {
-          nom: "mouvCoup",
-          left: -563,
-          bottom: -104,
-          height: 630,
-        },
-      },
-      {
-        masque: {
-          width: 80,
-          height: 150,
-        },
-        sprite: {
-          nom: "mouvAction",
-          left: -599,
-          bottom: -282,
-          height: 630,
-        },
-      },
-      {
-        masque: {
-          left: 61,
-          bottom: parseFloat($hauteurSol) + 157,
-          width: 21,
-          height: 55,
-        },
-        sprite: {
-          nom: "etatInitialMini",
-          left: -222,
-          bottom: -167,
-          height: 233,
-        },
-      },
-      {
-        masque: {
-          left: 52,
-          bottom: parseFloat($hauteurSol) + 157,
-          width: 30,
-          height: 53,
-        },
-        sprite: {
-          nom: "run5Mini",
-          left: -19,
-          bottom: -97,
-          height: 233,
-        },
-      },
-      {
-        masque: {
-          left: 52,
-          bottom: parseFloat($hauteurSol) + 157,
-          width: 26,
-          height: 53,
-        },
-        sprite: {
-          nom: "run9Mini",
-          left: -21,
-          bottom: -28,
-          height: 233,
-        },
-      },
-      {
-        masque: {
-          left: 60,
-          bottom: parseFloat($hauteurSol) + 157,
-          width: 23,
-          height: 53,
-        },
-        sprite: {
-          nom: "run6Mini",
-          left: -69,
-          bottom: -98,
-          height: 233,
-        },
-      },
-      {
-        masque: {
-          left: 52,
-          bottom: parseFloat($hauteurSol) + 157,
-          width: 30,
-          height: 49,
-        },
-        sprite: {
-          nom: "run11Mini",
-          left: -113,
-          bottom: -29,
-          height: 233,
-        },
-      },
-      {
-        masque: {
-          left: 54,
-          bottom: parseFloat($hauteurSol) + 157,
-          width: 25,
-          height: 50,
-        },
-        sprite: {
-          nom: "run3Mini",
-          left: -118,
-          bottom: -169,
-          height: 233,
-        },
-      },
-      {
-        masque: {
-          left: 52,
-          bottom: parseFloat($hauteurSol) + 157,
-          width: 29,
-          height: 48,
-        },
-        sprite: {
-          nom: "run10Mini",
-          left: -66,
-          bottom: -29,
-          height: 233,
-        },
-      },
-      {
-        masque: {
-          left: 50,
-          bottom: parseFloat($hauteurSol) + 157,
-          width: 37,
-          height: 47,
-        },
-        sprite: {
-          nom: "run8Mini",
-          left: -163,
-          bottom: -98,
-          height: 233,
-        },
-      },
-    ];
-
-    ////////////////////////////////////////////////////////////////////////
-    /////////////////////// DECLARATION DE VARIABLES ///////////////////////
-    ////////////////////////////////////////////////////////////////////////
-
-    var timing = 60;
-    var $feuRouge = $(".feuRouge");
-    var $feuOrange = $(".feuOrange");
-    var $feuVert = $(".feuVert");
-    var $container = $("#container");
-    var $sprite = $("#contenu");
-    var indexImage = 10;
-    var indexImageMini = 11;
-    var indexImageMaxi = 18;
-    var listeImagesPanneauPieton = [];
-    var compteurRats = 0;
-    // Création de la liste d'images de panneau piéton:
-
-    var listeImagesPanneauPieton = document.querySelectorAll(
-      ".calque_panneau_pieton"
-    );
-    var listeBoutonsAction = document.querySelectorAll("button");
-
-    var decor_mobile = document.getElementsByClassName("decor_mobile");
-
-    //Récupération des styles CSS et affectation dans le DOM
-    var affectationStyleDecorMobile = function () {
-      for (let i = 0; i < decor_mobile.length; i++) {
-        var styleDecor = window.getComputedStyle(decor_mobile[i]);
-        decor_mobile[i].style.left = styleDecor.left;
-        decor_mobile[i].style.width = styleDecor.width;
-        decor_mobile[i].style.height = styleDecor.height;
-      }
-    };
-    affectationStyleDecorMobile();
-
-    var listeDesObstacles = document.getElementsByClassName("obstacle");
-
-    var affectationStyleObstacles = function () {
-      for (let i = 0; i < listeDesObstacles.length; i++) {
-        var styleObstacle = window.getComputedStyle(listeDesObstacles[i]);
-        listeDesObstacles[i].style.left = styleObstacle.left;
-        listeDesObstacles[i].style.width = styleObstacle.width;
-        listeDesObstacles[i].style.height = styleObstacle.height;
-        listeDesObstacles[i].style.opacity = styleObstacle.opacity;
-      }
-    };
-    affectationStyleObstacles();
-
-    ////////////////////////////////////////////////////////////////////////
-    //////////////// DECLARATION DES COORDONNEES DE STICKY /////////////////
-    ////////////////////////////////////////////////////////////////////////
-
-    var initialiseSticky = function (index) {
-      $container.css({
-        left: interpos[index].masque.left,
-        bottom: interpos[index].masque.bottom,
-        width: interpos[index].masque.width,
-        height: interpos[index].masque.height,
-      });
-
-      $sprite.css({
-        left: interpos[index].sprite.left,
-        bottom: interpos[index].sprite.bottom,
-        height: interpos[index].sprite.height,
-      });
-    };
-
-    initialiseSticky(indexImage);
-
-    ////////////////////////////////////////////////////////////////////////
-    ////////////////////////////// OBJET JEU ///////////////////////////////
-    ////////////////////////////////////////////////////////////////////////
-
-    var monJeu = {
+    const monJeu = {
       directions: {
         droite: false,
         bas: false,
         gauche: false,
-        derniere: "",
         etatInitial: true,
         coup: false,
         action: false,
         obstacle: false,
-
         sortiePanneauEnCours: false,
       },
       parametres: {
         debutTimerIntro: NaN,
         currentTimerIntro: NaN,
         tempoClous: [0, 100, 200, 350, 500, 700, 900, 1000],
-        dernièreDirection: "",
         actionFeuTricolore: [1, 0, 0, 0],
         chronoIntro: 0,
         delaiFinIntro: 1100,
@@ -338,16 +25,345 @@ window.addEventListener("DOMContentLoaded", function () {
         compteurBoutonFille: 0,
         compteurActionFille: 0,
         apparitionBoutonFille: false,
-        succes: [
-          "#html_pic",
-          "#css",
-          "#js",
-          "#jquery",
-          "#node",
-          "#mongo",
-          [0, 0, 0, 0, 0, 0],
-        ],
+        succes: ["#html_pic", "#css", "#js", "#jquery", "#node", "#mongo"],
         finDuJeu: false,
+        listeBoutonsAction: [],
+        decor_mobile: [],
+        listeDesObstacles: [],
+        listeImagesPanneauPieton: [],
+        indexImage: 10,
+        indexImageMini: 11,
+        indexImageMaxi: 18,
+        $container: $("#container"),
+        $sprite: $("#contenu"),
+        compteurRats: 0,
+        $hauteurSol: 0,
+        interpos: [
+          {
+            masque: {
+              width: 58,
+              height: 149,
+            },
+            sprite: {
+              nom: "etatInitial",
+              left: -600,
+              bottom: -452,
+              height: 630,
+            },
+          },
+          {
+            masque: {
+              width: 83,
+              height: 135,
+            },
+            sprite: {
+              nom: "run5",
+              left: -50,
+              bottom: -264,
+              height: 630,
+            },
+          },
+          {
+            masque: {
+              width: 69,
+              height: 136,
+            },
+            sprite: {
+              nom: "run9",
+              left: -57,
+              bottom: -78,
+              height: 630,
+            },
+          },
+          {
+            masque: {
+              width: 73,
+              height: 139,
+            },
+            sprite: {
+              nom: "run6",
+              left: -176,
+              bottom: -264,
+              height: 630,
+            },
+          },
+          {
+            masque: {
+              width: 83,
+              height: 133,
+            },
+            sprite: {
+              nom: "run11",
+              left: -310,
+              bottom: -78,
+              height: 630,
+            },
+          },
+          {
+            masque: {
+              width: 68,
+              height: 136,
+            },
+            sprite: {
+              nom: "run3",
+              left: -318,
+              bottom: -457,
+              height: 630,
+            },
+          },
+          {
+            masque: {
+              width: 77,
+              height: 129,
+            },
+            sprite: {
+              nom: "run10",
+              left: -180,
+              bottom: -79,
+              height: 630,
+            },
+          },
+          {
+            masque: {
+              width: 101,
+              height: 126,
+            },
+            sprite: {
+              nom: "run8",
+              left: -439,
+              bottom: -265,
+              height: 630,
+            },
+          },
+          {
+            masque: {
+              width: 136,
+              height: 141,
+            },
+            sprite: {
+              nom: "mouvCoup",
+              left: -563,
+              bottom: -104,
+              height: 630,
+            },
+          },
+          {
+            masque: {
+              width: 80,
+              height: 150,
+            },
+            sprite: {
+              nom: "mouvAction",
+              left: -599,
+              bottom: -282,
+              height: 630,
+            },
+          },
+          {
+            masque: {
+              left: 61,
+              bottom: parseFloat($("#sol").css("height")) + 157,
+              width: 21,
+              height: 55,
+            },
+            sprite: {
+              nom: "etatInitialMini",
+              left: -222,
+              bottom: -167,
+              height: 233,
+            },
+          },
+          {
+            masque: {
+              left: 52,
+              bottom: parseFloat($("#sol").css("height")) + 157,
+              width: 30,
+              height: 53,
+            },
+            sprite: {
+              nom: "run5Mini",
+              left: -19,
+              bottom: -97,
+              height: 233,
+            },
+          },
+          {
+            masque: {
+              left: 52,
+              bottom: parseFloat($("#sol").css("height")) + 157,
+              width: 26,
+              height: 53,
+            },
+            sprite: {
+              nom: "run9Mini",
+              left: -21,
+              bottom: -28,
+              height: 233,
+            },
+          },
+          {
+            masque: {
+              left: 60,
+              bottom: parseFloat($("#sol").css("height")) + 157,
+              width: 23,
+              height: 53,
+            },
+            sprite: {
+              nom: "run6Mini",
+              left: -69,
+              bottom: -98,
+              height: 233,
+            },
+          },
+          {
+            masque: {
+              left: 52,
+              bottom: parseFloat($("#sol").css("height")) + 157,
+              width: 30,
+              height: 49,
+            },
+            sprite: {
+              nom: "run11Mini",
+              left: -113,
+              bottom: -29,
+              height: 233,
+            },
+          },
+          {
+            masque: {
+              left: 54,
+              bottom: parseFloat($("#sol").css("height")) + 157,
+              width: 25,
+              height: 50,
+            },
+            sprite: {
+              nom: "run3Mini",
+              left: -118,
+              bottom: -169,
+              height: 233,
+            },
+          },
+          {
+            masque: {
+              left: 52,
+              bottom: parseFloat($("#sol").css("height")) + 157,
+              width: 29,
+              height: 48,
+            },
+            sprite: {
+              nom: "run10Mini",
+              left: -66,
+              bottom: -29,
+              height: 233,
+            },
+          },
+          {
+            masque: {
+              left: 50,
+              bottom: parseFloat($("#sol").css("height")) + 157,
+              width: 37,
+              height: 47,
+            },
+            sprite: {
+              nom: "run8Mini",
+              left: -163,
+              bottom: -98,
+              height: 233,
+            },
+          },
+        ],
+      },
+
+      declarationDesVariables: function () {
+        /////////// DEFINITION DE LA LISTE DES BOUTONS D'ACTION ///////////
+
+        this.parametres.listeBoutonsAction =
+          document.querySelectorAll("button");
+
+        /////////// DEFINITION DE LA LISTE DES ELEMENTS DE DECOR ///////////
+
+        this.parametres.decor_mobile =
+          document.getElementsByClassName("decor_mobile");
+
+        for (let i = 0; i < this.parametres.decor_mobile.length; i++) {
+          const styleDecor = window.getComputedStyle(
+            this.parametres.decor_mobile[i]
+          );
+          this.parametres.decor_mobile[i].style.left = styleDecor.left;
+          this.parametres.decor_mobile[i].style.width = styleDecor.width;
+          this.parametres.decor_mobile[i].style.height = styleDecor.height;
+        }
+
+        /////////////// DEFINITION DE LA LISTE DES OBSTACLES ///////////////
+
+        this.parametres.listeDesObstacles =
+          document.getElementsByClassName("obstacle");
+
+        for (let i = 0; i < this.parametres.listeDesObstacles.length; i++) {
+          const styleObstacle = window.getComputedStyle(
+            this.parametres.listeDesObstacles[i]
+          );
+          this.parametres.listeDesObstacles[i].style.left = styleObstacle.left;
+          this.parametres.listeDesObstacles[i].style.width =
+            styleObstacle.width;
+          this.parametres.listeDesObstacles[i].style.height =
+            styleObstacle.height;
+          this.parametres.listeDesObstacles[i].style.opacity =
+            styleObstacle.opacity;
+        }
+
+        /////// DEFINITION DE LA LISTE DES CALQUES DU PANNEAU PIETON ///////
+
+        this.parametres.listeImagesPanneauPieton = document.querySelectorAll(
+          ".calque_panneau_pieton"
+        );
+      },
+
+      initialiseSticky(index) {
+        this.parametres.$container.css({
+          left: this.parametres.interpos[index].masque.left,
+          bottom: this.parametres.interpos[index].masque.bottom,
+          width: this.parametres.interpos[index].masque.width,
+          height: this.parametres.interpos[index].masque.height,
+        });
+
+        this.parametres.$sprite.css({
+          left: this.parametres.interpos[index].sprite.left,
+          bottom: this.parametres.interpos[index].sprite.bottom,
+          height: this.parametres.interpos[index].sprite.height,
+        });
+      },
+
+      animations: function () {
+        ///////////////////// ANIMATION DES BOUTONS D'ACTION /////////////////////
+        const $bouton = $("button");
+        setInterval(function () {
+          $bouton.animate({
+            opacity: "0",
+          });
+          $bouton.animate({
+            opacity: "1",
+          });
+        }, 1);
+
+        //////////////////////////MATION DU FEU DE VOITURE //////////////////////
+
+        const $feu = $(".feu");
+        const $widthFeu = parseFloat($feu.css("width"));
+        const $leftFeu = parseFloat($feu.css("left"));
+        const $heightFeu = parseFloat($feu.css("height"));
+        setInterval(function () {
+          let facteur = parseInt(100 * Math.random()) / 100;
+          $feu.css({
+            left:
+              210 +
+              ($leftFeu - $widthFeu / 2) -
+              ($widthFeu * facteur) / 2 +
+              "px",
+            width: $widthFeu * facteur + "px",
+            height: $heightFeu * facteur + "px",
+          });
+        }, 100);
       },
 
       attributionSucces: function (indexSucces) {
@@ -355,16 +371,15 @@ window.addEventListener("DOMContentLoaded", function () {
         $succes.animate({
           opacity: 1,
         });
-        this.parametres.succes[6][indexSucces] = 1;
       },
 
       detectionAction: function () {
-        for (var i = 0; i < listeBoutonsAction.length; i++) {
-          var bouton = listeBoutonsAction[i];
-          var extremiteContainer =
-            parseFloat($container.css("left")) +
-            parseFloat($container.css("width"));
-          var styleBouton = window.getComputedStyle(bouton);
+        for (let i = 0; i < this.parametres.listeBoutonsAction.length; i++) {
+          const bouton = this.parametres.listeBoutonsAction[i];
+          let extremiteContainer =
+            parseFloat(this.parametres.$container.css("left")) +
+            parseFloat(this.parametres.$container.css("width"));
+          const styleBouton = window.getComputedStyle(bouton);
 
           if (
             extremiteContainer > parseFloat(styleBouton.left) - 10 &&
@@ -377,17 +392,21 @@ window.addEventListener("DOMContentLoaded", function () {
       },
 
       gestionDesCoups: function (indexObstacleATraiter) {
-        if (listeDesObstacles.length > 0) {
+        if (this.parametres.listeDesObstacles.length > 0) {
           if (indexObstacleATraiter == 0) {
-            var opaciteObstacle =
-              listeDesObstacles[indexObstacleATraiter].style.opacity;
+            let opaciteObstacle =
+              this.parametres.listeDesObstacles[indexObstacleATraiter].style
+                .opacity;
             opaciteObstacle = opaciteObstacle - 0.1;
-            listeDesObstacles[indexObstacleATraiter].style.opacity =
-              opaciteObstacle;
+            this.parametres.listeDesObstacles[
+              indexObstacleATraiter
+            ].style.opacity = opaciteObstacle;
 
             if (opaciteObstacle < 0.1) {
-              listeDesObstacles[indexObstacleATraiter].style.left = "100000px";
-              var $boutonvoiture = $("#boutonvoitureenfeu");
+              this.parametres.listeDesObstacles[
+                indexObstacleATraiter
+              ].style.left = "100000px";
+              const $boutonvoiture = $("#boutonvoitureenfeu");
               $boutonvoiture.css("display", "none");
               this.attributionSucces(3);
               this.directions.obstacle = false;
@@ -395,14 +414,22 @@ window.addEventListener("DOMContentLoaded", function () {
           }
 
           if (indexObstacleATraiter == 1) {
+            const $boutonFille =  $("#boutonfille");
+            const $ballon = $(".ballon");
+            const $fille = $("#filleauballon");
+            const $filleAvecBallon = $(".filleavecballon");
+            const $filleSansBallon = $(".fillesansballon");
+
             if (this.parametres.compteurBoutonFille == 0) {
-              var $ballon = $(".ballon");
               $ballon.animate({
                 bottom: "3000px",
                 left: "6000px",
-                opacity: 0,
               });
-              listeBoutonsAction[2].style.display = "block";
+              
+              $filleAvecBallon.css("display", "none");
+              $filleSansBallon.css("display", "block");
+
+              $boutonFille.css("display", "block");
               this.parametres.apparitionBoutonFille = true;
             }
 
@@ -410,24 +437,20 @@ window.addEventListener("DOMContentLoaded", function () {
               this.parametres.apparitionBoutonFille &&
               this.parametres.compteurActionFille > 0
             ) {
-              var $fille = $("#filleauballon");
-
               $fille.animate({
                 bottom: "3000px",
                 left: "6000px",
-                opacity: 0,
               });
-
-              listeBoutonsAction[2].style.display = "none";
+              $boutonFille.css("display", "none");
               this.attributionSucces(4);
             }
           }
 
           if (indexObstacleATraiter == 2) {
-            if (compteurRats < 30) {
+            if (this.parametres.compteurRats < 30) {
               $poubelle = $("#poubellefrappe");
               $boitearats = $("#boitearats");
-              compteurRats++;
+              this.parametres.compteurRats++;
               $boitearats.append(`<img src="images/rat.svg" class="rat">`);
               $nouveauRat = $(".rat");
 
@@ -444,6 +467,8 @@ window.addEventListener("DOMContentLoaded", function () {
                 },
                 4000
               );
+
+              this.attributionSucces(5);
             } else {
               $poubelle.animate(
                 {
@@ -453,8 +478,7 @@ window.addEventListener("DOMContentLoaded", function () {
                 },
                 500
               );
-              this.attributionSucces(5);
-              var $boutonpoubelle = $("#boutonpoubelle");
+              const $boutonpoubelle = $("#boutonpoubelle");
               $boutonpoubelle.css("display", "none");
             }
           }
@@ -462,24 +486,28 @@ window.addEventListener("DOMContentLoaded", function () {
       },
 
       lancementAction: function (idBouton) {
-        var $message = $("#message");
+        const $message = $("#message");
 
         switch (idBouton) {
           case "boutonfeutricolore":
+            const $feuRouge = $(".feuRouge");
+            const $feuOrange = $(".feuOrange");
+            const $feuVert = $(".feuVert");
+
             switch (this.parametres.actionFeuTricolore[0]) {
               case 1:
                 $feuRouge.css("background-color", "rgb(255, 0, 0)");
-                var photo1 = document.getElementById("identite_1");
+                const photo1 = document.getElementById("identite_1");
                 photo1.style.display = "block";
                 break;
               case 2:
                 $feuOrange.css("background-color", "rgb(255, 187, 0)");
-                var photo2 = document.getElementById("identite_2");
+                const photo2 = document.getElementById("identite_2");
                 photo2.style.display = "block";
                 break;
               case 3:
                 $feuVert.css("background-color", "rgb(9, 251, 70)");
-                var photo3 = document.getElementById("identite_3");
+                const photo3 = document.getElementById("identite_3");
                 photo3.style.display = "block";
                 this.attributionSucces(1);
                 break;
@@ -492,7 +520,12 @@ window.addEventListener("DOMContentLoaded", function () {
             }
             this.parametres.actionFeuTricolore[0]++;
             break;
+
           case "boutonfille":
+            const $filleAvecBallon = $(".filleavecballon");
+            const $filleSansBallon = $(".fillesansballon");
+            const $ballon = $(".ballon");
+            const $boutonFille =  $("#boutonfille");
             this.parametres.compteurBoutonFille++;
             if (this.parametres.compteurBoutonFille == 1) {
               $message.text(
@@ -502,15 +535,15 @@ window.addEventListener("DOMContentLoaded", function () {
             }
             if (this.parametres.compteurBoutonFille == 2) {
               $message.text("");
-              var $ballon = $(".ballon");
               $ballon.animate({
                 bottom: "100px",
                 left: "48px",
               });
+              $filleAvecBallon.css("display", "block");
+              $filleSansBallon.css("display", "none");
               this.parametres.compteurBoutonFille = 0;
-              listeBoutonsAction[2].style.display = "none";
+              $boutonFille.css("display", "none");
             }
-
             break;
 
           case "boutonbus":
@@ -527,7 +560,6 @@ window.addEventListener("DOMContentLoaded", function () {
             setTimeout(function () {
               $message.text("");
             }, 4000);
-
             break;
 
           case "boutonpoubelle":
@@ -537,29 +569,18 @@ window.addEventListener("DOMContentLoaded", function () {
             setTimeout(function () {
               $message.text("");
             }, 4000);
-
             break;
 
           case "boutonparasol":
-            var score = 0;
-            for (let i = 0; i < this.parametres.succes[6].length; i++) {
-              score = score + this.parametres.succes[6][i];
-            }
-            if (score < 6) {
-              $message.text(
-                "Bravo! Sticky est désormais libre mais tous les succès n'ont pas été collectés, retentez votre chance !"
-              );
-            } else {
-              $message.text(
-                "Bravo! Sticky est désormais libre et a aquis les succès nécessaires à la poursuite de sa vie rêvée !"
-              );
-            }
-            var $parasol = $("#parasol");
-            var $plagiste = $("#plagiste");
-            var $messagefin = $("#messagefin");
-            var $boutonparasol = $("#boutonparasol");
+            $message.text(
+              "Bravo! Sticky est désormais libre et a aquis les succès nécessaires à la poursuite de sa vie rêvée !"
+            );
+            const $parasol = $("#parasol");
+            const $plagiste = $("#plagiste");
+            const $messagefin = $("#messagefin");
+            const $boutonparasol = $("#boutonparasol");
 
-            $container.animate({ opacity: 0 }, 600);
+            this.parametres.$container.animate({ opacity: 0 }, 600);
             $parasol.animate({ opacity: 0 }, 600);
             $plagiste.animate({ opacity: 1 }, 600);
             $messagefin.animate({ opacity: 1 }, 600);
@@ -569,14 +590,14 @@ window.addEventListener("DOMContentLoaded", function () {
         }
       },
 
-      detectionObstacle: function (increment) {
-        if (listeDesObstacles.length > 0) {
-          var extremiteContainer =
-            parseFloat($container.css("left")) +
-            parseFloat($container.css("width"));
+      detectionObstacle: function () {
+        if (this.parametres.listeDesObstacles.length > 0) {
+          const extremiteContainer =
+            parseFloat(this.parametres.$container.css("left")) +
+            parseFloat(this.parametres.$container.css("width"));
 
-          for (let i = 0; i < listeDesObstacles.length; i++) {
-            var obstacle = listeDesObstacles[i];
+          for (let i = 0; i < this.parametres.listeDesObstacles.length; i++) {
+            const obstacle = this.parametres.listeDesObstacles[i];
 
             if (extremiteContainer >= parseFloat(obstacle.style.left) - 20) {
               this.directions.obstacle = true;
@@ -589,14 +610,14 @@ window.addEventListener("DOMContentLoaded", function () {
       },
 
       mouvementSticky: function (position, increment) {
-        var positionActuelleContainer = parseFloat($container.css(position));
+        const positionActuelleContainer = parseFloat(
+          this.parametres.$container.css(position)
+        );
 
         //Test de la position left du container pour ne pas le faire sortir de l'écran à gauche ou à droite
         if (position == "left" && positionActuelleContainer + increment < 10) {
           //Test marge à gauche, on bloque le left au left mini
-          $container.css("left", 10);
-
-          // coordoContainer.bottom = parseFloat($container.css("bottom"));
+          this.parametres.$container.css("left", 10);
         } else {
           if (
             position == "left" &&
@@ -604,64 +625,76 @@ window.addEventListener("DOMContentLoaded", function () {
               screen.width - 0.6 * screen.width
           ) {
             // test marge à droite, on bloque le left au left maxi
-            $container.css(
+            this.parametres.$container.css(
               "left",
               parseFloat(screen.width) - 0.6 * screen.width
             );
-
-            // coordoContainer.bottom = parseFloat($container.css("bottom"));
           } else {
             if (position == "left") {
-              $container.css(position, positionActuelleContainer + increment);
+              this.parametres.$container.css(
+                position,
+                positionActuelleContainer + increment
+              );
             }
           }
         }
 
         switch (position) {
           case "coup":
-            indexImage = 8;
+            this.parametres.indexImage = 8;
             break;
           case "action":
-            indexImage = 9;
+            this.parametres.indexImage = 9;
             break;
           case "etatInitial":
-            indexImage = 0;
+            this.parametres.indexImage = 0;
             increment = "0";
             break;
           case "etatInitialMini":
-            indexImage = 10;
+            this.parametres.indexImage = 10;
             break;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////
         /////////////////// REGLAGE DU CONTAINER ET DU SPRITE EN COURANT ///////////////////
-        ////////////////////////////////////////////////////////////////////////////////////
+
         if (increment != NaN) {
-          $container.css({
-            width: interpos[indexImage].masque.width + "px",
-            height: interpos[indexImage].masque.height + "px",
+          this.parametres.$container.css({
+            width:
+              this.parametres.interpos[this.parametres.indexImage].masque
+                .width + "px",
+            height:
+              this.parametres.interpos[this.parametres.indexImage].masque
+                .height + "px",
           });
 
-          $sprite.css({
-            left: interpos[indexImage].sprite.left + "px",
-            bottom: interpos[indexImage].sprite.bottom + "px",
-            height: interpos[indexImage].sprite.height + "px",
+          this.parametres.$sprite.css({
+            left:
+              this.parametres.interpos[this.parametres.indexImage].sprite.left +
+              "px",
+            bottom:
+              this.parametres.interpos[this.parametres.indexImage].sprite
+                .bottom + "px",
+            height:
+              this.parametres.interpos[this.parametres.indexImage].sprite
+                .height + "px",
           });
         }
 
-        indexImage++;
-        if (indexImage == indexImageMaxi) {
-          indexImage = indexImageMini;
+        this.parametres.indexImage++;
+        if (this.parametres.indexImage >= this.parametres.indexImageMaxi) {
+          this.parametres.indexImage = this.parametres.indexImageMini;
         }
       },
 
       avancementDecor: function (increment) {
         if (
-          parseFloat(decor_mobile[0].style.left) + increment <= 0 &&
-          parseFloat(decor_mobile[0].style.left) + increment > -4600
+          parseFloat(this.parametres.decor_mobile[0].style.left) + increment <=
+            0 &&
+          parseFloat(this.parametres.decor_mobile[0].style.left) + increment >
+            -4600
         ) {
-          for (let element of decor_mobile) {
-            var nouveauLeft = parseFloat(element.style.left) + increment;
+          for (let element of this.parametres.decor_mobile) {
+            const nouveauLeft = parseFloat(element.style.left) + increment;
             element.style.left = nouveauLeft + "px";
           }
         }
@@ -671,7 +704,7 @@ window.addEventListener("DOMContentLoaded", function () {
         ///////// ALLER A GAUCHE /////////////
         if (this.directions.gauche) {
           if (this.parametres.introDuJeu == false) {
-            $container.addClass("containerinverse");
+            this.parametres.$container.addClass("containerinverse");
             this.detectionObstacle();
             this.mouvementSticky("left", -13);
             this.avancementDecor(17);
@@ -718,7 +751,7 @@ window.addEventListener("DOMContentLoaded", function () {
         if (this.directions.coup) {
           if (this.parametres.introDuJeu == false) {
             this.mouvementSticky("coup", NaN);
-            var indexObstacle = this.detectionObstacle();
+            const indexObstacle = this.detectionObstacle();
 
             if (this.directions.obstacle == true) {
               this.gestionDesCoups(indexObstacle);
@@ -730,10 +763,15 @@ window.addEventListener("DOMContentLoaded", function () {
       // fin du moteur animations
 
       start: function () {
-        var ici = this;
+        this.declarationDesVariables();
+        this.initialiseSticky(10);
+        this.animations();
+        const ici = this;
+
+        //////////////////////////// EVENEMENT KEYDOWN //////////////////////////
         window.addEventListener("keydown", function (event) {
           ici.directions.etatInitial = false;
-          var codeTouche = event.keyCode;
+          const codeTouche = event.keyCode;
 
           switch (codeTouche) {
             case 37:
@@ -751,11 +789,11 @@ window.addEventListener("DOMContentLoaded", function () {
             case 39:
               if (ici.parametres.introDuJeu == true) {
                 // Chronométrage du temps d'appui sur la touce flèche droite:
-                var dateAppui = new Date();
+                const dateAppui = new Date();
                 if (isNaN(ici.parametres.debutTimerIntro)) {
                   ici.parametres.debutTimerIntro = dateAppui.getTime();
                 } else {
-                  var dateActuelle = new Date();
+                  const dateActuelle = new Date();
                   ici.parametres.currentTimerIntro = dateActuelle.getTime();
                 }
                 ici.parametres.chronoIntro =
@@ -763,11 +801,16 @@ window.addEventListener("DOMContentLoaded", function () {
                   ici.parametres.debutTimerIntro;
 
                 // Check des clous à colorer en fonction du temps d'appui
-                for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
+                for (
+                  let i = 0;
+                  i < ici.parametres.listeImagesPanneauPieton.length;
+                  i++
+                ) {
                   if (
                     ici.parametres.chronoIntro > ici.parametres.tempoClous[i]
                   ) {
-                    listeImagesPanneauPieton[i].style.zIndex = i + 1;
+                    ici.parametres.listeImagesPanneauPieton[i].style.zIndex =
+                      i + 1;
                   }
                 }
 
@@ -808,14 +851,11 @@ window.addEventListener("DOMContentLoaded", function () {
           }
         });
 
+        /////////////////////////////// EVENEMENT KEYUP ///////////////////////////////
+
         window.addEventListener("keyup", function (event) {
           ici.parametres.debutTimerIntro = NaN;
-
-          if (ici.parametres.autorisationInit == true) {
-            ici.directions.sortiePanneauEnCours = false;
-          }
-
-          $container.removeClass("containerinverse");
+          ici.parametres.$container.removeClass("containerinverse");
           if (
             ici.parametres.introDuJeu == true &&
             ici.parametres.chronoIntro > ici.parametres.delaiFinIntro
@@ -827,7 +867,6 @@ window.addEventListener("DOMContentLoaded", function () {
           switch (codeTouche) {
             case 37:
               ici.directions.gauche = false;
-              ici.directions.derniere = "gauche";
 
               if (!ici.directions.droite) {
                 ici.directions.etatInitial = true;
@@ -835,7 +874,6 @@ window.addEventListener("DOMContentLoaded", function () {
 
               break;
             case 39:
-              ici.directions.derniere = "droite";
               if (ici.parametres.introDuJeu == true) {
                 if (
                   ici.parametres.chronoIntro <= ici.parametres.delaiFinIntro
@@ -845,44 +883,52 @@ window.addEventListener("DOMContentLoaded", function () {
                   ici.parametres.currentTimerIntro = NaN;
                   ici.parametres.chronoIntro = NaN;
                   //Réinitialisation de l'affichage du panneau
-                  for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
-                    listeImagesPanneauPieton[i].style.zIndex = 1;
+                  for (
+                    let i = 0;
+                    i < ici.parametres.listeImagesPanneauPieton.length;
+                    i++
+                  ) {
+                    ici.parametres.listeImagesPanneauPieton[i].style.zIndex = 1;
                   }
 
-                  listeImagesPanneauPieton[0].style.zIndex = 2;
+                  ici.parametres.listeImagesPanneauPieton[0].style.zIndex = 2;
                 }
 
                 //fin lorsqu'on a passé + de 3sec sur la flèche de droite
                 if (ici.parametres.chronoIntro > ici.parametres.delaiFinIntro) {
                   //Réinitialisation de l'affichage du panneau
-                  for (let i = 0; i < listeImagesPanneauPieton.length; i++) {
-                    listeImagesPanneauPieton[i].style.zIndex = 1;
+                  for (
+                    let i = 0;
+                    i < ici.parametres.listeImagesPanneauPieton.length;
+                    i++
+                  ) {
+                    ici.parametres.listeImagesPanneauPieton[i].style.zIndex = 1;
                   }
-                  listeImagesPanneauPieton[0].style.zIndex = 2;
+                  ici.parametres.listeImagesPanneauPieton[0].style.zIndex = 2;
 
                   // Passage sur le sprite image run8mini:
 
                   // Lancement de l'animation de sortie de panneau:
-                  var angle = (75 * Math.PI) / 180;
-                  var vitesseInitiale = 60;
-                  var gravite = 15;
-                  var x = 0;
+                  const angle = (75 * Math.PI) / 180;
+                  const vitesseInitiale = 60;
+                  const gravite = 15;
+                  let x = 0;
                   ici.directions.sortiePanneauEnCours = true;
                   ici.attributionSucces(0);
-                  var $message = $("#message");
+                  const $message = $("#message");
                   $message.text("");
-                  var sautPanneau = setInterval(function () {
-                    $container.css({
-                      left: interpos[17].masque.left,
-                      bottom: interpos[17].masque.bottom,
-                      width: interpos[17].masque.width,
-                      height: interpos[17].masque.height,
+                  const sautPanneau = setInterval(function () {
+                    ici.parametres.$container.css({
+                      left: ici.parametres.interpos[17].masque.left,
+                      bottom: ici.parametres.interpos[17].masque.bottom,
+                      width: ici.parametres.interpos[17].masque.width,
+                      height: ici.parametres.interpos[17].masque.height,
                     });
 
-                    $sprite.css({
-                      left: interpos[17].sprite.left,
-                      bottom: interpos[17].sprite.bottom,
-                      height: interpos[17].sprite.height,
+                    ici.parametres.$sprite.css({
+                      left: ici.parametres.interpos[17].sprite.left,
+                      bottom: ici.parametres.interpos[17].sprite.bottom,
+                      height: ici.parametres.interpos[17].sprite.height,
                     });
 
                     z =
@@ -893,52 +939,51 @@ window.addEventListener("DOMContentLoaded", function () {
                         (1 + Math.pow(Math.tan(angle), 2)) +
                         x * Math.tan(angle));
 
-                    $container.css({
+                    ici.parametres.$container.css({
                       bottom: z + "px",
                       left: 50 + x + "px",
                     });
                     x++;
-                    if (z < parseFloat($hauteurSol)) {
+                    if (z < parseFloat($("#sol").css("height"))) {
                       clearInterval(sautPanneau);
                       ici.directions.sortiePanneauEnCours = false;
                       // Passage sur le sprite image etatinitial mini:
-                      $container.css({
+                      ici.parametres.$container.css({
                         left: 50 + x + "px",
-                        bottom: parseFloat($hauteurSol) + "px",
-                        width: interpos[10].masque.width,
-                        height: interpos[10].masque.height,
+                        bottom: parseFloat($("#sol").css("height")) + "px",
+                        width: ici.parametres.interpos[10].masque.width,
+                        height: ici.parametres.interpos[10].masque.height,
                       });
-                      $sprite.css({
-                        left: interpos[10].sprite.left,
-                        bottom: interpos[10].sprite.bottom,
-                        height: interpos[10].sprite.height,
+                      ici.parametres.$sprite.css({
+                        left: ici.parametres.interpos[10].sprite.left,
+                        bottom: ici.parametres.interpos[10].sprite.bottom,
+                        height: ici.parametres.interpos[10].sprite.height,
                       });
 
-                      $sprite.animate({
-                        height: interpos[00].sprite.height,
-                        left: interpos[00].sprite.left,
-                        bottom: interpos[00].sprite.bottom,
+                      ici.parametres.$sprite.animate({
+                        height: ici.parametres.interpos[00].sprite.height,
+                        left: ici.parametres.interpos[00].sprite.left,
+                        bottom: ici.parametres.interpos[00].sprite.bottom,
                         duration: 10,
                       });
 
-                      $container.animate({
-                        height: interpos[00].masque.height,
-                        width: interpos[00].masque.width,
-                        bottom: interpos[00].masque.bottom,
+                      ici.parametres.$container.animate({
+                        height: ici.parametres.interpos[00].masque.height,
+                        width: ici.parametres.interpos[00].masque.width,
+                        bottom: ici.parametres.interpos[00].masque.bottom,
                         duration: 10,
                       });
 
-                      indexImage = 0;
-                      indexImageMini = 1;
-                      indexImageMaxi = 7;
+                      ici.parametres.indexImage = 0;
+                      ici.parametres.indexImageMini = 1;
+                      ici.parametres.indexImageMaxi = 7;
                     }
                   }, 4);
 
                   ici.parametres.debutTimerIntro = NaN;
                   ici.parametres.currentTimerIntro = NaN;
 
-                  initialiseSticky(indexImage);
-
+                  ici.initialiseSticky(ici.parametres.indexImage);
                   ici.parametres.introDuJeu = false;
                 }
               }
@@ -990,62 +1035,47 @@ window.addEventListener("DOMContentLoaded", function () {
           }
         });
 
-        var jeu = window.setInterval(function () {
+        ///////////////////////// EVENEMENT TAG SUR LE BUS /////////////////////////
+
+        const $tag = $("#tag");
+        const $bus = $("#bus");
+        let $tagOpacity = $tag.css("opacity");
+
+        $bus.mousemove(function (event) {
+          $tag.css("opacity", $tagOpacity);
+
+          if ($tagOpacity > 0.3) {
+            monJeu.attributionSucces(2);
+          }
+          $tagOpacity = parseFloat($tagOpacity) + 0.004;
+        });
+
+        const jeu = window.setInterval(function () {
           ici.leMoteurPourLesAnimations(0);
           if (ici.parametres.finDuJeu) {
             clearInterval(jeu);
           }
-        }, timing);
+        }, 60);
       },
     };
 
     monJeu.start();
-    ////////////////////////////////////////////////////////////////////////
-    //////////////////////// GESTION DES ANIMATIONS ////////////////////////
-    ////////////////////////////////////////////////////////////////////////
-
-    /////////////////////////// BOUTONS D'ACTION ///////////////////////////
-    var $bouton = $("button");
-    setInterval(function () {
-      $bouton.animate({
-        opacity: "0",
-      });
-      $bouton.animate({
-        opacity: "1",
-      });
-    }, 1);
-
-    ///////////////////////////// FEU DE VOITURE /////////////////////////////
-
-    var $feu = $(".feu");
-    var $widthFeu = parseFloat($feu.css("width"));
-    var $leftFeu = parseFloat($feu.css("left"));
-    var $heightFeu = parseFloat($feu.css("height"));
-    setInterval(function () {
-      let facteur = parseInt(100 * Math.random()) / 100;
-      $feu.css({
-        left:
-          210 + ($leftFeu - $widthFeu / 2) - ($widthFeu * facteur) / 2 + "px",
-        width: $widthFeu * facteur + "px",
-        height: $heightFeu * facteur + "px",
-      });
-    }, 100);
 
     ////////////////////////////////////////////////////////////////////////
     //////////////////////// GESTION DES EVENEMENTS ////////////////////////
     ////////////////////////////////////////////////////////////////////////
-    var $tag = $("#tag");
-    var $bus = $("#bus");
+    // var $tag = $("#tag");
+    // var $bus = $("#bus");
 
-    var $tagOpacity = $tag.css("opacity");
+    // var $tagOpacity = $tag.css("opacity");
 
-    $bus.mousemove(function (event) {
-      $tag.css("opacity", $tagOpacity);
+    // $bus.mousemove(function (event) {
+    //   $tag.css("opacity", $tagOpacity);
 
-      if ($tagOpacity > 0.3) {
-        monJeu.attributionSucces(2);
-      }
-      $tagOpacity = parseFloat($tagOpacity) + 0.004;
-    });
+    //   if ($tagOpacity > 0.3) {
+    //     monJeu.attributionSucces(2);
+    //   }
+    //   $tagOpacity = parseFloat($tagOpacity) + 0.004;
+    // });
   });
 }); //  fin du DOM Content loaded

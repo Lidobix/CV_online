@@ -288,14 +288,14 @@ button {
   left: 2325px;
 }
 #boutonfille {
-  left: 3000px;
+  left: 2965px;
   display: none;
 }
 #boutonpoubelle {
   left: 3470px;
 }
 #boutonparasol {
-  left: 5282px;
+  left: 5272px;
 }
 
 /***************************************************************
@@ -590,7 +590,6 @@ button {
   position: relative;
   display: none;
   height: 110px;
-  display: none;
 }
 
 .ballon {
