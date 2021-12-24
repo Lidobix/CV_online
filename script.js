@@ -300,16 +300,12 @@ window.addEventListener("DOMContentLoaded", function () {
           document.getElementsByClassName("obstacle");
 
         for (let i = 0; i < this.parametres.listeDesObstacles.length; i++) {
-          const styleObstacle = window.getComputedStyle(
-            this.parametres.listeDesObstacles[i]
-          );
-          this.parametres.listeDesObstacles[i].style.left = styleObstacle.left;
-          this.parametres.listeDesObstacles[i].style.width =
-            styleObstacle.width;
-          this.parametres.listeDesObstacles[i].style.height =
-            styleObstacle.height;
-          this.parametres.listeDesObstacles[i].style.opacity =
-            styleObstacle.opacity;
+          const obstacle = this.parametres.listeDesObstacles[i];
+          const styleObstacle = window.getComputedStyle(obstacle);
+          obstacle.style.left = styleObstacle.left;
+          obstacle.style.width = styleObstacle.width;
+          obstacle.style.height = styleObstacle.height;
+          obstacle.style.opacity = styleObstacle.opacity;
         }
 
         /////// DEFINITION DE LA LISTE DES CALQUES DU PANNEAU PIETON ///////
@@ -326,7 +322,6 @@ window.addEventListener("DOMContentLoaded", function () {
           width: this.parametres.interpos[index].masque.width,
           height: this.parametres.interpos[index].masque.height,
         });
-
         this.parametres.$sprite.css({
           left: this.parametres.interpos[index].sprite.left,
           bottom: this.parametres.interpos[index].sprite.bottom,
@@ -414,7 +409,7 @@ window.addEventListener("DOMContentLoaded", function () {
           }
 
           if (indexObstacleATraiter == 1) {
-            const $boutonFille =  $("#boutonfille");
+            const $boutonFille = $("#boutonfille");
             const $ballon = $(".ballon");
             const $fille = $("#filleauballon");
             const $filleAvecBallon = $(".filleavecballon");
@@ -425,7 +420,7 @@ window.addEventListener("DOMContentLoaded", function () {
                 bottom: "3000px",
                 left: "6000px",
               });
-              
+
               $filleAvecBallon.css("display", "none");
               $filleSansBallon.css("display", "block");
 
@@ -525,7 +520,7 @@ window.addEventListener("DOMContentLoaded", function () {
             const $filleAvecBallon = $(".filleavecballon");
             const $filleSansBallon = $(".fillesansballon");
             const $ballon = $(".ballon");
-            const $boutonFille =  $("#boutonfille");
+            const $boutonFille = $("#boutonfille");
             this.parametres.compteurBoutonFille++;
             if (this.parametres.compteurBoutonFille == 1) {
               $message.text(
@@ -761,6 +756,150 @@ window.addEventListener("DOMContentLoaded", function () {
         }
       },
       // fin du moteur animations
+      debutIntroDuJeu(contexte) {
+        // Chronométrage du temps d'appui sur la touce flèche droite:
+        const dateAppui = new Date();
+        if (isNaN(contexte.parametres.debutTimerIntro)) {
+          contexte.parametres.debutTimerIntro = dateAppui.getTime();
+        } else {
+          const dateActuelle = new Date();
+          contexte.parametres.currentTimerIntro = dateActuelle.getTime();
+        }
+        contexte.parametres.chronoIntro =
+          contexte.parametres.currentTimerIntro -
+          contexte.parametres.debutTimerIntro;
+
+        // Check des clous à colorer en fonction du temps d'appui
+        for (
+          let i = 0;
+          i < contexte.parametres.listeImagesPanneauPieton.length;
+          i++
+        ) {
+          if (
+            contexte.parametres.chronoIntro > contexte.parametres.tempoClous[i]
+          ) {
+            contexte.parametres.listeImagesPanneauPieton[i].style.zIndex =
+              i + 1;
+          }
+        }
+
+        contexte.directions.droite = true;
+      },
+
+      finIntroDuJeu(contexte) {
+        if (
+          contexte.parametres.chronoIntro <= contexte.parametres.delaiFinIntro
+        ) {
+          // Si le joueur lève la touche avant la fin de l'intro
+          contexte.parametres.debutTimerIntro = NaN; // Réinitialisation des tempos
+          contexte.parametres.currentTimerIntro = NaN;
+          contexte.parametres.chronoIntro = NaN;
+          //Réinitialisation de l'affichage du panneau
+          for (
+            let i = 0;
+            i < contexte.parametres.listeImagesPanneauPieton.length;
+            i++
+          ) {
+            contexte.parametres.listeImagesPanneauPieton[i].style.zIndex = 1;
+          }
+
+          contexte.parametres.listeImagesPanneauPieton[0].style.zIndex = 2;
+        }
+
+        //fin lorsqu'on a passé + de 3sec sur la flèche de droite
+        if (
+          contexte.parametres.chronoIntro > contexte.parametres.delaiFinIntro
+        ) {
+          //Réinitialisation de l'affichage du panneau
+          for (
+            let i = 0;
+            i < contexte.parametres.listeImagesPanneauPieton.length;
+            i++
+          ) {
+            contexte.parametres.listeImagesPanneauPieton[i].style.zIndex = 1;
+          }
+          contexte.parametres.listeImagesPanneauPieton[0].style.zIndex = 2;
+
+          // Passage sur le sprite image run8mini:
+
+          // Lancement de l'animation de sortie de panneau:
+          const angle = (75 * Math.PI) / 180;
+          const vitesseInitiale = 60;
+          const gravite = 15;
+          let x = 0;
+          contexte.directions.sortiePanneauEnCours = true;
+          contexte.attributionSucces(0);
+          $("#message").text("");
+
+          const sautPanneau = setInterval(function () {
+            contexte.parametres.$container.css({
+              left: contexte.parametres.interpos[17].masque.left,
+              bottom: contexte.parametres.interpos[17].masque.bottom,
+              width: contexte.parametres.interpos[17].masque.width,
+              height: contexte.parametres.interpos[17].masque.height,
+            });
+
+            contexte.parametres.$sprite.css({
+              left: contexte.parametres.interpos[17].sprite.left,
+              bottom: contexte.parametres.interpos[17].sprite.bottom,
+              height: contexte.parametres.interpos[17].sprite.height,
+            });
+
+            z =
+              207 +
+              (-0.5 *
+                ((gravite / Math.pow(vitesseInitiale, 2)) * Math.pow(x, 2)) *
+                (1 + Math.pow(Math.tan(angle), 2)) +
+                x * Math.tan(angle));
+
+            contexte.parametres.$container.css({
+              bottom: z + "px",
+              left: 50 + x + "px",
+            });
+            x++;
+            if (z < parseFloat($("#sol").css("height"))) {
+              clearInterval(sautPanneau);
+              contexte.directions.sortiePanneauEnCours = false;
+              // Passage sur le sprite image etatinitial mini:
+              contexte.parametres.$container.css({
+                left: 50 + x + "px",
+                bottom: parseFloat($("#sol").css("height")) + "px",
+                width: contexte.parametres.interpos[10].masque.width,
+                height: contexte.parametres.interpos[10].masque.height,
+              });
+              contexte.parametres.$sprite.css({
+                left: contexte.parametres.interpos[10].sprite.left,
+                bottom: contexte.parametres.interpos[10].sprite.bottom,
+                height: contexte.parametres.interpos[10].sprite.height,
+              });
+
+              contexte.parametres.$sprite.animate({
+                height: contexte.parametres.interpos[00].sprite.height,
+                left: contexte.parametres.interpos[00].sprite.left,
+                bottom: contexte.parametres.interpos[00].sprite.bottom,
+                duration: 10,
+              });
+
+              contexte.parametres.$container.animate({
+                height: contexte.parametres.interpos[00].masque.height,
+                width: contexte.parametres.interpos[00].masque.width,
+                bottom: contexte.parametres.interpos[00].masque.bottom,
+                duration: 10,
+              });
+
+              contexte.parametres.indexImage = 0;
+              contexte.parametres.indexImageMini = 1;
+              contexte.parametres.indexImageMaxi = 7;
+            }
+          }, 4);
+
+          this.parametres.debutTimerIntro = NaN;
+          this.parametres.currentTimerIntro = NaN;
+
+          this.initialiseSticky(this.parametres.indexImage);
+          this.parametres.introDuJeu = false;
+        }
+      },
 
       start: function () {
         this.declarationDesVariables();
@@ -788,33 +927,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
             case 39:
               if (ici.parametres.introDuJeu == true) {
-                // Chronométrage du temps d'appui sur la touce flèche droite:
-                const dateAppui = new Date();
-                if (isNaN(ici.parametres.debutTimerIntro)) {
-                  ici.parametres.debutTimerIntro = dateAppui.getTime();
-                } else {
-                  const dateActuelle = new Date();
-                  ici.parametres.currentTimerIntro = dateActuelle.getTime();
-                }
-                ici.parametres.chronoIntro =
-                  ici.parametres.currentTimerIntro -
-                  ici.parametres.debutTimerIntro;
-
-                // Check des clous à colorer en fonction du temps d'appui
-                for (
-                  let i = 0;
-                  i < ici.parametres.listeImagesPanneauPieton.length;
-                  i++
-                ) {
-                  if (
-                    ici.parametres.chronoIntro > ici.parametres.tempoClous[i]
-                  ) {
-                    ici.parametres.listeImagesPanneauPieton[i].style.zIndex =
-                      i + 1;
-                  }
-                }
-
-                ici.directions.droite = true;
+                ici.debutIntroDuJeu(ici);
               }
               if (
                 !ici.directions.gauche &&
@@ -824,7 +937,6 @@ window.addEventListener("DOMContentLoaded", function () {
               ) {
                 ici.directions.droite = true;
               }
-
               break;
 
             case 13:
@@ -846,7 +958,6 @@ window.addEventListener("DOMContentLoaded", function () {
               ) {
                 ici.directions.coup = true;
               }
-
               break;
           }
         });
@@ -875,117 +986,7 @@ window.addEventListener("DOMContentLoaded", function () {
               break;
             case 39:
               if (ici.parametres.introDuJeu == true) {
-                if (
-                  ici.parametres.chronoIntro <= ici.parametres.delaiFinIntro
-                ) {
-                  // Si le joueur lève la che la touche avant la fin de l'intro
-                  ici.parametres.debutTimerIntro = NaN; // Réinitialisation des tempos
-                  ici.parametres.currentTimerIntro = NaN;
-                  ici.parametres.chronoIntro = NaN;
-                  //Réinitialisation de l'affichage du panneau
-                  for (
-                    let i = 0;
-                    i < ici.parametres.listeImagesPanneauPieton.length;
-                    i++
-                  ) {
-                    ici.parametres.listeImagesPanneauPieton[i].style.zIndex = 1;
-                  }
-
-                  ici.parametres.listeImagesPanneauPieton[0].style.zIndex = 2;
-                }
-
-                //fin lorsqu'on a passé + de 3sec sur la flèche de droite
-                if (ici.parametres.chronoIntro > ici.parametres.delaiFinIntro) {
-                  //Réinitialisation de l'affichage du panneau
-                  for (
-                    let i = 0;
-                    i < ici.parametres.listeImagesPanneauPieton.length;
-                    i++
-                  ) {
-                    ici.parametres.listeImagesPanneauPieton[i].style.zIndex = 1;
-                  }
-                  ici.parametres.listeImagesPanneauPieton[0].style.zIndex = 2;
-
-                  // Passage sur le sprite image run8mini:
-
-                  // Lancement de l'animation de sortie de panneau:
-                  const angle = (75 * Math.PI) / 180;
-                  const vitesseInitiale = 60;
-                  const gravite = 15;
-                  let x = 0;
-                  ici.directions.sortiePanneauEnCours = true;
-                  ici.attributionSucces(0);
-                  const $message = $("#message");
-                  $message.text("");
-                  const sautPanneau = setInterval(function () {
-                    ici.parametres.$container.css({
-                      left: ici.parametres.interpos[17].masque.left,
-                      bottom: ici.parametres.interpos[17].masque.bottom,
-                      width: ici.parametres.interpos[17].masque.width,
-                      height: ici.parametres.interpos[17].masque.height,
-                    });
-
-                    ici.parametres.$sprite.css({
-                      left: ici.parametres.interpos[17].sprite.left,
-                      bottom: ici.parametres.interpos[17].sprite.bottom,
-                      height: ici.parametres.interpos[17].sprite.height,
-                    });
-
-                    z =
-                      207 +
-                      (-0.5 *
-                        ((gravite / Math.pow(vitesseInitiale, 2)) *
-                          Math.pow(x, 2)) *
-                        (1 + Math.pow(Math.tan(angle), 2)) +
-                        x * Math.tan(angle));
-
-                    ici.parametres.$container.css({
-                      bottom: z + "px",
-                      left: 50 + x + "px",
-                    });
-                    x++;
-                    if (z < parseFloat($("#sol").css("height"))) {
-                      clearInterval(sautPanneau);
-                      ici.directions.sortiePanneauEnCours = false;
-                      // Passage sur le sprite image etatinitial mini:
-                      ici.parametres.$container.css({
-                        left: 50 + x + "px",
-                        bottom: parseFloat($("#sol").css("height")) + "px",
-                        width: ici.parametres.interpos[10].masque.width,
-                        height: ici.parametres.interpos[10].masque.height,
-                      });
-                      ici.parametres.$sprite.css({
-                        left: ici.parametres.interpos[10].sprite.left,
-                        bottom: ici.parametres.interpos[10].sprite.bottom,
-                        height: ici.parametres.interpos[10].sprite.height,
-                      });
-
-                      ici.parametres.$sprite.animate({
-                        height: ici.parametres.interpos[00].sprite.height,
-                        left: ici.parametres.interpos[00].sprite.left,
-                        bottom: ici.parametres.interpos[00].sprite.bottom,
-                        duration: 10,
-                      });
-
-                      ici.parametres.$container.animate({
-                        height: ici.parametres.interpos[00].masque.height,
-                        width: ici.parametres.interpos[00].masque.width,
-                        bottom: ici.parametres.interpos[00].masque.bottom,
-                        duration: 10,
-                      });
-
-                      ici.parametres.indexImage = 0;
-                      ici.parametres.indexImageMini = 1;
-                      ici.parametres.indexImageMaxi = 7;
-                    }
-                  }, 4);
-
-                  ici.parametres.debutTimerIntro = NaN;
-                  ici.parametres.currentTimerIntro = NaN;
-
-                  ici.initialiseSticky(ici.parametres.indexImage);
-                  ici.parametres.introDuJeu = false;
-                }
+                ici.finIntroDuJeu(ici);
               }
               ici.directions.droite = false;
 
@@ -1060,22 +1061,5 @@ window.addEventListener("DOMContentLoaded", function () {
     };
 
     monJeu.start();
-
-    ////////////////////////////////////////////////////////////////////////
-    //////////////////////// GESTION DES EVENEMENTS ////////////////////////
-    ////////////////////////////////////////////////////////////////////////
-    // var $tag = $("#tag");
-    // var $bus = $("#bus");
-
-    // var $tagOpacity = $tag.css("opacity");
-
-    // $bus.mousemove(function (event) {
-    //   $tag.css("opacity", $tagOpacity);
-
-    //   if ($tagOpacity > 0.3) {
-    //     monJeu.attributionSucces(2);
-    //   }
-    //   $tagOpacity = parseFloat($tagOpacity) + 0.004;
-    // });
   });
 }); //  fin du DOM Content loaded
