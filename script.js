@@ -522,11 +522,12 @@ window.addEventListener("DOMContentLoaded", function () {
             const $ballon = $(".ballon");
             const $boutonFille = $("#boutonfille");
             this.parametres.compteurBoutonFille++;
-            if (this.parametres.compteurBoutonFille == 1) {
+            if (this.parametres.compteurBoutonFille == 1 && $boutonFille.css('display') == "block") {
               $message.text(
                 "lui rendre son ballon...",
-                this.parametres.compteurBoutonFille
-              );
+                this.parametres.compteurBoutonFille)
+            
+         
             }
             if (this.parametres.compteurBoutonFille == 2) {
               $message.text("");
@@ -551,19 +552,25 @@ window.addEventListener("DOMContentLoaded", function () {
             break;
 
           case "boutonvoitureenfeu":
-            $message.text("Kickez moi cette épave !");
-            setTimeout(function () {
-              $message.text("");
-            }, 4000);
+            const $boutonvoiture = $("#boutonvoitureenfeu");
+            if ($boutonvoiture.css("display") == "block") {
+              $message.text("Kickez moi cette épave !");
+              setTimeout(function () {
+                $message.text("");
+              }, 4000);
+            }
             break;
 
           case "boutonpoubelle":
-            $message.text(
-              "Sticky aime quand c'est propre, aidez le à nettoyer..."
-            );
-            setTimeout(function () {
-              $message.text("");
-            }, 4000);
+            const $boutonpoubelle = $("#boutonpoubelle");
+            if ($boutonpoubelle.css("display") == "block") {
+              $message.text(
+                "Sticky aime quand c'est propre, aidez le à nettoyer..."
+              );
+              setTimeout(function () {
+                $message.text("");
+              }, 4000);
+            }
             break;
 
           case "boutonparasol":
