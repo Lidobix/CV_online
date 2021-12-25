@@ -522,12 +522,14 @@ window.addEventListener("DOMContentLoaded", function () {
             const $ballon = $(".ballon");
             const $boutonFille = $("#boutonfille");
             this.parametres.compteurBoutonFille++;
-            if (this.parametres.compteurBoutonFille == 1 && $boutonFille.css('display') == "block") {
+            if (
+              this.parametres.compteurBoutonFille == 1 &&
+              $boutonFille.css("display") == "block"
+            ) {
               $message.text(
                 "lui rendre son ballon...",
-                this.parametres.compteurBoutonFille)
-            
-         
+                this.parametres.compteurBoutonFille
+              );
             }
             if (this.parametres.compteurBoutonFille == 2) {
               $message.text("");
