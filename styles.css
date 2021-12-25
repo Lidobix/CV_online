@@ -57,18 +57,19 @@ section {
 
 #identite {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 h1 {
-  margin: 15px 0 15px 15px;
+  margin: -3px 0 0 15px;
   font-family: "Righteous";
 }
 
 h5 {
-  align-self: flex-end;
-  margin-bottom: 6px;
-  margin-left: 16px;
+  align-self: flex-start;
+  margin-bottom: 5px;
+  margin-left: 18px;
+  margin-top: -9px;
 }
 #espace_pro {
   display: flex;
@@ -118,11 +119,32 @@ a :visited {
   color: black;
 }
 
+#message_dispo {
+  font-size: 0.5em;
+  position: absolute;
+  background-color: black;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+  top: 400px;
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  display: none;
+}
+
 /***************************************************************
 ******************* DESIGN DE LA ZONE DE JEU *******************
 ***************************************************************/
 #message {
   color: rgb(255, 255, 255);
+  padding: 0;
+  margin: 0;
   top: 5px;
   left: 10px;
   font-size: 0.65em;
@@ -660,3 +682,43 @@ button {
   left: 625px;
   opacity: 0;
 }
+/************************************************************
+***********************  MEDIA QUERY ************************
+************************************************************/
+
+@media (max-width: 1025px) {
+  section,
+  nav {
+    display: none;
+  }
+  #message_dispo {
+    display: block;
+  }
+  #espace_pro {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  .icones {
+    text-align: start;
+  }
+}
+@media (max-height: 650px) {
+  section,
+  nav {
+    display: none;
+  }
+  #message_dispo {
+    display: block;
+  }
+  #espace_pro {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  .icones {
+    text-align: start;
+  }
+} ;
