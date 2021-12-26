@@ -12,7 +12,6 @@
 ******************************************************************/
 :root {
   --hauteur-du-sol: 40px;
-  --facteuragrandissement: 1;
 }
 
 /************************************************************
@@ -476,16 +475,16 @@ button {
 
 .voiture {
   position: absolute;
-  height: calc(100px * var(--facteuragrandissement));
+  height: 100px;
   bottom: 0;
 }
 
 .feu {
   position: absolute;
-  height: calc(200px * var(--facteuragrandissement));
-  width: calc(200px * var(--facteuragrandissement));
-  bottom: calc(70px * var(--facteuragrandissement));
-  left: calc(-13px * var(--facteuragrandissement));
+  height: 200px;
+  width: 200px;
+  bottom: 70px;
+  left: -13px;
 }
 
 /*******************************************************
@@ -493,12 +492,12 @@ button {
 ********************************************************/
 #bus {
   position: absolute;
-  height: calc(270px * var(--facteuragrandissement));
-  bottom: calc(var(--hauteur-du-sol) - 0px);
+  height: 270px;
+  bottom: var(--hauteur-du-sol);
   left: 1400px;
 }
 #bus img:first-of-type {
-  height: calc(270px * var(--facteuragrandissement));
+  height: 270px;
   z-index: 3;
 }
 
@@ -529,10 +528,10 @@ button {
 #logo_ifocop {
   transform: rotate(-10deg);
   position: absolute;
-  width: calc(50px * var(--facteuragrandissement));
-  height: calc(50px * var(--facteuragrandissement));
-  bottom: calc(73px * var(--facteuragrandissement));
-  left: calc(568px * var(--facteuragrandissement));
+  width: 50px;
+  height: 50px;
+  bottom:73px;
+  left: 568px;
   -webkit-transform: rotate(-10deg);
   -moz-transform: rotate(-10deg);
   -ms-transform: rotate(-10deg);
@@ -626,7 +625,7 @@ button {
 #poubelle {
   position: absolute;
   width: 75px;
-  height: calc(100px * var(--facteuragrandissement));
+  height: 100px;
   bottom: calc(var(--hauteur-du-sol) - 2px);
   left: 1100px;
 }
@@ -652,7 +651,7 @@ button {
 
 #findujeu {
   position: absolute;
-  /* height: calc(470px * var(--facteuragrandissement)); */
+
   bottom: calc(var(--hauteur-du-sol) - 2px);
   left: 4700px;
 }
@@ -660,24 +659,24 @@ button {
 #mouton {
   position: absolute;
   bottom: 0;
-  height: calc(60px * var(--facteuragrandissement));
+  height: 60px;
 }
 #ferme {
   position: absolute;
-  height: calc(398px * var(--facteuragrandissement));
+  height: 398px;
 
   bottom: 0;
 }
 #parasol {
   position: absolute;
-  height: calc(173px * var(--facteuragrandissement));
+  height: 173px;
 
   bottom: -12px;
   left: 625px;
 }
 #plagiste {
   position: absolute;
-  height: calc(173px * var(--facteuragrandissement));
+  height: 173px;
   bottom: -12px;
   left: 625px;
   opacity: 0;
@@ -721,4 +720,4 @@ button {
   .icones {
     text-align: start;
   }
-} ;
+}

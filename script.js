@@ -39,6 +39,9 @@ window.addEventListener("DOMContentLoaded", function () {
         $sprite: $("#contenu"),
         compteurRats: 0,
         $hauteurSol: 0,
+        angleDeg: 0,
+        vitesseInitiale: 0,
+        gravite:0,
         interpos: [
           {
             masque: {
@@ -350,6 +353,16 @@ window.addEventListener("DOMContentLoaded", function () {
             break;
           case "Chrome":
             this.parametres.navigateur = "Chrome";
+        }
+
+        if (this.parametres.navigateur == "Firefox") {
+          this.parametres.angleDeg = 84;
+          this.parametres.vitesseInitiale = 115;
+          this.parametres.gravite = 65;
+        } else {
+          this.parametres.angleDeg = 75;
+          this.parametres.vitesseInitiale = 60;
+          this.parametres.gravite = 15;
         }
       },
 
@@ -856,9 +869,11 @@ window.addEventListener("DOMContentLoaded", function () {
           // Passage sur le sprite image run8mini:
 
           // Lancement de l'animation de sortie de panneau:
-          const angle = (75 * Math.PI) / 180;
-          const vitesseInitiale = 60;
-          const gravite = 15;
+
+          const angleRad = (contexte.parametres.angleDeg * Math.PI) / 180;
+          const vitesseInitiale = contexte.parametres.vitesseInitiale;
+
+          const gravite = contexte.parametres.gravite;
           let x = 0;
           contexte.directions.sortiePanneauEnCours = true;
           contexte.attributionSucces(0);
@@ -882,8 +897,8 @@ window.addEventListener("DOMContentLoaded", function () {
               207 +
               (-0.5 *
                 ((gravite / Math.pow(vitesseInitiale, 2)) * Math.pow(x, 2)) *
-                (1 + Math.pow(Math.tan(angle), 2)) +
-                x * Math.tan(angle));
+                (1 + Math.pow(Math.tan(angleRad), 2)) +
+                x * Math.tan(angleRad));
 
             contexte.parametres.$container.css({
               bottom: z + "px",
@@ -1078,14 +1093,13 @@ window.addEventListener("DOMContentLoaded", function () {
         const $bombe = $("#bombe");
         let $tagOpacity = $tag.css("opacity");
 
-
         $bus.mousemove(function (event) {
           $tag.css("opacity", $tagOpacity);
-          if (monJeu.parametres.navigateur != "Firefox" ){ 
-             $bombe.css("left", event.pageX + "px");
-          $bombe.css("bottom", screen.height - event.pageY - 180 + "px");
-        }
-        
+          if (monJeu.parametres.navigateur != "Firefox") {
+            $bombe.css("left", event.pageX + "px");
+            $bombe.css("bottom", screen.height - event.pageY - 180 + "px");
+          }
+
           if ($tagOpacity > 0.3) {
             monJeu.attributionSucces(2);
           }
