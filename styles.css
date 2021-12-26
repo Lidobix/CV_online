@@ -497,7 +497,6 @@ button {
   height: calc(270px * var(--facteuragrandissement));
   bottom: calc(var(--hauteur-du-sol) - 0px);
   left: 1400px;
-  /* display: none; */
 }
 #bus img:first-of-type {
   height: calc(270px * var(--facteuragrandissement));
@@ -556,11 +555,13 @@ button {
 .bombe_decor {
   position: absolute;
   height: 30px;
+  
 }
 #bombe {
   height: 30px;
   position: absolute;
-  display: none;
+  left:1450px;
+  bottom: var(--hauteur-du-sol);
 }
 
 #bombe_1 {

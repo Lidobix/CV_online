@@ -1051,8 +1051,17 @@ window.addEventListener("DOMContentLoaded", function () {
         const $bus = $("#bus");
         let $tagOpacity = $tag.css("opacity");
 
+        $bus.mouseout(function () {
+          const $bombe = $("#bombe");
+          $bombe.css("left", $("#boutonbus").css("left"));
+          $bombe.css("bottom", $("#sol").css("height"));
+        });
+
         $bus.mousemove(function (event) {
           $tag.css("opacity", $tagOpacity);
+          const $bombe = $("#bombe");
+          $bombe.css("left", event.pageX + "px");
+          $bombe.css("bottom", screen.height - event.pageY - 180 + "px");
 
           if ($tagOpacity > 0.3) {
             monJeu.attributionSucces(2);
