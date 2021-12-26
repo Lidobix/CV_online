@@ -132,7 +132,6 @@ a :visited {
   margin-right: 15px;
   border-radius: 20px;
   -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
   display: none;
@@ -292,7 +291,7 @@ button {
   -webkit-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
-  z-index: 3;
+  z-index: 2;
 }
 #boutonaffiche {
   left: 269px;
@@ -500,6 +499,7 @@ button {
 }
 #bus img:first-of-type {
   height: calc(270px * var(--facteuragrandissement));
+  z-index: 3;
 }
 
 #logo_company {
@@ -555,12 +555,11 @@ button {
 .bombe_decor {
   position: absolute;
   height: 30px;
-  
 }
 #bombe {
   height: 30px;
   position: absolute;
-  left:1450px;
+  left: 1450px;
   bottom: var(--hauteur-du-sol);
 }
 

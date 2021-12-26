@@ -22,6 +22,7 @@ window.addEventListener("DOMContentLoaded", function () {
         delaiFinIntro: 1100,
         autorisationInit: false,
         introDuJeu: true,
+        navigateur: "",
         compteurBoutonFille: 0,
         compteurActionFille: 0,
         apparitionBoutonFille: false,
@@ -274,7 +275,7 @@ window.addEventListener("DOMContentLoaded", function () {
         ],
       },
 
-      declarationDesVariables: function () {
+      initialisationDesVariables: function () {
         /////////// DEFINITION DE LA LISTE DES BOUTONS D'ACTION ///////////
 
         this.parametres.listeBoutonsAction =
@@ -327,6 +328,29 @@ window.addEventListener("DOMContentLoaded", function () {
           bottom: this.parametres.interpos[index].sprite.bottom,
           height: this.parametres.interpos[index].sprite.height,
         });
+
+        /////////////////////// DEFINITION DU NAVIGATEUR ///////////////////////
+
+        const refNavigateur = window.navigator.userAgent;
+        const tableauNavigateur = ["Firefox", "Edg", "Chrome"];
+        let i = -1;
+        let testNavigateur = false;
+
+        while (testNavigateur == false) {
+          i++;
+          testNavigateur = refNavigateur.includes(tableauNavigateur[i]);
+        }
+
+        switch (tableauNavigateur[i]) {
+          case "Firefox":
+            this.parametres.navigateur = "Firefox";
+            break;
+          case "Edg":
+            this.parametres.navigateur = "Edge";
+            break;
+          case "Chrome":
+            this.parametres.navigateur = "Chrome";
+        }
       },
 
       animations: function () {
@@ -911,7 +935,7 @@ window.addEventListener("DOMContentLoaded", function () {
       },
 
       start: function () {
-        this.declarationDesVariables();
+        this.initialisationDesVariables();
         this.initialiseSticky(10);
         this.animations();
         const ici = this;
@@ -927,7 +951,8 @@ window.addEventListener("DOMContentLoaded", function () {
                 !ici.directions.droite &&
                 !ici.directions.action &&
                 !ici.directions.coup &&
-                !ici.parametres.introDuJeu
+                !ici.parametres.introDuJeu &&
+                !ici.directions.sortiePanneauEnCours
               ) {
                 ici.directions.gauche = true;
               }
@@ -942,7 +967,8 @@ window.addEventListener("DOMContentLoaded", function () {
                 !ici.directions.gauche &&
                 !ici.directions.coup &&
                 !ici.directions.action &&
-                !ici.parametres.introDuJeu
+                !ici.parametres.introDuJeu &&
+                !ici.directions.sortiePanneauEnCours
               ) {
                 ici.directions.droite = true;
               }
@@ -1049,24 +1075,26 @@ window.addEventListener("DOMContentLoaded", function () {
 
         const $tag = $("#tag");
         const $bus = $("#bus");
+        const $bombe = $("#bombe");
         let $tagOpacity = $tag.css("opacity");
 
-        $bus.mouseout(function () {
-          const $bombe = $("#bombe");
-          $bombe.css("left", $("#boutonbus").css("left"));
-          $bombe.css("bottom", $("#sol").css("height"));
-        });
 
         $bus.mousemove(function (event) {
           $tag.css("opacity", $tagOpacity);
-          const $bombe = $("#bombe");
-          $bombe.css("left", event.pageX + "px");
+          if (monJeu.parametres.navigateur != "Firefox" ){ 
+             $bombe.css("left", event.pageX + "px");
           $bombe.css("bottom", screen.height - event.pageY - 180 + "px");
-
+        }
+        
           if ($tagOpacity > 0.3) {
             monJeu.attributionSucces(2);
           }
           $tagOpacity = parseFloat($tagOpacity) + 0.004;
+        });
+
+        $bus.mouseout(function () {
+          $bombe.css("left", $("#boutonbus").css("left"));
+          $bombe.css("bottom", $("#sol").css("height"));
         });
 
         const jeu = window.setInterval(function () {
