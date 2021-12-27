@@ -663,12 +663,12 @@ window.addEventListener("DOMContentLoaded", function () {
           if (
             position == "left" &&
             positionActuelleContainer + increment >
-              screen.width - 0.5 * screen.width
+              screen.width - 0.55 * screen.width
           ) {
             // test marge à droite, on bloque le left au left maxi
             this.parametres.$container.css(
               "left",
-              parseFloat(screen.width) - 0.5 * screen.width
+              parseFloat(screen.width) - 0.55 * screen.width
             );
           } else {
             if (position == "left") {

@@ -262,7 +262,7 @@ a :visited {
   color: white;
   background-color: black;
   text-align: center;
-  left: 885px;
+  left: 830px;
   bottom: calc(var(--hauteur-du-sol) + 50px);
   width: 420px;
   font-size: 0.65em;
@@ -530,7 +530,7 @@ button {
   position: absolute;
   width: 50px;
   height: 50px;
-  bottom:73px;
+  bottom: 73px;
   left: 568px;
   -webkit-transform: rotate(-10deg);
   -moz-transform: rotate(-10deg);
@@ -651,7 +651,6 @@ button {
 
 #findujeu {
   position: absolute;
-
   bottom: calc(var(--hauteur-du-sol) - 2px);
   left: 4700px;
 }
@@ -685,6 +684,18 @@ button {
 ***********************  MEDIA QUERY ************************
 ************************************************************/
 
+@media (max-width: 1921px) {
+  #messagefin {
+    left: 826px;
+    bottom: calc(var(--hauteur-du-sol) + 50px);
+  }
+}
+@media (max-width: 1441px) {
+  #messagefin {
+    left: 766px;
+    bottom: calc(var(--hauteur-du-sol) + 206px);
+  }
+}
 @media (max-width: 1025px) {
   section,
   nav {
