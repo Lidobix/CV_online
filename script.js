@@ -1,6 +1,6 @@
-"use-strict";
+'use-strict';
 
-window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener('DOMContentLoaded', function () {
   $(function () {
     const monJeu = {
       directions: {
@@ -22,11 +22,11 @@ window.addEventListener("DOMContentLoaded", function () {
         delaiFinIntro: 1100,
         autorisationInit: false,
         introDuJeu: true,
-        navigateur: "",
+        navigateur: '',
         compteurBoutonFille: 0,
         compteurActionFille: 0,
         apparitionBoutonFille: false,
-        succes: ["#html_pic", "#css", "#js", "#jquery", "#node", "#mongo"],
+        succes: ['#html_pic', '#css', '#js', '#jquery', '#node', '#mongo'],
         finDuJeu: false,
         listeBoutonsAction: [],
         decor_mobile: [],
@@ -35,13 +35,13 @@ window.addEventListener("DOMContentLoaded", function () {
         indexImage: 10,
         indexImageMini: 11,
         indexImageMaxi: 18,
-        $container: $("#container"),
-        $sprite: $("#contenu"),
+        $container: $('#container'),
+        $sprite: $('#contenu'),
         compteurRats: 0,
         $hauteurSol: 0,
         angleDeg: 0,
         vitesseInitiale: 0,
-        gravite:0,
+        gravite: 0,
         interpos: [
           {
             masque: {
@@ -49,7 +49,7 @@ window.addEventListener("DOMContentLoaded", function () {
               height: 149,
             },
             sprite: {
-              nom: "etatInitial",
+              nom: 'etatInitial',
               left: -600,
               bottom: -452,
               height: 630,
@@ -61,7 +61,7 @@ window.addEventListener("DOMContentLoaded", function () {
               height: 135,
             },
             sprite: {
-              nom: "run5",
+              nom: 'run5',
               left: -50,
               bottom: -264,
               height: 630,
@@ -73,7 +73,7 @@ window.addEventListener("DOMContentLoaded", function () {
               height: 136,
             },
             sprite: {
-              nom: "run9",
+              nom: 'run9',
               left: -57,
               bottom: -78,
               height: 630,
@@ -85,7 +85,7 @@ window.addEventListener("DOMContentLoaded", function () {
               height: 139,
             },
             sprite: {
-              nom: "run6",
+              nom: 'run6',
               left: -176,
               bottom: -264,
               height: 630,
@@ -97,7 +97,7 @@ window.addEventListener("DOMContentLoaded", function () {
               height: 133,
             },
             sprite: {
-              nom: "run11",
+              nom: 'run11',
               left: -310,
               bottom: -78,
               height: 630,
@@ -109,7 +109,7 @@ window.addEventListener("DOMContentLoaded", function () {
               height: 136,
             },
             sprite: {
-              nom: "run3",
+              nom: 'run3',
               left: -318,
               bottom: -457,
               height: 630,
@@ -121,7 +121,7 @@ window.addEventListener("DOMContentLoaded", function () {
               height: 129,
             },
             sprite: {
-              nom: "run10",
+              nom: 'run10',
               left: -180,
               bottom: -79,
               height: 630,
@@ -133,7 +133,7 @@ window.addEventListener("DOMContentLoaded", function () {
               height: 126,
             },
             sprite: {
-              nom: "run8",
+              nom: 'run8',
               left: -439,
               bottom: -265,
               height: 630,
@@ -145,7 +145,7 @@ window.addEventListener("DOMContentLoaded", function () {
               height: 141,
             },
             sprite: {
-              nom: "mouvCoup",
+              nom: 'mouvCoup',
               left: -563,
               bottom: -104,
               height: 630,
@@ -157,7 +157,7 @@ window.addEventListener("DOMContentLoaded", function () {
               height: 150,
             },
             sprite: {
-              nom: "mouvAction",
+              nom: 'mouvAction',
               left: -599,
               bottom: -282,
               height: 630,
@@ -166,12 +166,12 @@ window.addEventListener("DOMContentLoaded", function () {
           {
             masque: {
               left: 61,
-              bottom: parseFloat($("#sol").css("height")) + 157,
+              bottom: parseFloat($('#sol').css('height')) + 157,
               width: 21,
               height: 55,
             },
             sprite: {
-              nom: "etatInitialMini",
+              nom: 'etatInitialMini',
               left: -222,
               bottom: -167,
               height: 233,
@@ -180,12 +180,12 @@ window.addEventListener("DOMContentLoaded", function () {
           {
             masque: {
               left: 52,
-              bottom: parseFloat($("#sol").css("height")) + 157,
+              bottom: parseFloat($('#sol').css('height')) + 157,
               width: 30,
               height: 53,
             },
             sprite: {
-              nom: "run5Mini",
+              nom: 'run5Mini',
               left: -19,
               bottom: -97,
               height: 233,
@@ -194,12 +194,12 @@ window.addEventListener("DOMContentLoaded", function () {
           {
             masque: {
               left: 52,
-              bottom: parseFloat($("#sol").css("height")) + 157,
+              bottom: parseFloat($('#sol').css('height')) + 157,
               width: 26,
               height: 53,
             },
             sprite: {
-              nom: "run9Mini",
+              nom: 'run9Mini',
               left: -21,
               bottom: -28,
               height: 233,
@@ -208,12 +208,12 @@ window.addEventListener("DOMContentLoaded", function () {
           {
             masque: {
               left: 60,
-              bottom: parseFloat($("#sol").css("height")) + 157,
+              bottom: parseFloat($('#sol').css('height')) + 157,
               width: 23,
               height: 53,
             },
             sprite: {
-              nom: "run6Mini",
+              nom: 'run6Mini',
               left: -69,
               bottom: -98,
               height: 233,
@@ -222,12 +222,12 @@ window.addEventListener("DOMContentLoaded", function () {
           {
             masque: {
               left: 52,
-              bottom: parseFloat($("#sol").css("height")) + 157,
+              bottom: parseFloat($('#sol').css('height')) + 157,
               width: 30,
               height: 49,
             },
             sprite: {
-              nom: "run11Mini",
+              nom: 'run11Mini',
               left: -113,
               bottom: -29,
               height: 233,
@@ -236,12 +236,12 @@ window.addEventListener("DOMContentLoaded", function () {
           {
             masque: {
               left: 54,
-              bottom: parseFloat($("#sol").css("height")) + 157,
+              bottom: parseFloat($('#sol').css('height')) + 157,
               width: 25,
               height: 50,
             },
             sprite: {
-              nom: "run3Mini",
+              nom: 'run3Mini',
               left: -118,
               bottom: -169,
               height: 233,
@@ -250,12 +250,12 @@ window.addEventListener("DOMContentLoaded", function () {
           {
             masque: {
               left: 52,
-              bottom: parseFloat($("#sol").css("height")) + 157,
+              bottom: parseFloat($('#sol').css('height')) + 157,
               width: 29,
               height: 48,
             },
             sprite: {
-              nom: "run10Mini",
+              nom: 'run10Mini',
               left: -66,
               bottom: -29,
               height: 233,
@@ -264,12 +264,12 @@ window.addEventListener("DOMContentLoaded", function () {
           {
             masque: {
               left: 50,
-              bottom: parseFloat($("#sol").css("height")) + 157,
+              bottom: parseFloat($('#sol').css('height')) + 157,
               width: 37,
               height: 47,
             },
             sprite: {
-              nom: "run8Mini",
+              nom: 'run8Mini',
               left: -163,
               bottom: -98,
               height: 233,
@@ -282,12 +282,12 @@ window.addEventListener("DOMContentLoaded", function () {
         /////////// DEFINITION DE LA LISTE DES BOUTONS D'ACTION ///////////
 
         this.parametres.listeBoutonsAction =
-          document.querySelectorAll("button");
+          document.querySelectorAll('button');
 
         /////////// DEFINITION DE LA LISTE DES ELEMENTS DE DECOR ///////////
 
         this.parametres.decor_mobile =
-          document.getElementsByClassName("decor_mobile");
+          document.getElementsByClassName('decor_mobile');
 
         for (let i = 0; i < this.parametres.decor_mobile.length; i++) {
           const styleDecor = window.getComputedStyle(
@@ -301,7 +301,7 @@ window.addEventListener("DOMContentLoaded", function () {
         /////////////// DEFINITION DE LA LISTE DES OBSTACLES ///////////////
 
         this.parametres.listeDesObstacles =
-          document.getElementsByClassName("obstacle");
+          document.getElementsByClassName('obstacle');
 
         for (let i = 0; i < this.parametres.listeDesObstacles.length; i++) {
           const obstacle = this.parametres.listeDesObstacles[i];
@@ -315,7 +315,7 @@ window.addEventListener("DOMContentLoaded", function () {
         /////// DEFINITION DE LA LISTE DES CALQUES DU PANNEAU PIETON ///////
 
         this.parametres.listeImagesPanneauPieton = document.querySelectorAll(
-          ".calque_panneau_pieton"
+          '.calque_panneau_pieton'
         );
       },
 
@@ -335,7 +335,7 @@ window.addEventListener("DOMContentLoaded", function () {
         /////////////////////// DEFINITION DU NAVIGATEUR ///////////////////////
 
         const refNavigateur = window.navigator.userAgent;
-        const tableauNavigateur = ["Firefox", "Edg", "Chrome"];
+        const tableauNavigateur = ['Firefox', 'Edg', 'Chrome'];
         let i = -1;
         let testNavigateur = false;
 
@@ -345,17 +345,17 @@ window.addEventListener("DOMContentLoaded", function () {
         }
 
         switch (tableauNavigateur[i]) {
-          case "Firefox":
-            this.parametres.navigateur = "Firefox";
+          case 'Firefox':
+            this.parametres.navigateur = 'Firefox';
             break;
-          case "Edg":
-            this.parametres.navigateur = "Edge";
+          case 'Edg':
+            this.parametres.navigateur = 'Edge';
             break;
-          case "Chrome":
-            this.parametres.navigateur = "Chrome";
+          case 'Chrome':
+            this.parametres.navigateur = 'Chrome';
         }
 
-        if (this.parametres.navigateur == "Firefox") {
+        if (this.parametres.navigateur == 'Firefox') {
           this.parametres.angleDeg = 84;
           this.parametres.vitesseInitiale = 115;
           this.parametres.gravite = 65;
@@ -368,22 +368,22 @@ window.addEventListener("DOMContentLoaded", function () {
 
       animations: function () {
         ///////////////////// ANIMATION DES BOUTONS D'ACTION /////////////////////
-        const $bouton = $("button");
+        const $bouton = $('button');
         setInterval(function () {
           $bouton.animate({
-            opacity: "0",
+            opacity: '0',
           });
           $bouton.animate({
-            opacity: "1",
+            opacity: '1',
           });
         }, 1);
 
         //////////////////////////MATION DU FEU DE VOITURE //////////////////////
 
-        const $feu = $(".feu");
-        const $widthFeu = parseFloat($feu.css("width"));
-        const $leftFeu = parseFloat($feu.css("left"));
-        const $heightFeu = parseFloat($feu.css("height"));
+        const $feu = $('.feu');
+        const $widthFeu = parseFloat($feu.css('width'));
+        const $leftFeu = parseFloat($feu.css('left'));
+        const $heightFeu = parseFloat($feu.css('height'));
         setInterval(function () {
           let facteur = parseInt(100 * Math.random()) / 100;
           $feu.css({
@@ -391,9 +391,9 @@ window.addEventListener("DOMContentLoaded", function () {
               210 +
               ($leftFeu - $widthFeu / 2) -
               ($widthFeu * facteur) / 2 +
-              "px",
-            width: $widthFeu * facteur + "px",
-            height: $heightFeu * facteur + "px",
+              'px',
+            width: $widthFeu * facteur + 'px',
+            height: $heightFeu * facteur + 'px',
           });
         }, 100);
       },
@@ -409,8 +409,8 @@ window.addEventListener("DOMContentLoaded", function () {
         for (let i = 0; i < this.parametres.listeBoutonsAction.length; i++) {
           const bouton = this.parametres.listeBoutonsAction[i];
           let extremiteContainer =
-            parseFloat(this.parametres.$container.css("left")) +
-            parseFloat(this.parametres.$container.css("width"));
+            parseFloat(this.parametres.$container.css('left')) +
+            parseFloat(this.parametres.$container.css('width'));
           const styleBouton = window.getComputedStyle(bouton);
 
           if (
@@ -437,31 +437,31 @@ window.addEventListener("DOMContentLoaded", function () {
             if (opaciteObstacle < 0.1) {
               this.parametres.listeDesObstacles[
                 indexObstacleATraiter
-              ].style.left = "100000px";
-              const $boutonvoiture = $("#boutonvoitureenfeu");
-              $boutonvoiture.css("display", "none");
+              ].style.left = '100000px';
+              const $boutonvoiture = $('#boutonvoitureenfeu');
+              $boutonvoiture.css('display', 'none');
               this.attributionSucces(3);
               this.directions.obstacle = false;
             }
           }
 
           if (indexObstacleATraiter == 1) {
-            const $boutonFille = $("#boutonfille");
-            const $ballon = $(".ballon");
-            const $fille = $("#filleauballon");
-            const $filleAvecBallon = $(".filleavecballon");
-            const $filleSansBallon = $(".fillesansballon");
+            const $boutonFille = $('#boutonfille');
+            const $ballon = $('.ballon');
+            const $fille = $('#filleauballon');
+            const $filleAvecBallon = $('.filleavecballon');
+            const $filleSansBallon = $('.fillesansballon');
 
             if (this.parametres.compteurBoutonFille == 0) {
               $ballon.animate({
-                bottom: "3000px",
-                left: "6000px",
+                bottom: '3000px',
+                left: '6000px',
               });
 
-              $filleAvecBallon.css("display", "none");
-              $filleSansBallon.css("display", "block");
+              $filleAvecBallon.css('display', 'none');
+              $filleSansBallon.css('display', 'block');
 
-              $boutonFille.css("display", "block");
+              $boutonFille.css('display', 'block');
               this.parametres.apparitionBoutonFille = true;
             }
 
@@ -470,32 +470,32 @@ window.addEventListener("DOMContentLoaded", function () {
               this.parametres.compteurActionFille > 0
             ) {
               $fille.animate({
-                bottom: "3000px",
-                left: "6000px",
+                bottom: '3000px',
+                left: '6000px',
               });
-              $boutonFille.css("display", "none");
+              $boutonFille.css('display', 'none');
               this.attributionSucces(4);
             }
           }
 
           if (indexObstacleATraiter == 2) {
             if (this.parametres.compteurRats < 30) {
-              $poubelle = $("#poubellefrappe");
-              $boitearats = $("#boitearats");
+              $poubelle = $('#poubellefrappe');
+              $boitearats = $('#boitearats');
               this.parametres.compteurRats++;
               $boitearats.append(`<img src="images/rat.svg" class="rat">`);
-              $nouveauRat = $(".rat");
+              $nouveauRat = $('.rat');
 
               $nouveauRat.css({
-                width: "75px",
-                position: "absolute",
-                bottom: "0",
+                width: '75px',
+                position: 'absolute',
+                bottom: '0',
               });
               $nouveauRat.animate(
                 {
-                  bottom: "0",
-                  left: "4000px",
-                  opacity: "0",
+                  bottom: '0',
+                  left: '4000px',
+                  opacity: '0',
                 },
                 4000
               );
@@ -504,128 +504,128 @@ window.addEventListener("DOMContentLoaded", function () {
             } else {
               $poubelle.animate(
                 {
-                  bottom: "3000px",
-                  left: "4000px",
-                  opacity: "0",
+                  bottom: '3000px',
+                  left: '4000px',
+                  opacity: '0',
                 },
                 500
               );
-              const $boutonpoubelle = $("#boutonpoubelle");
-              $boutonpoubelle.css("display", "none");
+              const $boutonpoubelle = $('#boutonpoubelle');
+              $boutonpoubelle.css('display', 'none');
             }
           }
         }
       },
 
       lancementAction: function (idBouton) {
-        const $message = $("#message");
+        const $message = $('#message');
 
         switch (idBouton) {
-          case "boutonfeutricolore":
-            const $feuRouge = $(".feuRouge");
-            const $feuOrange = $(".feuOrange");
-            const $feuVert = $(".feuVert");
+          case 'boutonfeutricolore':
+            const $feuRouge = $('.feuRouge');
+            const $feuOrange = $('.feuOrange');
+            const $feuVert = $('.feuVert');
 
             switch (this.parametres.actionFeuTricolore[0]) {
               case 1:
-                $feuRouge.css("background-color", "rgb(255, 0, 0)");
-                const photo1 = document.getElementById("identite_1");
-                photo1.style.display = "block";
+                $feuRouge.css('background-color', 'rgb(255, 0, 0)');
+                const photo1 = document.getElementById('identite_1');
+                photo1.style.display = 'block';
                 break;
               case 2:
-                $feuOrange.css("background-color", "rgb(255, 187, 0)");
-                const photo2 = document.getElementById("identite_2");
-                photo2.style.display = "block";
+                $feuOrange.css('background-color', 'rgb(255, 187, 0)');
+                const photo2 = document.getElementById('identite_2');
+                photo2.style.display = 'block';
                 break;
               case 3:
-                $feuVert.css("background-color", "rgb(9, 251, 70)");
-                const photo3 = document.getElementById("identite_3");
-                photo3.style.display = "block";
+                $feuVert.css('background-color', 'rgb(9, 251, 70)');
+                const photo3 = document.getElementById('identite_3');
+                photo3.style.display = 'block';
                 this.attributionSucces(1);
                 break;
               case 4:
                 this.parametres.actionFeuTricolore[0] = 0;
-                $feuRouge.css("background-color", "rgb(131, 38, 38)");
-                $feuOrange.css("background-color", "rgb(138, 77, 27)");
-                $feuVert.css("background-color", "rgb(23, 58, 31)");
+                $feuRouge.css('background-color', 'rgb(131, 38, 38)');
+                $feuOrange.css('background-color', 'rgb(138, 77, 27)');
+                $feuVert.css('background-color', 'rgb(23, 58, 31)');
                 break;
             }
             this.parametres.actionFeuTricolore[0]++;
             break;
 
-          case "boutonfille":
-            const $filleAvecBallon = $(".filleavecballon");
-            const $filleSansBallon = $(".fillesansballon");
-            const $ballon = $(".ballon");
-            const $boutonFille = $("#boutonfille");
+          case 'boutonfille':
+            const $filleAvecBallon = $('.filleavecballon');
+            const $filleSansBallon = $('.fillesansballon');
+            const $ballon = $('.ballon');
+            const $boutonFille = $('#boutonfille');
             this.parametres.compteurBoutonFille++;
             if (
               this.parametres.compteurBoutonFille == 1 &&
-              $boutonFille.css("display") == "block"
+              $boutonFille.css('display') == 'block'
             ) {
               $message.text(
-                "lui rendre son ballon...",
+                'lui rendre son ballon...',
                 this.parametres.compteurBoutonFille
               );
             }
             if (this.parametres.compteurBoutonFille == 2) {
-              $message.text("");
+              $message.text('');
               $ballon.animate({
-                bottom: "100px",
-                left: "48px",
+                bottom: '100px',
+                left: '48px',
               });
-              $filleAvecBallon.css("display", "block");
-              $filleSansBallon.css("display", "none");
+              $filleAvecBallon.css('display', 'block');
+              $filleSansBallon.css('display', 'none');
               this.parametres.compteurBoutonFille = 0;
-              $boutonFille.css("display", "none");
+              $boutonFille.css('display', 'none');
             }
             break;
 
-          case "boutonbus":
+          case 'boutonbus':
             $message.text(
               "Sticky aime l'art de rue, sur ce bus sera sa future oeuvre ! Prenez une bombe créez ensemble !"
             );
             setTimeout(function () {
-              $message.text("");
+              $message.text('');
             }, 5000);
             break;
 
-          case "boutonvoitureenfeu":
-            const $boutonvoiture = $("#boutonvoitureenfeu");
-            if ($boutonvoiture.css("display") == "block") {
-              $message.text("Kickez moi cette épave !");
+          case 'boutonvoitureenfeu':
+            const $boutonvoiture = $('#boutonvoitureenfeu');
+            if ($boutonvoiture.css('display') == 'block') {
+              $message.text('Kickez moi cette épave !');
               setTimeout(function () {
-                $message.text("");
+                $message.text('');
               }, 4000);
             }
             break;
 
-          case "boutonpoubelle":
-            const $boutonpoubelle = $("#boutonpoubelle");
-            if ($boutonpoubelle.css("display") == "block") {
+          case 'boutonpoubelle':
+            const $boutonpoubelle = $('#boutonpoubelle');
+            if ($boutonpoubelle.css('display') == 'block') {
               $message.text(
                 "Sticky aime quand c'est propre, aidez le à nettoyer..."
               );
               setTimeout(function () {
-                $message.text("");
+                $message.text('');
               }, 4000);
             }
             break;
 
-          case "boutonparasol":
+          case 'boutonparasol':
             $message.text(
-              "Bravo! Sticky est désormais libre et a aquis les succès nécessaires à la poursuite de sa vie rêvée !"
+              'Bravo! Sticky est désormais libre et a aquis les succès nécessaires à la poursuite de sa vie rêvée !'
             );
-            const $parasol = $("#parasol");
-            const $plagiste = $("#plagiste");
-            const $messagefin = $("#messagefin");
-            const $boutonparasol = $("#boutonparasol");
+            const $parasol = $('#parasol');
+            const $plagiste = $('#plagiste');
+            const $messagefin = $('#messagefin');
+            const $boutonparasol = $('#boutonparasol');
 
             this.parametres.$container.animate({ opacity: 0 }, 600);
             $parasol.animate({ opacity: 0 }, 600);
             $plagiste.animate({ opacity: 1 }, 600);
             $messagefin.animate({ opacity: 1 }, 600);
-            $boutonparasol.css("display", "none");
+            $boutonparasol.css('display', 'none');
 
             this.parametres.finDuJeu = true;
         }
@@ -634,8 +634,8 @@ window.addEventListener("DOMContentLoaded", function () {
       detectionObstacle: function () {
         if (this.parametres.listeDesObstacles.length > 0) {
           const extremiteContainer =
-            parseFloat(this.parametres.$container.css("left")) +
-            parseFloat(this.parametres.$container.css("width"));
+            parseFloat(this.parametres.$container.css('left')) +
+            parseFloat(this.parametres.$container.css('width'));
 
           for (let i = 0; i < this.parametres.listeDesObstacles.length; i++) {
             const obstacle = this.parametres.listeDesObstacles[i];
@@ -656,22 +656,22 @@ window.addEventListener("DOMContentLoaded", function () {
         );
 
         //Test de la position left du container pour ne pas le faire sortir de l'écran à gauche ou à droite
-        if (position == "left" && positionActuelleContainer + increment < 10) {
+        if (position == 'left' && positionActuelleContainer + increment < 10) {
           //Test marge à gauche, on bloque le left au left mini
-          this.parametres.$container.css("left", 10);
+          this.parametres.$container.css('left', 10);
         } else {
           if (
-            position == "left" &&
+            position == 'left' &&
             positionActuelleContainer + increment >
               screen.width - 0.55 * screen.width
           ) {
             // test marge à droite, on bloque le left au left maxi
             this.parametres.$container.css(
-              "left",
+              'left',
               parseFloat(screen.width) - 0.55 * screen.width
             );
           } else {
-            if (position == "left") {
+            if (position == 'left') {
               this.parametres.$container.css(
                 position,
                 positionActuelleContainer + increment
@@ -681,17 +681,17 @@ window.addEventListener("DOMContentLoaded", function () {
         }
 
         switch (position) {
-          case "coup":
+          case 'coup':
             this.parametres.indexImage = 8;
             break;
-          case "action":
+          case 'action':
             this.parametres.indexImage = 9;
             break;
-          case "etatInitial":
+          case 'etatInitial':
             this.parametres.indexImage = 0;
-            increment = "0";
+            increment = '0';
             break;
-          case "etatInitialMini":
+          case 'etatInitialMini':
             this.parametres.indexImage = 10;
             break;
         }
@@ -702,22 +702,22 @@ window.addEventListener("DOMContentLoaded", function () {
           this.parametres.$container.css({
             width:
               this.parametres.interpos[this.parametres.indexImage].masque
-                .width + "px",
+                .width + 'px',
             height:
               this.parametres.interpos[this.parametres.indexImage].masque
-                .height + "px",
+                .height + 'px',
           });
 
           this.parametres.$sprite.css({
             left:
               this.parametres.interpos[this.parametres.indexImage].sprite.left +
-              "px",
+              'px',
             bottom:
               this.parametres.interpos[this.parametres.indexImage].sprite
-                .bottom + "px",
+                .bottom + 'px',
             height:
               this.parametres.interpos[this.parametres.indexImage].sprite
-                .height + "px",
+                .height + 'px',
           });
         }
 
@@ -736,7 +736,7 @@ window.addEventListener("DOMContentLoaded", function () {
         ) {
           for (let element of this.parametres.decor_mobile) {
             const nouveauLeft = parseFloat(element.style.left) + increment;
-            element.style.left = nouveauLeft + "px";
+            element.style.left = nouveauLeft + 'px';
           }
         }
       },
@@ -745,9 +745,9 @@ window.addEventListener("DOMContentLoaded", function () {
         ///////// ALLER A GAUCHE /////////////
         if (this.directions.gauche) {
           if (this.parametres.introDuJeu == false) {
-            this.parametres.$container.addClass("containerinverse");
+            this.parametres.$container.addClass('containerinverse');
             this.detectionObstacle();
-            this.mouvementSticky("left", -13);
+            this.mouvementSticky('left', -13);
             this.avancementDecor(17);
           }
         }
@@ -757,23 +757,23 @@ window.addEventListener("DOMContentLoaded", function () {
           if (!this.parametres.introDuJeu) {
             this.detectionObstacle();
             if (this.directions.obstacle == false) {
-              this.mouvementSticky("left", 10);
+              this.mouvementSticky('left', 10);
               this.avancementDecor(-20);
             } else {
-              this.mouvementSticky("left", -10);
+              this.mouvementSticky('left', -10);
               this.avancementDecor(20);
             }
           } else {
-            this.mouvementSticky("left", 0);
+            this.mouvementSticky('left', 0);
           }
         }
 
         ///////// RETOUR ETAT INITIAL /////////////
         if (this.directions.etatInitial) {
           if (this.parametres.introDuJeu == false) {
-            this.mouvementSticky("etatInitial", NaN);
+            this.mouvementSticky('etatInitial', NaN);
           } else {
-            this.mouvementSticky("etatInitialMini", NaN);
+            this.mouvementSticky('etatInitialMini', NaN);
           }
         }
         ///////// ACTION /////////////
@@ -784,14 +784,14 @@ window.addEventListener("DOMContentLoaded", function () {
           !this.directions.coup
         ) {
           if (this.parametres.introDuJeu == false) {
-            this.mouvementSticky("action", NaN);
+            this.mouvementSticky('action', NaN);
           }
         }
 
         ///////// COUP /////////////
         if (this.directions.coup) {
           if (this.parametres.introDuJeu == false) {
-            this.mouvementSticky("coup", NaN);
+            this.mouvementSticky('coup', NaN);
             const indexObstacle = this.detectionObstacle();
 
             if (this.directions.obstacle == true) {
@@ -877,7 +877,7 @@ window.addEventListener("DOMContentLoaded", function () {
           let x = 0;
           contexte.directions.sortiePanneauEnCours = true;
           contexte.attributionSucces(0);
-          $("#message").text("");
+          $('#message').text('');
 
           const sautPanneau = setInterval(function () {
             contexte.parametres.$container.css({
@@ -901,17 +901,17 @@ window.addEventListener("DOMContentLoaded", function () {
                 x * Math.tan(angleRad));
 
             contexte.parametres.$container.css({
-              bottom: z + "px",
-              left: 50 + x + "px",
+              bottom: z + 'px',
+              left: 50 + x + 'px',
             });
             x++;
-            if (z < parseFloat($("#sol").css("height"))) {
+            if (z < parseFloat($('#sol').css('height'))) {
               clearInterval(sautPanneau);
               contexte.directions.sortiePanneauEnCours = false;
               // Passage sur le sprite image etatinitial mini:
               contexte.parametres.$container.css({
-                left: 50 + x + "px",
-                bottom: parseFloat($("#sol").css("height")) + "px",
+                left: 50 + x + 'px',
+                bottom: parseFloat($('#sol').css('height')) + 'px',
                 width: contexte.parametres.interpos[10].masque.width,
                 height: contexte.parametres.interpos[10].masque.height,
               });
@@ -956,7 +956,7 @@ window.addEventListener("DOMContentLoaded", function () {
         const ici = this;
 
         //////////////////////////// EVENEMENT KEYDOWN //////////////////////////
-        window.addEventListener("keydown", function (event) {
+        window.addEventListener('keydown', function (event) {
           ici.directions.etatInitial = false;
           const codeTouche = event.keyCode;
 
@@ -1014,9 +1014,9 @@ window.addEventListener("DOMContentLoaded", function () {
 
         /////////////////////////////// EVENEMENT KEYUP ///////////////////////////////
 
-        window.addEventListener("keyup", function (event) {
+        window.addEventListener('keyup', function (event) {
           ici.parametres.debutTimerIntro = NaN;
-          ici.parametres.$container.removeClass("containerinverse");
+          ici.parametres.$container.removeClass('containerinverse');
           if (
             ici.parametres.introDuJeu == true &&
             ici.parametres.chronoIntro > ici.parametres.delaiFinIntro
@@ -1088,16 +1088,16 @@ window.addEventListener("DOMContentLoaded", function () {
 
         ///////////////////////// EVENEMENT TAG SUR LE BUS /////////////////////////
 
-        const $tag = $("#tag");
-        const $bus = $("#bus");
-        const $bombe = $("#bombe");
-        let $tagOpacity = $tag.css("opacity");
+        const $tag = $('#tag');
+        const $bus = $('#bus');
+        const $bombe = $('#bombe');
+        let $tagOpacity = $tag.css('opacity');
 
         $bus.mousemove(function (event) {
-          $tag.css("opacity", $tagOpacity);
-          if (monJeu.parametres.navigateur != "Firefox") {
-            $bombe.css("left", event.pageX + "px");
-            $bombe.css("bottom", screen.height - event.pageY - 180 + "px");
+          $tag.css('opacity', $tagOpacity);
+          if (monJeu.parametres.navigateur != 'Firefox') {
+            $bombe.css('left', event.pageX + 'px');
+            $bombe.css('bottom', screen.height - event.pageY - 180 + 'px');
           }
 
           if ($tagOpacity > 0.3) {
@@ -1107,8 +1107,8 @@ window.addEventListener("DOMContentLoaded", function () {
         });
 
         $bus.mouseout(function () {
-          $bombe.css("left", $("#boutonbus").css("left"));
-          $bombe.css("bottom", $("#sol").css("height"));
+          $bombe.css('left', $('#boutonbus').css('left'));
+          $bombe.css('bottom', $('#sol').css('height'));
         });
 
         const jeu = window.setInterval(function () {
