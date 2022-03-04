@@ -318,7 +318,7 @@
           window.document.getElementById('boutonfeutricolore');
         boutonfeutri.addEventListener('click', (event) => {
           console.log('bouton feu cliqué!');
-          gtag('add_to_cart', 'clic sur feu', {
+          gtag('event', 'add_to_cart', {
             event_category: 'engagement',
             event_label: 'addtocart',
             value: 12,
