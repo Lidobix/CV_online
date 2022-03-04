@@ -314,14 +314,33 @@
 
       <script>
         ////////////////////////////// EVENT ANALYTICS //////////////////////////////
-        const boutonfeutri =
+        const boutonFeutri =
           window.document.getElementById('boutonfeutricolore');
-        boutonfeutri.addEventListener('click', (event) => {
+        boutonFeutri.addEventListener('click', (event) => {
           console.log('bouton feu cliqué!');
           gtag('event', 'add_to_cart', {
-            event_category: 'engagement',
+            event_category: 'achat',
             event_label: 'addtocart',
             value: 12,
+          });
+        });
+        const boutonBus = window.document.getElementById('boutonbus');
+        boutonBus.addEventListener('click', (event) => {
+          console.log('bouton bus cliqué!');
+          gtag('event', 'purchase', {
+            event_category: 'achat',
+            event_label: 'purchase',
+            value: 102,
+          });
+        });
+        const boutonVoitureEnFeu =
+          window.document.getElementById('boutonvoitureenfeu');
+        boutonVoitureEnFeu.addEventListener('click', (event) => {
+          console.log('bouton voiture cliqué!');
+          gtag('event', 'share', {
+            event_category: 'engagement',
+            event_label: 'share',
+            value: 102,
           });
         });
         window.document.addEventListener('click', (event) => {
